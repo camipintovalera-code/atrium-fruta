@@ -35,7 +35,7 @@ app.get("/auth/tiktok", (req, res) => {
   const params = new URLSearchParams({
     client_key: CLIENT_KEY,
     response_type: "code",
-    scope: "user.info.basic",
+    scope: "user.info.basic,video.list",
     redirect_uri: REDIRECT_URI,
     state: state
   });
