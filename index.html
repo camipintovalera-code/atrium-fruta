@@ -499,117 +499,11 @@ function mostrarVideos(lista) {
 
   lista.forEach((video, indice) => {
 
-    const tarjeta =
-      function crearTarjeta(video, indice) {
+    const tarjeta = crearTarjeta(video, indice);
 
-  const titulo =
-    video.title || "Frutinovela de ATRIUM FRUTA";
-
-  const categoria =
-    determinarCategoria(titulo);
-
-  const tarjeta =
-    document.createElement("article");
-
-  tarjeta.className =
-    "novela-card";
-
-  tarjeta.dataset.category =
-    categoria;
-
-  tarjeta.dataset.popular =
-    indice < 6 ? "true" : "false";
-
-
-  const cover =
-    document.createElement("div");
-
-  cover.className =
-    "cover";
-
-
-  const badge =
-    document.createElement("span");
-
-  badge.className =
-    "badge";
-
-  badge.textContent =
-    "VIDEO DE TIKTOK";
-
-
-  const imagen =
-    document.createElement("img");
-
-  imagen.src =
-    video.cover_image_url || "";
-
-  imagen.alt =
-    "Miniatura: " + titulo;
-
-  imagen.loading =
-    "lazy";
-
-
-  cover.appendChild(badge);
-
-  cover.appendChild(imagen);
-
-
-  const contenido =
-    document.createElement("div");
-
-  contenido.className =
-    "card-content";
-
-
-  const h3 =
-    document.createElement("h3");
-
-  h3.textContent =
-    titulo;
-
-
-  const partes =
-    document.createElement("p");
-
-  partes.className =
-    "parts";
-
-  partes.textContent =
-    "🎬 Frutinovela disponible";
-
-
-  const boton =
-    document.createElement("button");
-
-  boton.className =
-    "view-button";
-
-  boton.textContent =
-    "▶️ Ver Frutinovela";
-
-
-  boton.addEventListener("click", () => {
-
-    abrirVideo(video.id, titulo);
+    grid.appendChild(tarjeta);
 
   });
-
-
-  contenido.appendChild(h3);
-
-  contenido.appendChild(partes);
-
-  contenido.appendChild(boton);
-
-
-  tarjeta.appendChild(cover);
-
-  tarjeta.appendChild(contenido);
-
-
-  return tarjeta;
 
 }
 
