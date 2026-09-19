@@ -15,6 +15,7 @@ const CLIENT_SECRET = process.env.TIKTOK_CLIENT_SECRET;
 const REDIRECT_URI = process.env.TIKTOK_REDIRECT_URI;
 
 const states = new Set();
+let latestAccessToken = null;
 
 app.get("/", (req, res) => {
   res.send("ATRIUM FRUTA - Backend funcionando");
@@ -92,6 +93,7 @@ if (!response.ok || data.error) {
   );
 }
 
+latestAccessToken = data.access_token;
 const videoResponse = await fetch(
   "https://open.tiktokapis.com/v2/video/list/?fields=id,title,cover_image_url,share_url,duration,create_time",
   {
@@ -131,7 +133,7 @@ res.send(`
 });
 
 app.get("/api/tiktok/videos", async (req, res) => {
-  const accessToken = req.query.access_token;
+  const accessToken = latestAccessToken;
 
   if (!accessToken) {
     return res.status(400).json({
