@@ -377,6 +377,7 @@ function determinarCategoria(titulo) {
    CREAR TARJETA
 ---------------------------------- */
 
+
 function crearTarjeta(video, indice) {
 
   const titulo =
@@ -429,6 +430,7 @@ function crearTarjeta(video, indice) {
 
 
   cover.appendChild(badge);
+
   cover.appendChild(imagen);
 
 
@@ -453,38 +455,42 @@ function crearTarjeta(video, indice) {
     "parts";
 
   partes.textContent =
-    "🎬 Video disponible en TikTok";
+    "🎬 Frutinovela disponible";
 
 
   const boton =
-    document.createElement("a");
+    document.createElement("button");
 
   boton.className =
     "view-button";
 
-  boton.href =
-    video.share_url || "#";
-
-  boton.target =
-    "_blank";
-
-  boton.rel =
-    "noopener";
-
   boton.textContent =
-    "Ver en TikTok";
+    "▶️ Ver Frutinovela";
+
+
+  boton.addEventListener("click", () => {
+
+    abrirVideo(video.id, titulo);
+
+  });
 
 
   contenido.appendChild(h3);
+
   contenido.appendChild(partes);
+
   contenido.appendChild(boton);
 
 
   tarjeta.appendChild(cover);
+
   tarjeta.appendChild(contenido);
 
 
   return tarjeta;
+
+}
+
 
 }
 
