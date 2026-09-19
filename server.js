@@ -224,7 +224,7 @@ API DE VIDEOS
 
 app.get("/api/tiktok/videos", async (req, res) => {
 
-const accessToken = latestAccessToken;
+
 const { data: tokenData, error: tokenError } = await supabase
   .from("tiktok_tokens")
   .select("access_token")
