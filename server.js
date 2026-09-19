@@ -40,6 +40,8 @@ app.get("/auth/tiktok", (req, res) => {
     state: state
   });
 
+  console.log("TikTok Client Key cargado:", CLIENT_KEY);
+console.log("TikTok Redirect URI:", REDIRECT_URI);
   res.redirect(
     "https://www.tiktok.com/v2/auth/authorize/?" +
     params.toString()
