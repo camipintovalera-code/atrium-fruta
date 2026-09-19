@@ -2,6 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
 require("dotenv").config();
+const { createClient } = require("@supabase/supabase-js");
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SECRET_KEY
+);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,7 +23,7 @@ const WEBSITE_URL = "https://camipintovalera-code.github.io/atrium-fruta/";
 
 const states = new Set();
 
-let latestAccessToken = null;
+
 
 /* ---------------------------------
 INICIO
@@ -123,7 +129,28 @@ if (!response.ok || data.error) {
 
 }
 
-latestAccessToken = data.access_token;
+const { error: saveError } = await supabase
+  .from("tiktok_tokens")
+  .upsert({
+    id: 1,
+    access_token: data.access_token,
+    refresh_token: data.refresh_token,
+    expires_at: Date.now() + (data.expires_in * 1000),
+    refresh_expires_at: data.refresh_expires_in
+      ? Date.now() + (data.refresh_expires_in * 1000)
+      : null,
+    updated_at: new Date().toISOString()
+  });
+
+if (saveError) {
+
+  console.error("Error guardando token en Supabase:", saveError);
+
+  return res.status(500).send(
+    "TikTok autorizó la cuenta, pero no se pudo guardar la autorización."
+  );
+
+}
 
 
 /* ---------------------------------
@@ -198,16 +225,21 @@ API DE VIDEOS
 app.get("/api/tiktok/videos", async (req, res) => {
 
 const accessToken = latestAccessToken;
+const { data: tokenData, error: tokenError } = await supabase
+  .from("tiktok_tokens")
+  .select("access_token")
+  .eq("id", 1)
+  .single();
 
-if (!accessToken) {
+if (tokenError || !tokenData?.access_token) {
 
-
-return res.status(400).json({
-  error: "Falta el access_token"
-});
-
+  return res.status(400).json({
+    error: "Falta el access_token"
+  });
 
 }
+
+const accessToken = tokenData.access_token;
 
 try {
 
