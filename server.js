@@ -85,18 +85,53 @@ app.get("/auth/tiktok/callback", async (req, res) => {
 
     const data = await response.json();
 
-    if (!response.ok || data.error) {
-      console.error("Error de TikTok:", data);
-      return res.status(400).send(
-        "No se pudo completar la autorización con TikTok."
-      );
-    }
+if (!response.ok || data.error) {
+  console.error("Error de TikTok:", data);
+  return res.status(400).send(
+    "No se pudo completar la autorización con TikTok."
+  );
+}
 
-    res.send(`
-      <h1>Conexión con TikTok exitosa</h1>
-      <p>La autorización fue recibida correctamente.</p>
-      <p>El token fue obtenido en el servidor.</p>
-    `);
+const videoResponse = await fetch(
+  "https://open.tiktokapis.com/v2/video/list/",
+  {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${data.access_token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      fields: [
+        "id",
+        "title",
+        "cover_image_url",
+        "share_url",
+        "duration",
+        "create_time"
+      ],
+      max_count: 20
+    })
+  }
+);
+
+const videoData = await videoResponse.json();
+
+console.log("Respuesta de videos:", videoData);
+
+if (!videoResponse.ok || videoData.error?.code !== "ok") {
+  return res.status(400).send(`
+    <h1>Autorización exitosa</h1>
+    <p>El token fue obtenido, pero TikTok no permitió consultar los videos.</p>
+    <pre>${JSON.stringify(videoData, null, 2)}</pre>
+  `);
+}
+
+res.send(`
+  <h1>Conexión con TikTok exitosa</h1>
+  <p>El token fue obtenido correctamente.</p>
+  <h2>Videos encontrados: ${videoData.data?.videos?.length || 0}</h2>
+  <pre>${JSON.stringify(videoData, null, 2)}</pre>
+`);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error interno del servidor.");
