@@ -223,19 +223,13 @@ Disfruta nuestras Frutinovelas.
 
 </footer>
 
+
 <script>
 
-const API_URL =
-"https://atrium-fruta.onrender.com/api/tiktok/videos";
+const API_URL = "https://atrium-fruta.onrender.com/api/tiktok/videos";
 
-
-const grid =
-document.getElementById("novelas-grid");
-
-
-const loading =
-document.getElementById("tiktok-loading");
-
+const grid = document.getElementById("novelas-grid");
+const loading = document.getElementById("tiktok-loading");
 
 let videos = [];
 
@@ -246,65 +240,67 @@ let videos = [];
 
 async function cargarVideosTikTok() {
 
-try {
+  try {
 
-const response =
-await fetch(API_URL);
+    loading.style.display = "block";
 
+    const response = await fetch(API_URL, {
+      method: "GET",
+      cache: "no-store"
+    });
 
-const data =
-await response.json();
+    console.log("Estado API:", response.status);
 
+    const data = await response.json();
 
-if (!response.ok || data.error) {
+    console.log("Respuesta API:", data);
 
-throw new Error(
-"NO_SE_PUDIERON_CARGAR_LOS_VIDEOS"
-);
+    if (!response.ok) {
+      throw new Error("HTTP_" + response.status);
+    }
 
-}
+    if (data.error && data.error.code !== "ok") {
+      throw new Error("TIKTOK_ERROR");
+    }
 
+    videos = data.data?.videos || [];
 
-videos =
-data.data?.videos || [];
+    if (videos.length === 0) {
 
+      grid.innerHTML = `
+        <p style="text-align:center; width:100%;">
+          No hay videos disponibles en este momento.
+        </p>
+      `;
 
-if (videos.length === 0) {
+      return;
+    }
 
-grid.innerHTML = `
-<p style="text-align:center; width:100%;">
-No hay videos disponibles en este momento.
-</p>
-`;
+    loading.style.display = "none";
 
-return;
+    mostrarVideos(videos);
 
-}
+  } catch (error) {
 
+    console.error("Error cargando TikTok:", error);
 
-mostrarVideos(videos);
+    loading.style.display = "none";
 
+    grid.innerHTML = `
+      <div style="text-align:center; width:100%;">
 
-} catch (error) {
+        <p>
+          No se pudieron cargar las Frutinovelas desde TikTok.
+        </p>
 
-console.error(error);
+        <p style="font-size:14px;">
+          Primero conecta la cuenta de TikTok.
+        </p>
 
+      </div>
+    `;
 
-grid.innerHTML = `
-<div style="text-align:center; width:100%;">
-
-<p>
-No se pudieron cargar las Frutinovelas desde TikTok.
-</p>
-
-<p style="font-size:14px;">
-Primero conecta la cuenta de TikTok.
-</p>
-
-</div>
-`;
-
-}
+  }
 
 }
 
@@ -315,41 +311,33 @@ Primero conecta la cuenta de TikTok.
 
 function determinarCategoria(titulo) {
 
-const texto =
-titulo.toLowerCase();
+  const texto = titulo.toLowerCase();
 
+  if (
+    texto.includes("fe") ||
+    texto.includes("dios") ||
+    texto.includes("milagro") ||
+    texto.includes("esperanza") ||
+    texto.includes("oración") ||
+    texto.includes("oracion")
+  ) {
+    return "Fe";
+  }
 
-if (
-texto.includes("fe") ||
-texto.includes("dios") ||
-texto.includes("milagro") ||
-texto.includes("esperanza") ||
-texto.includes("oración") ||
-texto.includes("oracion")
-) {
+  if (
+    texto.includes("amor") ||
+    texto.includes("esposa") ||
+    texto.includes("esposo") ||
+    texto.includes("novia") ||
+    texto.includes("novio") ||
+    texto.includes("matrimonio") ||
+    texto.includes("ella") ||
+    texto.includes("él")
+  ) {
+    return "Amor";
+  }
 
-return "Fe";
-
-}
-
-
-if (
-texto.includes("amor") ||
-texto.includes("esposa") ||
-texto.includes("esposo") ||
-texto.includes("novia") ||
-texto.includes("novio") ||
-texto.includes("matrimonio") ||
-texto.includes("ella") ||
-texto.includes("él")
-) {
-
-return "Amor";
-
-}
-
-
-return "Drama";
+  return "Drama";
 
 }
 
@@ -360,129 +348,112 @@ return "Drama";
 
 function crearTarjeta(video, indice) {
 
-const titulo =
-video.title ||
-"Frutinovela de ATRIUM FRUTA";
+  const titulo =
+    video.title || "Frutinovela de ATRIUM FRUTA";
+
+  const categoria =
+    determinarCategoria(titulo);
+
+  const tarjeta =
+    document.createElement("article");
+
+  tarjeta.className =
+    "novela-card";
+
+  tarjeta.dataset.category =
+    categoria;
+
+  tarjeta.dataset.popular =
+    indice < 6 ? "true" : "false";
 
 
-const categoria =
-determinarCategoria(titulo);
+  const cover =
+    document.createElement("div");
+
+  cover.className =
+    "cover";
 
 
-const tarjeta =
-document.createElement("article");
+  const badge =
+    document.createElement("span");
+
+  badge.className =
+    "badge";
+
+  badge.textContent =
+    "VIDEO DE TIKTOK";
 
 
-tarjeta.className =
-"novela-card";
+  const imagen =
+    document.createElement("img");
+
+  imagen.src =
+    video.cover_image_url || "";
+
+  imagen.alt =
+    "Miniatura: " + titulo;
+
+  imagen.loading =
+    "lazy";
 
 
-tarjeta.dataset.category =
-categoria;
+  cover.appendChild(badge);
+  cover.appendChild(imagen);
 
 
-/*
-Las primeras publicaciones
-se muestran como destacadas
-para mantener el funcionamiento
-del filtro.
-*/
+  const contenido =
+    document.createElement("div");
 
-tarjeta.dataset.popular =
-indice < 6 ? "true" : "false";
+  contenido.className =
+    "card-content";
 
 
-const cover =
-document.createElement("div");
+  const h3 =
+    document.createElement("h3");
 
-cover.className =
-"cover";
-
-
-const badge =
-document.createElement("span");
-
-badge.className =
-"badge";
-
-badge.textContent =
-"VIDEO DE TIKTOK";
+  h3.textContent =
+    titulo;
 
 
-const imagen =
-document.createElement("img");
+  const partes =
+    document.createElement("p");
 
-imagen.src =
-video.cover_image_url || "";
+  partes.className =
+    "parts";
 
-imagen.alt =
-"Miniatura: " + titulo;
-
-imagen.loading =
-"lazy";
+  partes.textContent =
+    "🎬 Video disponible en TikTok";
 
 
-cover.appendChild(badge);
+  const boton =
+    document.createElement("a");
 
-cover.appendChild(imagen);
+  boton.className =
+    "view-button";
 
+  boton.href =
+    video.share_url || "#";
 
-const contenido =
-document.createElement("div");
+  boton.target =
+    "_blank";
 
-contenido.className =
-"card-content";
+  boton.rel =
+    "noopener";
 
-
-const h3 =
-document.createElement("h3");
-
-h3.textContent =
-titulo;
-
-
-const partes =
-document.createElement("p");
-
-partes.className =
-"parts";
-
-partes.textContent =
-"🎬 Video disponible en TikTok";
+  boton.textContent =
+    "Ver en TikTok";
 
 
-const boton =
-document.createElement("a");
-
-boton.className =
-"view-button";
-
-boton.href =
-video.share_url || "#";
-
-boton.target =
-"_blank";
-
-boton.rel =
-"noopener";
-
-boton.textContent =
-"Ver en TikTok";
+  contenido.appendChild(h3);
+  contenido.appendChild(partes);
+  contenido.appendChild(boton);
 
 
-contenido.appendChild(h3);
-
-contenido.appendChild(partes);
-
-contenido.appendChild(boton);
+  tarjeta.appendChild(cover);
+  tarjeta.appendChild(contenido);
 
 
-tarjeta.appendChild(cover);
-
-tarjeta.appendChild(contenido);
-
-
-return tarjeta;
+  return tarjeta;
 
 }
 
@@ -493,18 +464,16 @@ return tarjeta;
 
 function mostrarVideos(lista) {
 
-grid.innerHTML = "";
+  grid.innerHTML = "";
 
+  lista.forEach((video, indice) => {
 
-lista.forEach((video, indice) => {
+    const tarjeta =
+      crearTarjeta(video, indice);
 
-const tarjeta =
-crearTarjeta(video, indice);
+    grid.appendChild(tarjeta);
 
-
-grid.appendChild(tarjeta);
-
-});
+  });
 
 }
 
@@ -514,62 +483,60 @@ grid.appendChild(tarjeta);
 ---------------------------------- */
 
 const buttons =
-document.querySelectorAll(".filter-btn");
+  document.querySelectorAll(".filter-btn");
 
 
 buttons.forEach(btn => {
 
-btn.addEventListener("click", () => {
+  btn.addEventListener("click", () => {
 
-buttons.forEach(b =>
-b.classList.remove("active")
-);
+    buttons.forEach(b =>
+      b.classList.remove("active")
+    );
 
-btn.classList.add("active");
-
-
-const filtro =
-btn.dataset.filter;
+    btn.classList.add("active");
 
 
-const tarjetas =
-document.querySelectorAll(".novela-card");
+    const filtro =
+      btn.dataset.filter;
 
 
-tarjetas.forEach((tarjeta, indice) => {
-
-let mostrar = false;
-
-
-if (filtro === "all") {
-
-mostrar = true;
-
-}
+    const tarjetas =
+      document.querySelectorAll(".novela-card");
 
 
-else if (filtro === "popular") {
+    tarjetas.forEach(tarjeta => {
 
-mostrar =
-tarjeta.dataset.popular === "true";
-
-}
+      let mostrar = false;
 
 
-else {
+      if (filtro === "all") {
 
-mostrar =
-tarjeta.dataset.category === filtro;
+        mostrar = true;
 
-}
+      }
+
+      else if (filtro === "popular") {
+
+        mostrar =
+          tarjeta.dataset.popular === "true";
+
+      }
+
+      else {
+
+        mostrar =
+          tarjeta.dataset.category === filtro;
+
+      }
 
 
-tarjeta.style.display =
-mostrar ? "" : "none";
+      tarjeta.style.display =
+        mostrar ? "" : "none";
 
-});
+    });
 
-});
+  });
 
 });
 
@@ -581,6 +548,8 @@ mostrar ? "" : "none";
 cargarVideosTikTok();
 
 </script>
+
+
 
 </body>
 </html>
