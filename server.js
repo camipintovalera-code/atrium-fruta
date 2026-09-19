@@ -93,7 +93,7 @@ if (!response.ok || data.error) {
 }
 
 const videoResponse = await fetch(
-  "https://open.tiktokapis.com/v2/video/list/",
+  "https://open.tiktokapis.com/v2/video/list/?fields=id,title,cover_image_url,share_url,duration,create_time",
   {
     method: "POST",
     headers: {
@@ -101,14 +101,6 @@ const videoResponse = await fetch(
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      fields: [
-        "id",
-        "title",
-        "cover_image_url",
-        "share_url",
-        "duration",
-        "create_time"
-      ],
       max_count: 20
     })
   }
