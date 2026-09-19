@@ -223,7 +223,38 @@ Disfruta nuestras Frutinovelas.
 
 </footer>
 
+<!-- VENTANA PARA VER FRUTINOVELAS -->
 
+<div id="video-modal" class="video-modal">
+
+  <div class="video-modal-content">
+
+    <button id="close-video" class="close-video">
+      ✕ Cerrar
+    </button>
+
+    <h2 id="video-modal-title">
+      Frutinovela
+    </h2>
+
+    <div class="video-player-container">
+
+      <iframe
+        id="tiktok-player"
+        src=""
+        allow="fullscreen"
+        title="Reproductor de Frutinovela">
+      </iframe>
+
+    </div>
+
+    <div class="ad-space">
+      ESPACIO PUBLICITARIO
+    </div>
+
+  </div>
+
+</div>
 <script>
 
 const API_URL = "https://atrium-fruta.onrender.com/api/tiktok/videos";
