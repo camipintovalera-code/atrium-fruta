@@ -19,6 +19,14 @@ const states = new Set();
 app.get("/", (req, res) => {
   res.send("ATRIUM FRUTA - Backend funcionando");
 });
+app.get("/debug/tiktok", (req, res) => {
+  res.json({
+    clientKeyLoaded: !!CLIENT_KEY,
+    clientKeyLength: CLIENT_KEY ? CLIENT_KEY.length : 0,
+    clientSecretLoaded: !!CLIENT_SECRET,
+    redirectUri: REDIRECT_URI
+  });
+});
 
 app.get("/auth/tiktok", (req, res) => {
   const state = crypto.randomBytes(24).toString("hex");
