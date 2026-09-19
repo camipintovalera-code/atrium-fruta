@@ -269,6 +269,7 @@ let videos = [];
    CARGAR VIDEOS DESDE TIKTOK
 ---------------------------------- */
 
+
 async function cargarVideosTikTok() {
 
   try {
@@ -307,15 +308,11 @@ async function cargarVideosTikTok() {
       return;
     }
 
-    loading.style.display = "none";
-
     mostrarVideos(videos);
 
   } catch (error) {
 
     console.error("Error cargando TikTok:", error);
-
-    loading.style.display = "none";
 
     grid.innerHTML = `
       <div style="text-align:center; width:100%;">
@@ -331,9 +328,14 @@ async function cargarVideosTikTok() {
       </div>
     `;
 
+  } finally {
+
+    loading.style.display = "none";
+
   }
 
 }
+
 
 
 /* ---------------------------------
