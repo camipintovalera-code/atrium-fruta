@@ -239,7 +239,7 @@ if (tokenError || !tokenData?.access_token) {
 
 }
 
-const accessToken = tokenData.access_token;
+const accessToken = tokenData?.access_token;
 
 try {
 
