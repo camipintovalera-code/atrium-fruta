@@ -130,6 +130,53 @@ res.send(`
   }
 });
 
+app.get("/api/tiktok/videos", async (req, res) => {
+  const accessToken = req.query.access_token;
+
+  if (!accessToken) {
+    return res.status(400).json({
+      error: "Falta el access_token"
+    });
+  }
+
+  try {
+    const fields = [
+      "id",
+      "title",
+      "cover_image_url",
+      "share_url",
+      "duration",
+      "create_time"
+    ].join(",");
+
+    const response = await fetch(
+      `https://open.tiktokapis.com/v2/video/list/?fields=${fields}`,
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          max_count: 20
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || data.error?.code !== "ok") {
+      return res.status(400).json(data);
+    }
+
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Error interno del servidor"
+    });
+  }
+});
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en el puerto ${PORT}`);
 });
