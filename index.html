@@ -239,12 +239,14 @@ Disfruta nuestras Frutinovelas.
 
     <div class="video-player-container">
 
-      <iframe
-        id="tiktok-player"
-        src=""
-        allow="fullscreen"
-        title="Reproductor de Frutinovela">
-      </iframe>
+      <video
+  id="tiktok-player"
+  controls
+  playsinline
+  style="width:100%; max-height:70vh;"
+>
+  Tu navegador no puede reproducir este video.
+</video>
 
     </div>
 
@@ -655,8 +657,14 @@ function abrirVideo(videoId, titulo) {
 
   videoModalTitle.textContent = titulo;
 
-  tiktokPlayer.src =
-    "https://camipintovalera-code.github.io/atrium-fruta/video%20prueba.mp4";
+  tiktokPlayer.innerHTML = `
+    <source
+      src="https://camipintovalera-code.github.io/atrium-fruta/video%20prueba.mp4"
+      type="video/mp4"
+    >
+  `;
+
+  tiktokPlayer.load();
 
   videoModal.classList.add("active");
 
@@ -669,8 +677,8 @@ function cerrarVideo() {
 
   videoModal.classList.remove("active");
 
-  tiktokPlayer.src =
-    "";
+  tiktokPlayer.pause();
+tiktokPlayer.innerHTML = "";
 
   document.body.style.overflow =
     "";
