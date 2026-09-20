@@ -263,6 +263,49 @@ const grid = document.getElementById("novelas-grid");
 const loading = document.getElementById("tiktok-loading");
 
 let videos = [];
+  const nombresPersonalizados = {
+
+  
+
+  "7686616882992008462": "Ella lo dejó… y después se dio cuenta de lo que perdió — Parte 3",
+
+  "7686536471200763149": "Hizo todo por ella… pero ella eligió a otro — Parte 1",
+
+  
+
+  "7685624384001789198": "La millonaria quiso a Limón… y destruyó su matrimonio — Parte 1",
+
+  "7684152799919213837": "Perdieron a su hija… hasta que ella regresó",
+
+  "7683708228512779533": "El secreto de Pancho — Parte 1",
+
+  "7682217357120605453": "Buscaba tiempo para salvar a su mamá… hasta que...",
+
+  "7681439105544228109": "Cuando ya no tienes nada, solo te queda la fe — Parte 1",
+
+  "7681177703533382925": "Cuando ya no tienes nada, solo te queda la fe — Parte 2",
+
+  "7679518897493642509": "La lección más valiosa vino del plátano más humilde — Parte 1",
+
+  "7679095083471310093": "Mi esposo no amaba a su propio hijo",
+
+  "7678761442262174989": "No podía creer que su esposo le hiciera esto... — Parte 1",
+
+  "7678411562339568927": "La historia más triste del pequeño limón — Parte 5",
+
+  "7678366662315314462": "La historia más triste del pequeño limón — Parte 4",
+
+  "7678120139761470733": "La historia más triste del pequeño limón — Parte 3",
+
+  "7677779577325767949": "La historia más triste del pequeño limón — Parte 2",
+
+  "7677385368311713037": "La historia más triste del pequeño limón — Parte 1",
+
+  "7676215613609479437": "El final de Lucas — Parte 10",
+
+  "7674830146192411917": "¿Quién robó a Lucas? — Parte 9"
+
+};
 
 
 /* ---------------------------------
@@ -382,8 +425,10 @@ function determinarCategoria(titulo) {
 
 function crearTarjeta(video, indice) {
 
-  const titulo =
-    video.title || "Frutinovela de ATRIUM FRUTA";
+ const titulo =
+  nombresPersonalizados[video.id] ||
+  video.title ||
+  "Frutinovela de ATRIUM FRUTA";
 
   const categoria =
     determinarCategoria(titulo);
