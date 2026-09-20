@@ -653,18 +653,14 @@ const closeVideo =
 
 function abrirVideo(videoId, titulo) {
 
-  videoModalTitle.textContent =
-    titulo;
+  videoModalTitle.textContent = titulo;
 
   tiktokPlayer.src =
-  "https://www.tiktok.com/player/v1/" +
-    videoId +
-  "?autoplay=0";
+    "https://raw.githubusercontent.com/camipintovalera-code/atrium-fruta/main/video%20prueba.mp4";
 
   videoModal.classList.add("active");
 
-  document.body.style.overflow =
-    "hidden";
+  document.body.style.overflow = "hidden";
 
 }
 
