@@ -585,62 +585,52 @@ buttons.forEach(btn => {
 
 
     const filtro =
-      btn.dataset.filter;
-    if (filtro === "popular") {
+  btn.dataset.filter;
 
-  const tarjetasOrdenadas =
-    Array.from(document.querySelectorAll(".novela-card"))
-      .sort((a, b) =>
-        Number(b.dataset.views || 0) -
-        Number(a.dataset.views || 0)
-      );
+const tarjetas =
+  Array.from(document.querySelectorAll(".novela-card"));
 
-  tarjetasOrdenadas.forEach(tarjeta => {
+if (filtro === "popular") {
+
+  tarjetas.sort((a, b) =>
+    Number(b.dataset.views || 0) -
+    Number(a.dataset.views || 0)
+  );
+
+  tarjetas.forEach(tarjeta => {
     grid.appendChild(tarjeta);
   });
 
-    }
+}
 
+tarjetas.forEach(tarjeta => {
 
-    const tarjetas =
-      document.querySelectorAll(".novela-card");
+  let mostrar = false;
 
+  if (filtro === "all") {
 
-    tarjetas.forEach(tarjeta => {
+    mostrar = true;
 
-      let mostrar = false;
+  }
 
+  else if (filtro === "popular") {
 
-      if (filtro === "all") {
+    mostrar =
+      tarjeta.dataset.popular === "true";
 
-        mostrar = true;
+  }
 
-      }
+  else {
 
-      else if (filtro === "popular") {
+    mostrar =
+      tarjeta.dataset.category === filtro;
 
-        mostrar =
-          tarjeta.dataset.popular === "true";
+  }
 
-      }
-
-      else {
-
-        mostrar =
-          tarjeta.dataset.category === filtro;
-
-      }
-
-
-      tarjeta.style.display =
-        mostrar ? "" : "none";
-
-    });
-
-  });
+  tarjeta.style.display =
+    mostrar ? "" : "none";
 
 });
-
 /* ---------------------------------
    REPRODUCTOR DE FRUTINOVELAS
 ---------------------------------- */
