@@ -501,7 +501,9 @@ function crearTarjeta(video, indice) {
     "parts";
 
   partes.textContent =
-    "🎬 Frutinovela disponible";
+  "👁️ " +
+  Number(video.view_count || 0).toLocaleString("es-CO") +
+  " vistas";
 
 
   const boton =
