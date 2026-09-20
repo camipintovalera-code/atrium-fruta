@@ -250,7 +250,11 @@ const fields = [
   "cover_image_url",
   "share_url",
   "duration",
-  "create_time"
+  "create_time",
+  "view_count",
+  "like_count",
+  "comment_count",
+  "share_count"
 ].join(",");
 
 
