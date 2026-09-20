@@ -441,8 +441,10 @@ function crearTarjeta(video, indice) {
   tarjeta.dataset.category =
     categoria;
 
-  tarjeta.dataset.popular =
-    indice < 6 ? "true" : "false";
+    tarjeta.dataset.popular =
+  Number(video.view_count || 0) >= 100000
+    ? "true"
+    : "false";
 
 
   const cover =
