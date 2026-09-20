@@ -310,75 +310,160 @@ const nombresPersonalizados = {
 
 
 /* ---------------------------------
-   CARGAR VIDEOS DESDE TIKTOK
+   CATÁLOGO DE FRUTINOVELAS
 ---------------------------------- */
 
+const catalogoLocal = [
 
-async function cargarVideosTikTok() {
+  {
+    id: "zanahoria-1",
+    title: "La casa que cambió la vida de Viejo Zanahoria — Parte 1",
+    view_count: 1900000
+  },
 
-  try {
+  {
+    id: "zanahoria-2",
+    title: "La casa que cambió la vida de Viejo Zanahoria — Parte 2",
+    view_count: 342400
+  },
 
-    loading.style.display = "block";
+  {
+    id: "hijo-1",
+    title: "El hijo que nadie apoyó 💔 — Parte 1",
+    view_count: 1300000
+  },
 
-    const response = await fetch(API_URL, {
-      method: "GET",
-      cache: "no-store"
-    });
+  {
+    id: "hijo-2",
+    title: "El hijo que nadie apoyó 💔 — Parte 2",
+    view_count: 506300
+  },
 
-    console.log("Estado API:", response.status);
+  {
+    id: "hijo-3",
+    title: "El hijo que nadie apoyó 💔 — Parte 3",
+    view_count: 248000
+  },
 
-    const data = await response.json();
+  {
+    id: "hijo-4",
+    title: "El hijo que nadie apoyó 💔 — Parte 4",
+    view_count: 330100
+  },
 
-    console.log("Respuesta API:", data);
+  {
+    id: "hijo-5",
+    title: "El hijo que nadie apoyó 💔 — Parte 5",
+    view_count: 401300
+  },
 
-    if (!response.ok) {
-      throw new Error("HTTP_" + response.status);
-    }
+  {
+    id: "hijo-6",
+    title: "El hijo que nadie apoyó 💔 — Parte 6",
+    view_count: 283300
+  },
 
-    if (data.error && data.error.code !== "ok") {
-      throw new Error("TIKTOK_ERROR");
-    }
+  {
+    id: "hijo-7",
+    title: "El hijo que nadie apoyó 💔 — Parte 7",
+    view_count: 182200
+  },
 
-    videos = data.data?.videos || [];
+  {
+    id: "hijo-8",
+    title: "El hijo que nadie apoyó 💔 — Parte 8",
+    view_count: 173300
+  },
 
-    if (videos.length === 0) {
+  {
+    id: "hijo-9",
+    title: "El hijo que nadie apoyó 💔 — Parte 9",
+    view_count: 144400
+  },
 
-      grid.innerHTML = `
-        <p style="text-align:center; width:100%;">
-          No hay videos disponibles en este momento.
-        </p>
-      `;
+  {
+    id: "hijo-10",
+    title: "El hijo que nadie apoyó 💔 — Parte 10",
+    view_count: 125400
+  },
 
-      return;
-    }
+  {
+    id: "limon-1",
+    title: "La historia más triste del pequeño limón — Parte 1",
+    view_count: 3900000
+  },
 
-    mostrarVideos(videos);
+  {
+    id: "limon-2",
+    title: "La historia más triste del pequeño limón — Parte 2",
+    view_count: 409300
+  },
 
-  } catch (error) {
+  {
+    id: "limon-3",
+    title: "La historia más triste del pequeño limón — Parte 3",
+    view_count: 393000
+  },
 
-    console.error("Error cargando TikTok:", error);
+  {
+    id: "limon-4",
+    title: "La historia más triste del pequeño limón — Parte 4",
+    view_count: 133100
+  },
 
-    grid.innerHTML = `
-      <div style="text-align:center; width:100%;">
+  {
+    id: "limon-5",
+    title: "La historia más triste del pequeño limón — Parte 5",
+    view_count: 124900
+  },
 
-        <p>
-          No se pudieron cargar las Frutinovelas desde TikTok.
-        </p>
+  {
+    id: "fe-1",
+    title: "Cuando ya no tienes nada, solo te queda la fe — Parte 1",
+    view_count: 800600
+  },
 
-        <p style="font-size:14px;">
-          Primero conecta la cuenta de TikTok.
-        </p>
+  {
+    id: "fe-2",
+    title: "Cuando ya no tienes nada, solo te queda la fe — Parte 2",
+    view_count: 143800
+  },
 
-      </div>
-    `;
+  {
+    id: "millonaria-1",
+    title: "La millonaria quiso a Limón… y destruyó su matrimonio — Parte 1",
+    view_count: 1300000
+  },
 
-  } finally {
+  {
+    id: "millonaria-2",
+    title: "La millonaria quiso a Limón… y destruyó su matrimonio — Parte 2",
+    view_count: 137700
+  },
 
-    loading.style.display = "none";
-
+  {
+    id: "otro-1",
+    title: "Hizo todo por ella… pero ella eligió a otro — Parte 1",
+    view_count: 16300
   }
 
+];
+
+
+/* ---------------------------------
+   CARGAR CATÁLOGO LOCAL
+---------------------------------- */
+
+function cargarVideosTikTok() {
+
+  videos = catalogoLocal;
+
+  mostrarVideos(videos);
+
+  loading.style.display = "none";
+
 }
+
 
 
 
