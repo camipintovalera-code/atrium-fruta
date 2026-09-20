@@ -158,7 +158,7 @@ if (saveError) {
 ---------------------------------- */
 
 const videoResponse = await fetch(
-  "https://open.tiktokapis.com/v2/video/list/?fields=id,title,cover_image_url,share_url,duration,create_time",
+  "https://open.tiktokapis.com/v2/video/list/?fields=id,title,cover_image_url,share_url,duration,create_time,view_count,like_count,comment_count,share_count",
   {
     method: "POST",
 
