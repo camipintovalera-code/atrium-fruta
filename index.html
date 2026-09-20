@@ -740,14 +740,61 @@ const closeVideo =
 
 function abrirVideo(videoId, titulo) {
 
+  const archivosVideos = {
+
+    "zanahoria-1": "el%20viejo%20zanahoria%20parte%201.mp4",
+    "zanahoria-2": "el%20viejo%20zanahoria%20parte%202.mp4",
+
+    "hijo-1": "el%20hijo%20parte%201.mp4",
+    "hijo-2": "el%20hijo%20parte%202.mp4",
+    "hijo-3": "el%20hijo%20parte%203.mp4",
+    "hijo-4": "el%20hijo%20parte%204.mp4",
+    "hijo-5": "el%20hijo%20parte%205.mp4",
+    "hijo-6": "el%20hijo%20parte%206.mp4",
+    "hijo-7": "el%20hijo%20parte%207.mp4",
+    "hijo-8": "el%20hijo%20parte%208.mp4",
+    "hijo-9": "el%20hijo%20parte%209.mp4",
+    "hijo-10": "el%20hijo%20parte%2010.mp4",
+
+    "limon-1": "peque%C3%B1o%20limon%20parte%201.mp4",
+    "limon-2": "peque%C3%B1o%20limon%20parte%202.mp4",
+    "limon-3": "peque%C3%B1o%20limon%20parte%203.mp4",
+    "limon-4": "peque%C3%B1o%20limon%20parte%204.mp4",
+    "limon-5": "peque%C3%B1o%20limon%20parte%205.mp4",
+
+    "fe-1": "la%20fe%20parte%201.mp4",
+    "fe-2": "la%20fe%20parte%202.mp4",
+
+    "millonaria-1": "la%20millonaria%20parte%201.mp4",
+    "millonaria-2": "la%20millonaria%20parte%202.mp4",
+
+    "otro-1": "hizo%20todo%20parte%201.mp4"
+
+  };
+
+  const archivo = archivosVideos[videoId];
+
+  if (!archivo) {
+    alert("Video todavía no disponible");
+    return;
+  }
+
+  const urlVideo =
+    "https://camipintovalera-code.github.io/atrium-fruta/" + archivo;
+
   videoModalTitle.textContent = titulo;
 
   tiktokPlayer.innerHTML = `
-    <source
-      src="https://camipintovalera-code.github.io/atrium-fruta/video%20prueba.mp4"
-      type="video/mp4"
-    >
+    <source src="${urlVideo}" type="video/mp4">
   `;
+
+  tiktokPlayer.load();
+
+  videoModal.classList.add("active");
+
+  document.body.style.overflow = "hidden";
+
+}
 
   tiktokPlayer.load();
 
