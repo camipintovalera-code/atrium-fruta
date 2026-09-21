@@ -1017,9 +1017,7 @@ function crearMiniatura(videoInfo) {
 
   const video = document.createElement("video");
 
-  video.src =
-    "https://camipintovalera-code.github.io/atrium-fruta/" +
-    videoInfo.video;
+  video.src = "/" + videoInfo.video;
 
   video.muted = true;
   video.preload = "auto";
