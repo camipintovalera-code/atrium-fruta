@@ -763,7 +763,13 @@ function abrirFrutinovela(historia) {
 
     const tituloParte = document.createElement("h3");
 
-    tituloParte.textContent = video.title;
+const numeroParte = video.title.match(/Parte\s+\d+/i);
+
+tituloParte.textContent = numeroParte
+  ? numeroParte[0].toUpperCase()
+  : "PARTE";
+
+tituloParte.className = "parte-titulo";
 
     const archivosVideos = {
 
@@ -936,6 +942,9 @@ videoModal.addEventListener(
    INICIAR
 ---------------------------------- */
 
+document.body.style.overflow = "auto";
+
+cargarVideosTikTok();
 cargarVideosTikTok();
 
 </script>
