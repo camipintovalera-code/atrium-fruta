@@ -74,4 +74,55 @@
   border-left: 5px solid #e63946;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+/* =================================
+   ESPACIOS PUBLICITARIOS
+================================= */
+
+.ad-space {
+  width: calc(100% - 30px);
+  max-width: 970px;
+  min-height: 110px;
+  height: auto;
+  margin: 35px auto;
+  padding: 25px 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fffaf7;
+  border: 1px dashed #e2cfc5;
+  border-radius: 12px;
+
+  color: #a18b82;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Espacios publicitarios dentro del reproductor */
+
+.video-modal-content .ad-space {
+  width: 100%;
+  max-width: 100%;
+  min-height: 90px;
+  margin: 30px auto 10px;
+  background: #fffaf7;
+}
+
+/* Adaptación para celulares */
+
+@media (max-width: 600px) {
+
+  .ad-space {
+    width: calc(100% - 30px);
+    min-height: 90px;
+    margin: 25px auto;
+    padding: 20px 10px;
+    font-size: 10px;
+  }
+
+}
 
