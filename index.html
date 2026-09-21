@@ -508,58 +508,6 @@ function determinarCategoria(titulo) {
 
 
 function crearTarjeta(video, indice) {
-  const archivosMiniatura = {
-  "zanahoria-1": "el%20viejo%20zanahoria%20parte%201.mp4",
-  "hijo-1": "el%20hijo%20parte%201.mp4",
-  "limon-1": "peque%C3%B1o%20limon%20parte%201.mp4",
-  "fe-1": "la%20fe%20parte%201.mp4",
-  "millonaria-1": "la%20millonaria%20parte%201.mp4",
-  "otro-1": "hizo%20todo%20parte%201.mp4"
-};
-
-function generarMiniatura(id, imagen) {
-
-  const archivo = archivosMiniatura[id];
-
-  if (!archivo) return;
-
-  const video = document.createElement("video");
-
-  video.src =
-    "https://camipintovalera-code.github.io/atrium-fruta/" + archivo;
-
-  video.muted = true;
-  video.preload = "metadata";
-  video.preload = "auto";
-
-  video.addEventListener("loadeddata", () => {
-
-    video.currentTime = 2;
-
-  });
-
-  video.addEventListener("seeked", () => {
-
-    const canvas = document.createElement("canvas");
-
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-
-    const contexto = canvas.getContext("2d");
-
-    contexto.drawImage(
-      video,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-    imagen.src = canvas.toDataURL("image/jpeg", 0.9);
-
-  });
-
-}
 
   const titulo = video.title;
   const categoria = determinarCategoria(titulo);
@@ -590,18 +538,50 @@ function generarMiniatura(id, imagen) {
 
   const imagen = document.createElement("img");
 
- imagen.src = "";
-
   imagen.alt = "Miniatura: " + titulo;
 
   imagen.loading = "lazy";
 
+  /*
+    Miniaturas oficiales de cada Frutinovela
+  */
+
+  const miniaturas = {
+    "El hijo que nadie apoyó": "assets/01-el-hijo-que-nadie-apoyo.png",
+    "La casa que cambió la vida de Viejo Zanahoria": "assets/02-viejo-zanahoria.png",
+    "La historia más triste del pequeño limón": "assets/03-la-historia-del-pequeno-limon.png",
+    "Cuando ya no tienes nada, solo te queda la fe": "assets/04-cuando-no-tienes-nada-la-fe.png",
+    "La Millonaria Quiso A Limón… Y Destruyó Su Matrimonio": "assets/05-la-millonaria-quiso-a-limon.png",
+    "Hizo Todo por Ella… Pero Ella Eligió a Otro": "assets/06-hizo-todo-por-ella.png"
+  };
+
+  /*
+    Buscar la miniatura correspondiente
+  */
+
+  let miniaturaEncontrada = null;
+
+  for (const nombre in miniaturas) {
+
+    if (titulo.toLowerCase().includes(nombre.toLowerCase())) {
+
+      miniaturaEncontrada = miniaturas[nombre];
+
+      break;
+
+    }
+
+  }
+
+  if (miniaturaEncontrada) {
+
+    imagen.src = miniaturaEncontrada;
+
+  }
+
   cover.appendChild(badge);
 
   cover.appendChild(imagen);
-  const primeraParte = video.historia.partes[0];
-
-generarMiniatura(primeraParte.id, imagen);
 
   const contenido = document.createElement("div");
 
