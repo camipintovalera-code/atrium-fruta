@@ -538,8 +538,30 @@ function crearTarjeta(video, indice) {
 
   const imagen = document.createElement("img");
 
-  imagen.src =
-    "https://placehold.co/400x600/222222/ffffff?text=FRUTINOVELA";
+  const tituloLower = titulo.toLowerCase();
+
+let miniatura = "";
+
+if (tituloLower.includes("hijo que nadie")) {
+  miniatura = "01-el-hijo-que-nadie-apoyo.png";
+
+} else if (tituloLower.includes("viejo zanahoria")) {
+  miniatura = "02-viejo-zanahoria.png";
+
+} else if (tituloLower.includes("pequeño limón")) {
+  miniatura = "03-la-historia-del-pequeno-limon.png";
+
+} else if (tituloLower.includes("fe")) {
+  miniatura = "04-cuando-no-tienes-nada-la-fe.png";
+
+} else if (tituloLower.includes("millonaria")) {
+  miniatura = "05-la-millonaria-quiso-a-limon.png";
+
+} else if (tituloLower.includes("hizo todo por ella")) {
+  miniatura = "06-hizo-todo-por-ella.png";
+}
+
+imagen.src = "assets/" + miniatura;
 
   imagen.alt = "Miniatura: " + titulo;
 
