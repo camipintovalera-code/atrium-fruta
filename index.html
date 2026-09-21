@@ -983,8 +983,6 @@ cargarVideosTikTok();
 
 </script>
 
-
-
 <script>
 const miniaturasVideos = [
   {
@@ -1017,12 +1015,16 @@ function crearMiniatura(videoInfo) {
 
   const video = document.createElement("video");
 
-  video.src = "/" + videoInfo.video;
-
   video.muted = true;
   video.preload = "auto";
+  video.crossOrigin = "";
 
-  video.addEventListener("loadedmetadata", () => {
+  video.src = new URL(
+    videoInfo.video,
+    window.location.origin + "/"
+  ).href;
+
+  video.addEventListener("loadeddata", () => {
 
     video.currentTime = 2;
 
@@ -1045,22 +1047,46 @@ function crearMiniatura(videoInfo) {
       canvas.height
     );
 
-    const imagen = document.createElement("img");
+    canvas.toBlob((blob) => {
 
-    imagen.src = canvas.toDataURL("image/png");
+      if (!blob) {
+        console.error(
+          "No se pudo crear la miniatura:",
+          videoInfo.nombre
+        );
+        return;
+      }
 
-    imagen.style.maxWidth = "500px";
-    imagen.style.height = "auto";
-    imagen.style.display = "block";
-    imagen.style.margin = "20px auto";
+      const url = URL.createObjectURL(blob);
 
-    document.body.appendChild(imagen);
+      const enlace = document.createElement("a");
 
-    console.log(
-      videoInfo.nombre,
-      canvas.width,
-      "x",
-      canvas.height
+      enlace.href = url;
+      enlace.download = videoInfo.nombre;
+      enlace.textContent =
+        "⬇️ Descargar " + videoInfo.nombre;
+
+      enlace.style.display = "block";
+      enlace.style.margin = "15px";
+      enlace.style.fontSize = "18px";
+
+      document.body.appendChild(enlace);
+
+      console.log(
+        "MINIATURA LISTA:",
+        videoInfo.nombre,
+        canvas.width + " x " + canvas.height
+      );
+
+    }, "image/png");
+
+  });
+
+  video.addEventListener("error", () => {
+
+    console.error(
+      "ERROR CARGANDO VIDEO:",
+      videoInfo.video
     );
 
   });
@@ -1070,5 +1096,7 @@ function crearMiniatura(videoInfo) {
 
 miniaturasVideos.forEach(crearMiniatura);
 </script>
+
+
 </body>
 </html>
