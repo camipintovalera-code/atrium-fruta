@@ -508,6 +508,58 @@ function determinarCategoria(titulo) {
 
 
 function crearTarjeta(video, indice) {
+  const archivosMiniatura = {
+  "zanahoria-1": "el%20viejo%20zanahoria%20parte%201.mp4",
+  "hijo-1": "el%20hijo%20parte%201.mp4",
+  "limon-1": "peque%C3%B1o%20limon%20parte%201.mp4",
+  "fe-1": "la%20fe%20parte%201.mp4",
+  "millonaria-1": "la%20millonaria%20parte%201.mp4",
+  "otro-1": "hizo%20todo%20parte%201.mp4"
+};
+
+function generarMiniatura(id, imagen) {
+
+  const archivo = archivosMiniatura[id];
+
+  if (!archivo) return;
+
+  const video = document.createElement("video");
+
+  video.src =
+    "https://camipintovalera-code.github.io/atrium-fruta/" + archivo;
+
+  video.muted = true;
+  video.preload = "metadata";
+  video.preload = "auto";
+
+  video.addEventListener("loadeddata", () => {
+
+    video.currentTime = 2;
+
+  });
+
+  video.addEventListener("seeked", () => {
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const contexto = canvas.getContext("2d");
+
+    contexto.drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    imagen.src = canvas.toDataURL("image/jpeg", 0.9);
+
+  });
+
+}
 
   const titulo = video.title;
   const categoria = determinarCategoria(titulo);
@@ -538,30 +590,7 @@ function crearTarjeta(video, indice) {
 
   const imagen = document.createElement("img");
 
-  const tituloLower = titulo.toLowerCase();
-
-let miniatura = "";
-
-if (tituloLower.includes("hijo que nadie")) {
-  miniatura = "01-el-hijo-que-nadie-apoyo.png";
-
-} else if (tituloLower.includes("viejo zanahoria")) {
-  miniatura = "02-viejo-zanahoria.png";
-
-} else if (tituloLower.includes("pequeño limón")) {
-  miniatura = "03-la-historia-del-pequeno-limon.png";
-
-} else if (tituloLower.includes("fe")) {
-  miniatura = "04-cuando-no-tienes-nada-la-fe.png";
-
-} else if (tituloLower.includes("millonaria")) {
-  miniatura = "05-la-millonaria-quiso-a-limon.png";
-
-} else if (tituloLower.includes("hizo todo por ella")) {
-  miniatura = "06-hizo-todo-por-ella.png";
-}
-
-imagen.src = "assets/" + miniatura;
+ imagen.src = "";
 
   imagen.alt = "Miniatura: " + titulo;
 
@@ -570,6 +599,9 @@ imagen.src = "assets/" + miniatura;
   cover.appendChild(badge);
 
   cover.appendChild(imagen);
+  const primeraParte = video.historia.partes[0];
+
+generarMiniatura(primeraParte.id, imagen);
 
   const contenido = document.createElement("div");
 
