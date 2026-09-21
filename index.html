@@ -984,6 +984,108 @@ cargarVideosTikTok();
 </script>
 
 
+<script>
+const videosParaMiniaturas = [
+  {
+    video: "el%20hijo%20parte%201.mp4",
+    nombre: "01-el-hijo-que-nadie-apoyo.png"
+  },
+  {
+    video: "el%20viejo%20zanahoria%20parte%201.mp4",
+    nombre: "02-viejo-zanahoria.png"
+  },
+  {
+    video: "peque%C3%B1o%20limon%20parte%201.mp4",
+    nombre: "03-la-historia-del-pequeno-limon.png"
+  },
+  {
+    video: "la%20fe%20parte%201.mp4",
+    nombre: "04-cuando-no-tienes-nada-la-fe.png"
+  },
+  {
+    video: "la%20millonaria%20parte%201.mp4",
+    nombre: "05-la-millonaria-quiso-a-limon.png"
+  },
+  {
+    video: "hizo%20todo%20parte%201.mp4",
+    nombre: "06-hizo-todo-por-ella.png"
+  }
+];
 
+function generarMiniatura(item) {
+
+  const video = document.createElement("video");
+
+  video.src =
+    "https://atriumfruta.com/" + item.video;
+
+  video.crossOrigin = "anonymous";
+  video.muted = true;
+  video.preload = "auto";
+
+  video.addEventListener("loadedmetadata", () => {
+
+    video.currentTime = 2;
+
+  });
+
+  video.addEventListener("seeked", () => {
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const contexto = canvas.getContext("2d");
+
+    contexto.drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    canvas.toBlob((blob) => {
+
+      const enlace = document.createElement("a");
+
+      enlace.href = URL.createObjectURL(blob);
+
+      enlace.download = item.nombre;
+
+      enlace.textContent =
+        "⬇️ Descargar " + item.nombre;
+
+      enlace.style.display = "block";
+      enlace.style.margin = "10px";
+      enlace.style.fontSize = "16px";
+
+      document.body.appendChild(enlace);
+
+    }, "image/png");
+
+    console.log(
+      "Miniatura:",
+      item.nombre,
+      canvas.width + "x" + canvas.height
+    );
+
+  });
+
+  video.addEventListener("error", () => {
+
+    console.error(
+      "Error cargando:",
+      item.video
+    );
+
+  });
+
+  video.load();
+}
+
+videosParaMiniaturas.forEach(generarMiniatura);
+</script>
 </body>
 </html>
