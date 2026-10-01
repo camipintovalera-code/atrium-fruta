@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 
 <html lang="es">
@@ -963,7 +964,7 @@ imagen.loading =
 
 
 /* ---------------------------------
-   MINIATURAS
+   MINIATURAS DE LAS HISTORIAS
 ---------------------------------- */
 
 const miniaturas = {
@@ -1161,7 +1162,7 @@ historia.partes.sort(
 const parteA =
 Number(
 a.title.match(
-/Parte (\d+)$/
+/Parte (\d+)$/i
 )?.[1] || 0
 );
 
@@ -1169,7 +1170,7 @@ a.title.match(
 const parteB =
 Number(
 b.title.match(
-/Parte (\d+)$/
+/Parte (\d+)$/i
 )?.[1] || 0
 );
 
@@ -1374,85 +1375,102 @@ tiktokPlayer.innerHTML =
 
 
 /* ---------------------------------
-   MINIATURAS PARA VIDEOS
-   SOLUCIÓN PARA IPHONE / SAFARI
+   MINIATURAS PARA LOS VIDEOS
+   IPHONE / SAFARI
 ---------------------------------- */
 
-const miniaturasVideo = {
+/*
+   IMPORTANTE:
 
-"La casa que cambió la vida de Viejo Zanahoria":
+   Cada ID de video tiene su propio poster.
+   De esta manera el poster NO depende del título
+   general de la Frutinovela.
+
+   Por ahora utilizamos las miniaturas disponibles
+   de cada historia.
+*/
+
+const postersVideos = {
+
+"zanahoria-1":
 "assets/02-viejo-zanahoria.png",
 
-"El hijo que nadie apoyó 💔":
+"zanahoria-2":
+"assets/02-viejo-zanahoria.png",
+
+
+"hijo-1":
 "assets/01-el-hijo-que-nadie-apoyo.png",
 
-"La historia más triste del pequeño limón":
+"hijo-2":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+"hijo-3":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+"hijo-4":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+"hijo-5":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+"hijo-6":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+"hijo-7":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+"hijo-8":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+"hijo-9":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+"hijo-10":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+
+"limon-1":
 "assets/03-la-historia-del-pequeno-limon.png",
 
-"Cuando ya no tienes nada, solo te queda la fe":
+"limon-2":
+"assets/03-la-historia-del-pequeno-limon.png",
+
+"limon-3":
+"assets/03-la-historia-del-pequeno-limon.png",
+
+"limon-4":
+"assets/03-la-historia-del-pequeno-limon.png",
+
+"limon-5":
+"assets/03-la-historia-del-pequeno-limon.png",
+
+
+"fe-1":
 "assets/04-cuando-no-tienes-nada-la-fe.png",
 
-"La millonaria quiso a Limón… y destruyó su matrimonio":
+"fe-2":
+"assets/04-cuando-no-tienes-nada-la-fe.png",
+
+
+"millonaria-1":
 "assets/05-la-millonaria-quiso-a-limon.png",
 
-"Hizo todo por ella… pero ella eligió a otro":
+"millonaria-2":
+"assets/05-la-millonaria-quiso-a-limon.png",
+
+
+"otro-1":
 "assets/06-hizo-todo-por-ella.png"
 
 };
 
 
-let posterHistoria =
-"";
-
-
-for (
-const nombre in miniaturasVideo
-) {
-
-if (
-titulo
-.toLowerCase()
-.includes(nombre.toLowerCase())
-) {
-
-posterHistoria =
-miniaturasVideo[nombre];
-
-break;
-
-}
-
-}
-
-
-historia.partes.forEach(
-video => {
-
-
-const tituloParte =
-document.createElement(
-"h3"
-);
-
-
-const numeroParte =
-video.title.match(
-/Parte\s+\d+/i
-);
-
-
-tituloParte.textContent =
-numeroParte
-? numeroParte[0].toUpperCase()
-: "PARTE";
-
-
-tituloParte.className =
-"parte-titulo";
-
+/* ---------------------------------
+   ARCHIVOS MP4
+---------------------------------- */
 
 const archivosVideos = {
-
 
 "zanahoria-1":
 "el%20viejo%20zanahoria%20parte%201.mp4",
@@ -1528,6 +1546,32 @@ const archivosVideos = {
 };
 
 
+historia.partes.forEach(
+video => {
+
+
+const tituloParte =
+document.createElement(
+"h3"
+);
+
+
+const numeroParte =
+video.title.match(
+/Parte\s+\d+/i
+);
+
+
+tituloParte.textContent =
+numeroParte
+? numeroParte[0].toUpperCase()
+: "PARTE";
+
+
+tituloParte.className =
+"parte-titulo";
+
+
 const archivo =
 archivosVideos[
 video.id
@@ -1544,6 +1588,10 @@ const urlVideo =
 archivo;
 
 
+/* ---------------------------------
+   CREAR VIDEO
+---------------------------------- */
+
 const reproductor =
 document.createElement(
 "video"
@@ -1556,6 +1604,21 @@ true;
 
 reproductor.playsInline =
 true;
+
+
+/*
+   Atributos adicionales para Safari/iPhone.
+*/
+
+reproductor.setAttribute(
+"playsinline",
+""
+);
+
+reproductor.setAttribute(
+"webkit-playsinline",
+""
+);
 
 
 reproductor.preload =
@@ -1571,16 +1634,36 @@ reproductor.style.maxHeight =
 
 
 /* ---------------------------------
-   POSTER PARA IPHONE / SAFARI
+   POSTER INDIVIDUAL DEL VIDEO
 ---------------------------------- */
 
-if (posterHistoria) {
+const posterVideo =
+postersVideos[
+video.id
+];
+
+
+if (posterVideo) {
+
+/*
+   Se coloca el poster directamente
+   sobre el elemento <video>.
+*/
 
 reproductor.poster =
-posterHistoria;
+posterVideo;
+
+reproductor.setAttribute(
+"poster",
+posterVideo
+);
 
 }
 
+
+/* ---------------------------------
+   FUENTE MP4
+---------------------------------- */
 
 const source =
 document.createElement(
@@ -1601,6 +1684,18 @@ source
 );
 
 
+/*
+   Cargar explícitamente el video
+   después de establecer poster + source.
+*/
+
+reproductor.load();
+
+
+/* ---------------------------------
+   INSERTAR EN LA PÁGINA
+---------------------------------- */
+
 tiktokPlayer.appendChild(
 tituloParte
 );
@@ -1610,6 +1705,10 @@ tiktokPlayer.appendChild(
 reproductor
 );
 
+
+/* ---------------------------------
+   ANUNCIO DESPUÉS DE CADA PARTE
+---------------------------------- */
 
 const anuncio =
 document.createElement(
@@ -1734,3 +1833,4 @@ cargarVideosTikTok();
 </body>
 
 </html>
+```
