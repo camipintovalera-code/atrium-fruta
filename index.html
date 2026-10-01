@@ -1325,6 +1325,7 @@ mostrar
 });
 
 
+```html
 /* ---------------------------------
    REPRODUCTOR DE FRUTINOVELAS
 ---------------------------------- */
@@ -1354,6 +1355,193 @@ document.getElementById(
 
 
 /* ---------------------------------
+   CREAR POSTER AUTOMÁTICAMENTE
+   DESDE EL PRIMER FOTOGRAMA
+---------------------------------- */
+
+function generarPosterDesdeVideo(
+video
+) {
+
+return new Promise(
+(resolve) => {
+
+
+/*
+   Esperamos a que el navegador
+   haya cargado suficiente información
+   del MP4 para poder capturar
+   su primer fotograma.
+*/
+
+const capturar =
+() => {
+
+
+try {
+
+
+if (
+video.videoWidth === 0 ||
+video.videoHeight === 0
+) {
+
+resolve(null);
+
+return;
+
+}
+
+
+/*
+   Creamos un canvas con las
+   mismas dimensiones del video.
+*/
+
+const canvas =
+document.createElement(
+"canvas"
+);
+
+
+canvas.width =
+video.videoWidth;
+
+
+canvas.height =
+video.videoHeight;
+
+
+const contexto =
+canvas.getContext(
+"2d"
+);
+
+
+/*
+   Dibujamos el primer fotograma
+   del MP4.
+*/
+
+contexto.drawImage(
+video,
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+/*
+   Convertimos el fotograma
+   en una imagen.
+*/
+
+const poster =
+canvas.toDataURL(
+"image/jpeg",
+0.85
+);
+
+
+/*
+   Asignamos la imagen como
+   poster del VIDEO.
+*/
+
+video.poster =
+poster;
+
+
+video.setAttribute(
+"poster",
+poster
+);
+
+
+resolve(
+poster
+);
+
+
+}
+
+catch (
+error
+) {
+
+console.warn(
+"No se pudo generar el poster:",
+error
+);
+
+
+resolve(null);
+
+}
+
+};
+
+
+/*
+   Si el video ya tiene cargado
+   el primer fotograma, capturamos
+   inmediatamente.
+*/
+
+if (
+video.readyState >= 2
+) {
+
+capturar();
+
+return;
+
+}
+
+
+/*
+   Esperar hasta que Safari,
+   Chrome o Firefox hayan cargado
+   el primer fotograma.
+*/
+
+video.addEventListener(
+"loadeddata",
+capturar,
+{
+once: true
+}
+);
+
+
+/*
+   Seguridad adicional por si
+   loadeddata ya ocurrió antes
+   de registrar el evento.
+*/
+
+video.addEventListener(
+"canplay",
+capturar,
+{
+once: true
+}
+);
+
+
+/*
+   Forzamos la carga.
+*/
+
+video.load();
+
+});
+
+}
+
+
+/* ---------------------------------
    ABRIR FRUTINOVELA
 ---------------------------------- */
 
@@ -1372,98 +1560,6 @@ titulo;
 
 tiktokPlayer.innerHTML =
 "";
-
-
-/* ---------------------------------
-   MINIATURAS PARA LOS VIDEOS
-   IPHONE / SAFARI
----------------------------------- */
-
-/*
-   IMPORTANTE:
-
-   Cada ID de video tiene su propio poster.
-   De esta manera el poster NO depende del título
-   general de la Frutinovela.
-
-   Por ahora utilizamos las miniaturas disponibles
-   de cada historia.
-*/
-
-const postersVideos = {
-
-"zanahoria-1":
-"assets/02-viejo-zanahoria.png",
-
-"zanahoria-2":
-"assets/02-viejo-zanahoria.png",
-
-
-"hijo-1":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"hijo-2":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"hijo-3":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"hijo-4":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"hijo-5":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"hijo-6":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"hijo-7":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"hijo-8":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"hijo-9":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"hijo-10":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-
-"limon-1":
-"assets/03-la-historia-del-pequeno-limon.png",
-
-"limon-2":
-"assets/03-la-historia-del-pequeno-limon.png",
-
-"limon-3":
-"assets/03-la-historia-del-pequeno-limon.png",
-
-"limon-4":
-"assets/03-la-historia-del-pequeno-limon.png",
-
-"limon-5":
-"assets/03-la-historia-del-pequeno-limon.png",
-
-
-"fe-1":
-"assets/04-cuando-no-tienes-nada-la-fe.png",
-
-"fe-2":
-"assets/04-cuando-no-tienes-nada-la-fe.png",
-
-
-"millonaria-1":
-"assets/05-la-millonaria-quiso-a-limon.png",
-
-"millonaria-2":
-"assets/05-la-millonaria-quiso-a-limon.png",
-
-
-"otro-1":
-"assets/06-hizo-todo-por-ella.png"
-
-};
 
 
 /* ---------------------------------
@@ -1546,9 +1642,17 @@ const archivosVideos = {
 };
 
 
+/* ---------------------------------
+   CREAR CADA VIDEO
+---------------------------------- */
+
 historia.partes.forEach(
 video => {
 
+
+/* ---------------------------------
+   TÍTULO DE LA PARTE
+---------------------------------- */
 
 const tituloParte =
 document.createElement(
@@ -1572,6 +1676,10 @@ tituloParte.className =
 "parte-titulo";
 
 
+/* ---------------------------------
+   BUSCAR MP4
+---------------------------------- */
+
 const archivo =
 archivosVideos[
 video.id
@@ -1582,14 +1690,26 @@ if (!archivo)
 return;
 
 
+/*
+   IMPORTANTE:
+
+   Usamos una ruta relativa.
+
+   Esto hace que el MP4 se cargue
+   desde el mismo dominio donde está
+   abierta la página.
+
+   Así el canvas puede capturar
+   el primer fotograma sin problemas
+   de CORS.
+*/
+
 const urlVideo =
-"https://camipintovalera-code.github.io/atrium-fruta/"
-+
 archivo;
 
 
 /* ---------------------------------
-   CREAR VIDEO
+   CREAR ELEMENTO VIDEO
 ---------------------------------- */
 
 const reproductor =
@@ -1598,22 +1718,27 @@ document.createElement(
 );
 
 
+/*
+   Controles normales.
+*/
+
 reproductor.controls =
 true;
 
+
+/*
+   Importante para iPhone.
+*/
 
 reproductor.playsInline =
 true;
 
 
-/*
-   Atributos adicionales para Safari/iPhone.
-*/
-
 reproductor.setAttribute(
 "playsinline",
 ""
 );
+
 
 reproductor.setAttribute(
 "webkit-playsinline",
@@ -1621,8 +1746,23 @@ reproductor.setAttribute(
 );
 
 
+/*
+   Permitimos que cargue el primer
+   fotograma automáticamente.
+*/
+
 reproductor.preload =
-"metadata";
+"auto";
+
+
+/*
+   Silenciado para evitar que
+   Safari intente reproducir sonido
+   automáticamente durante la carga.
+*/
+
+reproductor.muted =
+true;
 
 
 reproductor.style.width =
@@ -1634,35 +1774,7 @@ reproductor.style.maxHeight =
 
 
 /* ---------------------------------
-   POSTER INDIVIDUAL DEL VIDEO
----------------------------------- */
-
-const posterVideo =
-postersVideos[
-video.id
-];
-
-
-if (posterVideo) {
-
-/*
-   Se coloca el poster directamente
-   sobre el elemento <video>.
-*/
-
-reproductor.poster =
-posterVideo;
-
-reproductor.setAttribute(
-"poster",
-posterVideo
-);
-
-}
-
-
-/* ---------------------------------
-   FUENTE MP4
+   SOURCE DEL MP4
 ---------------------------------- */
 
 const source =
@@ -1685,16 +1797,9 @@ source
 
 
 /*
-   Cargar explícitamente el video
-   después de establecer poster + source.
+   Insertamos primero el video
+   en el DOM.
 */
-
-reproductor.load();
-
-
-/* ---------------------------------
-   INSERTAR EN LA PÁGINA
----------------------------------- */
 
 tiktokPlayer.appendChild(
 tituloParte
@@ -1703,6 +1808,55 @@ tituloParte
 
 tiktokPlayer.appendChild(
 reproductor
+);
+
+
+/* ---------------------------------
+   GENERAR POSTER DEL MP4
+---------------------------------- */
+
+/*
+   El poster se crea utilizando
+   EL PRIMER FOTOGRAMA DE ESTE MP4.
+
+   Por lo tanto:
+
+   hijo-1 → primer fotograma hijo-1
+   hijo-2 → primer fotograma hijo-2
+   hijo-3 → primer fotograma hijo-3
+
+   etc.
+*/
+
+generarPosterDesdeVideo(
+reproductor
+);
+
+
+/* ---------------------------------
+   CUANDO EL USUARIO REPRODUZCA
+---------------------------------- */
+
+/*
+   Volvemos a activar el sonido
+   solamente cuando el usuario
+   presione Play.
+
+   Esto evita problemas de
+   reproducción automática.
+*/
+
+reproductor.addEventListener(
+"play",
+() => {
+
+reproductor.muted =
+false;
+
+},
+{
+once: true
+}
 );
 
 
@@ -1731,6 +1885,10 @@ anuncio
 });
 
 
+/* ---------------------------------
+   MOSTRAR MODAL
+---------------------------------- */
+
 videoModal.classList.add(
 "active"
 );
@@ -1745,6 +1903,8 @@ document.body.style.overflow =
 /* ---------------------------------
    CERRAR FRUTINOVELA
 ---------------------------------- */
+```
+
 
 function cerrarVideo() {
 
