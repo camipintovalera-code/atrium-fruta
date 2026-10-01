@@ -1373,6 +1373,58 @@ tiktokPlayer.innerHTML =
 "";
 
 
+/* ---------------------------------
+   MINIATURAS PARA VIDEOS
+   SOLUCIÓN PARA IPHONE / SAFARI
+---------------------------------- */
+
+const miniaturasVideo = {
+
+"La casa que cambió la vida de Viejo Zanahoria":
+"assets/02-viejo-zanahoria.png",
+
+"El hijo que nadie apoyó 💔":
+"assets/01-el-hijo-que-nadie-apoyo.png",
+
+"La historia más triste del pequeño limón":
+"assets/03-la-historia-del-pequeno-limon.png",
+
+"Cuando ya no tienes nada, solo te queda la fe":
+"assets/04-cuando-no-tienes-nada-la-fe.png",
+
+"La millonaria quiso a Limón… y destruyó su matrimonio":
+"assets/05-la-millonaria-quiso-a-limon.png",
+
+"Hizo todo por ella… pero ella eligió a otro":
+"assets/06-hizo-todo-por-ella.png"
+
+};
+
+
+let posterHistoria =
+"";
+
+
+for (
+const nombre in miniaturasVideo
+) {
+
+if (
+titulo
+.toLowerCase()
+.includes(nombre.toLowerCase())
+) {
+
+posterHistoria =
+miniaturasVideo[nombre];
+
+break;
+
+}
+
+}
+
+
 historia.partes.forEach(
 video => {
 
@@ -1506,12 +1558,28 @@ reproductor.playsInline =
 true;
 
 
+reproductor.preload =
+"metadata";
+
+
 reproductor.style.width =
 "100%";
 
 
 reproductor.style.maxHeight =
 "70vh";
+
+
+/* ---------------------------------
+   POSTER PARA IPHONE / SAFARI
+---------------------------------- */
+
+if (posterHistoria) {
+
+reproductor.poster =
+posterHistoria;
+
+}
 
 
 const source =
