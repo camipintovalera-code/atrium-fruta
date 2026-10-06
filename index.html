@@ -1,1825 +1,3629 @@
-
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5460968404803401"
-     crossorigin="anonymous"></script>
+  <!-- GOOGLE ADSENSE - ANUNCIOS AUTOMÁTICOS -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5460968404803401"
+    crossorigin="anonymous"></script>
 
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="ATRIUM FRUTA es una plataforma de entretenimiento dedicada a las Frutinovelas, historias cortas de drama, amor, fe y superación. Descubre nuestras historias y disfruta sus diferentes partes.">
+  <title>ATRIUM FRUTA | Frutinovelas originales</title>
 
-  <meta name="robots" content="index, follow">
+  <meta
+    name="description"
+    content="ATRIUM FRUTA es un espacio de entretenimiento dedicado a Frutinovelas originales de drama, amor, fe, superación y familia. Conoce las historias, personajes y capítulos."
+  >
 
-  <title>ATRIUM FRUTA | Frutinovelas</title>
+  <meta
+    name="robots"
+    content="index, follow"
+  >
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/logo-mark.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    :root{
+      --bg:#0c0d0e;
+      --panel:#17181a;
+      --panel-2:#1d1f22;
+      --panel-3:#232529;
+      --text:#f5f5f5;
+      --muted:#aeb2b8;
+      --line:#303338;
+      --gold:#f0b84e;
+      --gold-soft:#d6b66d;
+      --red:#c84b37;
+      --green:#8bb45a;
+      --blue:#2f67f6;
+      --max:1120px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      line-height:1.6;
+    }
+
+    body.modal-open{
+      overflow:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    button,
+    input,
+    textarea{
+      font:inherit;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .container{
+      width:min(var(--max),calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .site-header{
+      background:#0b0c0d;
+    }
+
+    .cover-wrap{
+      background:#100708;
+      overflow:hidden;
+      border-bottom:1px solid #1f2022;
+    }
+
+    .cover{
+      width:100%;
+      height:clamp(220px,31vw,370px);
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .profile-row{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:24px;
+      align-items:end;
+      padding:0 24px 26px;
+      position:relative;
+    }
+
+    .avatar-wrap{
+      margin-top:-86px;
+      z-index:2;
+    }
+
+    .avatar{
+      width:168px;
+      height:168px;
+      border-radius:50%;
+      border:8px solid #191a1c;
+      box-shadow:0 7px 24px rgba(0,0,0,.42);
+      background:#2b0f14;
+      object-fit:cover;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    h1{
+      font-size:34px;
+      line-height:1.12;
+      margin:0;
+      font-weight:900;
+      letter-spacing:-.8px;
+    }
+
+    .verified{
+      display:inline-grid;
+      place-items:center;
+      width:24px;
+      height:24px;
+      border-radius:50%;
+      background:#7f858d;
+      color:#171819;
+      font-size:15px;
+      font-weight:900;
+    }
+
+    .stats{
+      margin-top:8px;
+      color:#e8e8e8;
+      font-size:15px;
+    }
+
+    .stats strong{
+      font-weight:800;
+    }
+
+    .bio{
+      margin-top:13px;
+      color:#f0f0f0;
+      font-size:17px;
+    }
+
+    .bio span{
+      color:#d6d6d8;
+    }
+
+    .creator{
+      margin-top:14px;
+      color:#b9bdc1;
+      font-weight:600;
+      font-size:14px;
+    }
+
+    .profile-actions{
+      display:flex;
+      gap:10px;
+      padding-bottom:6px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      padding:12px 17px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      font-weight:800;
+      font-size:14px;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn.primary{
+      background:var(--blue);
+      border-color:var(--blue);
+      color:#fff;
+    }
+
+    .btn.ghost{
+      background:#242527;
+      color:#fff;
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      border-color:var(--gold);
+      color:#17120a;
+    }
+
+    .top-nav{
+      display:flex;
+      gap:8px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      padding:8px;
+      overflow:auto;
+      position:sticky;
+      top:0;
+      background:rgba(12,13,14,.95);
+      backdrop-filter:blur(10px);
+      z-index:100;
+    }
+
+    .top-nav a{
+      white-space:nowrap;
+      padding:12px 18px;
+      border-radius:10px;
+      color:#b9bcc2;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .top-nav a.active,
+    .top-nav a:hover{
+      background:#202226;
+      color:#fff;
+    }
+
+    /* =========================================
+       GENERAL
+    ========================================= */
+
+    .page-shell{
+      padding:34px 0 72px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,#1a1b1e,#151618);
+      border:1px solid var(--line);
+      border-radius:20px;
+      box-shadow:0 14px 38px rgba(0,0,0,.16);
+    }
+
+    .section{
+      margin-top:34px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:16px;
+    }
+
+    .section h3{
+      font-size:27px;
+      margin:0;
+      letter-spacing:-.5px;
+    }
+
+    .section-head p{
+      margin:5px 0 0;
+      color:var(--muted);
+    }
+
+    .eyebrow{
+      font-size:12px;
+      letter-spacing:.17em;
+      text-transform:uppercase;
+      color:var(--gold-soft);
+      font-weight:900;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .reading{
+      line-height:1.75;
+    }
+
+    .reading p{
+      color:#c0c4c8;
+      font-size:16px;
+    }
+
+    .info-card{
+      padding:25px;
+    }
+
+    .info-card h4{
+      margin:0 0 9px;
+      font-size:20px;
+    }
+
+    .info-card p{
+      color:#c0c4c8;
+      margin:0;
+    }
+
+    /* =========================================
+       HERO
+    ========================================= */
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .hero-copy{
+      padding:38px;
+    }
+
+    .hero h2{
+      font-size:54px;
+      line-height:1.02;
+      margin:12px 0 16px;
+      letter-spacing:-1.6px;
+    }
+
+    .hero p{
+      font-size:18px;
+      color:#c5c8cc;
+      max-width:750px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      margin-top:24px;
+      flex-wrap:wrap;
+    }
+
+    .hero-art{
+      min-height:330px;
+      overflow:hidden;
+    }
+
+    .hero-art img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    /* =========================================
+       SERIES
+    ========================================= */
+
+    .series-label{
+      font-size:12px;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--gold-soft);
+      font-weight:900;
+      margin-bottom:12px;
+      padding-left:4px;
+    }
+
+    .series-home{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .series-image-card{
+      overflow:hidden;
+      min-height:410px;
+    }
+
+    .series-image-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .series-copy{
+      padding:32px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .series-copy h3{
+      font-size:40px;
+      line-height:1.05;
+      margin:8px 0 14px;
+      letter-spacing:-1px;
+    }
+
+    .series-lead{
+      font-size:18px;
+      color:#c5c8cc;
+      line-height:1.65;
+    }
+
+    .series-text{
+      padding:28px 30px;
+      margin-top:18px;
+    }
+
+    .series-text p{
+      font-size:16px;
+      line-height:1.75;
+    }
+
+    .series-columns{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .series-characters{
+      display:grid;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .series-character{
+      display:grid;
+      grid-template-columns:46px 1fr;
+      gap:12px;
+      align-items:start;
+      padding:12px;
+      background:#191a1d;
+      border:1px solid var(--line);
+      border-radius:12px;
+    }
+
+    .series-character > span{
+      font-size:27px;
+      line-height:1.1;
+    }
+
+    .series-character strong{
+      display:block;
+      margin-bottom:4px;
+    }
+
+    .series-character p{
+      font-size:13px;
+      line-height:1.5;
+      color:var(--muted);
+      margin:0;
+    }
+
+    .series-footer{
+      margin-top:18px;
+      padding:20px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .series-footer strong{
+      font-size:19px;
+    }
+
+    .series-footer p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* =========================================
+       DIRECTORY
+    ========================================= */
+
+    .section-directory{
+      padding:28px;
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:26px;
+      align-items:center;
+    }
+
+    .section-directory h3{
+      margin:6px 0 7px;
+      font-size:28px;
+    }
+
+    .section-directory p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .directory-links{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+    }
+
+    .directory-links a{
+      display:grid;
+      grid-template-columns:34px 1fr;
+      gap:9px;
+      align-items:center;
+      padding:11px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#18191c;
+      color:#d7d9dc;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .directory-links span{
+      color:var(--gold);
+      font-size:11px;
+    }
+
+    .directory-links a:hover{
+      border-color:#4a4d53;
+      background:#202226;
+    }
+
+    /* =========================================
+       TAGS
+    ========================================= */
+
+    .tags{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+
+    .tag{
+      padding:5px 9px;
+      border-radius:999px;
+      background:#25272a;
+      color:#c9cbd0;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    /* =========================================
+       STORY CARDS
+    ========================================= */
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .story-card{
+      overflow:hidden;
+      cursor:pointer;
+      transition:.18s transform ease,.18s border-color ease;
+    }
+
+    .story-card:hover{
+      transform:translateY(-3px);
+      border-color:#4a4d53;
+    }
+
+    .story-image{
+      aspect-ratio:16/10;
+      background:#1f2023;
+      overflow:hidden;
+    }
+
+    .story-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .story-body{
+      padding:17px 17px 18px;
+    }
+
+    .story-title{
+      font-size:18px;
+      font-weight:900;
+      line-height:1.25;
+      margin:0 0 8px;
+    }
+
+    .story-excerpt{
+      font-size:14px;
+      color:var(--muted);
+      margin:0 0 13px;
+    }
+
+    .story-link{
+      display:inline-block;
+      margin-top:15px;
+      color:#f2c86e;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    /* =========================================
+       FILTERS
+    ========================================= */
+
+    .filters{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+      margin:14px 0 20px;
+    }
+
+    .filter{
+      background:#1d1f22;
+      border:1px solid var(--line);
+      color:#d5d7da;
+      border-radius:999px;
+      padding:9px 14px;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .filter.active,
+    .filter:hover{
+      background:#2b2e33;
+      color:#fff;
+    }
+
+    /* =========================================
+       STORY DETAIL
+    ========================================= */
+
+    .detail-hero{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:24px;
+    }
+
+    .detail-cover{
+      overflow:hidden;
+      min-height:400px;
+    }
+
+    .detail-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .detail-copy{
+      padding:32px;
+    }
+
+    .detail-copy h2{
+      font-size:42px;
+      line-height:1.05;
+      margin:8px 0 13px;
+    }
+
+    .detail-copy .lead{
+      color:#c6c9cc;
+      font-size:17px;
+    }
+
+    /* =========================================
+       CHAPTERS
+    ========================================= */
+
+    .timeline{
+      display:grid;
+      gap:16px;
+    }
+
+    .chapter{
+      display:grid;
+      grid-template-columns:62px 1fr;
+      gap:16px;
+      padding:20px;
+      background:#191a1d;
+      border:1px solid var(--line);
+      border-radius:16px;
+    }
+
+    .num{
+      width:54px;
+      height:54px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:#2a2c30;
+      color:#f2c86e;
+      font-weight:900;
+    }
+
+    .chapter h4{
+      margin:0 0 7px;
+      font-size:20px;
+    }
+
+    .chapter p{
+      margin:0;
+      color:#bfc3c7;
+      font-size:14px;
+    }
+
+    .video-box{
+      margin-top:18px;
+      background:#090a0b;
+      border-radius:15px;
+      overflow:hidden;
+      border:1px solid #303236;
+    }
+
+    .video-box video{
+      display:block;
+      width:100%;
+      max-height:650px;
+      background:#000;
+    }
+
+    .video-caption{
+      padding:12px 14px;
+      color:#999da3;
+      font-size:12px;
+      background:#111214;
+    }
+
+    /* =========================================
+       ABOUT
+    ========================================= */
+
+    .about-hero{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:24px;
+    }
+
+    .about-cover{
+      min-height:360px;
+      overflow:hidden;
+    }
+
+    .about-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .about-copy{
+      padding:32px;
+    }
+
+    .about-copy h2{
+      font-size:42px;
+      line-height:1.05;
+      margin:8px 0 14px;
+    }
+
+    .process-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    /* =========================================
+       CONTACT
+    ========================================= */
+
+    .contact{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .contact-form,
+    .contact-info{
+      padding:26px;
+    }
+
+    .field{
+      display:grid;
+      gap:7px;
+      margin-bottom:15px;
+    }
+
+    .field label{
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .field input,
+    .field textarea{
+      width:100%;
+      background:#111214;
+      border:1px solid #373a3f;
+      color:#fff;
+      border-radius:11px;
+      padding:12px 13px;
+      outline:none;
+    }
+
+    .field input:focus,
+    .field textarea:focus{
+      border-color:#5a5e66;
+    }
+
+    .field textarea{
+      min-height:140px;
+      resize:vertical;
+    }
+
+    /* =========================================
+       FAQ
+    ========================================= */
+
+    .faq{
+      display:grid;
+      gap:12px;
+    }
+
+    .faq details{
+      background:#191a1d;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:16px 18px;
+    }
+
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+    }
+
+    .faq p{
+      margin:12px 0 0;
+      color:#bfc3c7;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    .footer{
+      border-top:1px solid var(--line);
+      background:#0b0c0d;
+      padding:30px 0 20px;
+    }
+
+    .footer-grid{
+      display:flex;
+      justify-content:space-between;
+      gap:28px;
+    }
+
+    .footer-brand{
+      font-weight:900;
+      font-size:18px;
+    }
+
+    .footer p{
+      color:#95999f;
+      margin:6px 0 0;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      align-content:flex-start;
+      justify-content:flex-end;
+    }
+
+    .footer-links a{
+      font-size:13px;
+      color:#b5b8bd;
+    }
+
+    .footer-links a:hover{
+      color:#fff;
+    }
+
+    .footer-bottom{
+      border-top:1px solid #202225;
+      margin-top:20px;
+      padding-top:16px;
+      color:#70747a;
+      font-size:12px;
+    }
+
+    /* =========================================
+       TOAST
+    ========================================= */
+
+    .toast{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      max-width:320px;
+      padding:12px 14px;
+      background:#202226;
+      border:1px solid #3b3e43;
+      border-radius:12px;
+      box-shadow:0 18px 40px rgba(0,0,0,.32);
+      opacity:0;
+      transform:translateY(10px);
+      pointer-events:none;
+      transition:.2s;
+      z-index:9999;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media(max-width:900px){
+
+      .profile-row{
+        grid-template-columns:auto 1fr;
+      }
+
+      .profile-actions{
+        grid-column:1/-1;
+        justify-content:flex-start;
+        padding-left:192px;
+        margin-top:-8px;
+      }
+
+      .hero,
+      .detail-hero,
+      .about-hero,
+      .contact{
+        grid-template-columns:1fr;
+      }
+
+      .grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .series-home{
+        grid-template-columns:1fr;
+      }
+
+      .series-columns,
+      .section-directory,
+      .process-grid{
+        grid-template-columns:1fr;
+      }
+
+      .directory-links{
+        grid-template-columns:1fr;
+      }
+
+      .hero h2{
+        font-size:42px;
+      }
+
+    }
+
+    @media(max-width:620px){
+
+      .container{
+        width:min(var(--max),calc(100% - 20px));
+      }
+
+      .cover{
+        height:230px;
+      }
+
+      .profile-row{
+        grid-template-columns:1fr;
+        padding:0 10px 18px;
+      }
+
+      .avatar-wrap{
+        margin-top:-72px;
+      }
+
+      .avatar{
+        width:132px;
+        height:132px;
+      }
+
+      .profile-main{
+        padding-left:6px;
+      }
+
+      .profile-actions{
+        grid-column:auto;
+        padding-left:0;
+        margin-top:2px;
+      }
+
+      .profile-actions .btn{
+        flex:1;
+        text-align:center;
+      }
+
+      .top-nav{
+        margin:0;
+        padding:6px 4px;
+      }
+
+      .top-nav a{
+        padding:10px 13px;
+        font-size:13px;
+      }
+
+      .page-shell{
+        padding-top:22px;
+      }
+
+      .hero-copy{
+        padding:26px;
+      }
+
+      .hero h2{
+        font-size:36px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .footer-grid{
+        flex-direction:column;
+      }
+
+      .footer-links{
+        justify-content:flex-start;
+      }
+
+      .detail-copy,
+      .about-copy{
+        padding:25px;
+      }
+
+      .detail-copy h2,
+      .about-copy h2{
+        font-size:34px;
+      }
+
+      .chapter{
+        grid-template-columns:52px 1fr;
+      }
+
+      .num{
+        width:46px;
+        height:46px;
+      }
+
+      .series-copy{
+        padding:25px;
+      }
+
+      .series-copy h3{
+        font-size:32px;
+      }
+
+      .series-lead{
+        font-size:16px;
+      }
+
+      .series-text{
+        padding:22px;
+      }
+
+      .series-footer{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .series-footer .btn{
+        width:100%;
+        text-align:center;
+      }
+
+      .series-image-card{
+        min-height:260px;
+      }
+
+    }
+
+  </style>
 
 </head>
 
 <body>
 
-<header>
+<header class="site-header">
 
-<div class="header-container">
+  <div class="cover-wrap">
 
-<div class="logo-area">
+    <img
+      class="cover"
+      src="assets/cover.png"
+      alt="ATRIUM FRUTA - Frutinovelas"
+      onerror="this.style.display='none';"
+    >
 
-<img
-  class="mini-logo"
-  src="assets/logo-mark.png"
-  alt="Logo de ATRIUM FRUTA"
->
+  </div>
 
-<div class="brand">
-ATRIUM FRUTA
-<small>FRUTINOVELAS</small>
-</div>
+  <div class="profile-row container">
 
-</div>
+    <div class="avatar-wrap">
 
-<nav>
+      <img
+        class="avatar"
+        src="assets/logo-mark.png"
+        alt="Logo ATRIUM FRUTA"
+      >
 
-<a href="index.html">
-Inicio
-</a>
+    </div>
 
-<a href="#frutinovelas">
-Frutinovelas
-</a>
+    <div class="profile-main">
 
-<a href="#destacadas">
-Más vistas
-</a>
+      <div class="name-row">
 
-<a href="#redes">
-Redes sociales
-</a>
+        <h1>ATRIUM FRUTA</h1>
 
-</nav>
+        <span
+          class="verified"
+          title="Proyecto de entretenimiento digital"
+        >✓</span>
 
-</div>
+      </div>
+
+      <div class="stats">
+        <strong>Frutinovelas originales</strong> ·
+        Drama · Amor · Fe · Superación
+      </div>
+
+      <div class="bio">
+        🍓 Drama · 💔 Amor · 🙏 Fe · 🔥 Superación
+        <br>
+        <span>
+          🎬 Historias que se sienten hasta la última parte
+        </span>
+      </div>
+
+      <div class="creator">
+        ▣ Proyecto de entretenimiento digital
+      </div>
+
+    </div>
+
+    <div class="profile-actions">
+
+      <a
+        class="btn primary"
+        href="#frutinovelas"
+      >
+        Explorar historias
+      </a>
+
+      <a
+        class="btn ghost"
+        href="#contacto"
+      >
+        Contacto
+      </a>
+
+    </div>
+
+  </div>
+
+  <nav
+    class="top-nav container"
+    aria-label="Navegación principal"
+  >
+
+    <a
+      href="#inicio"
+      data-route="inicio"
+    >
+      Inicio
+    </a>
+
+    <a
+      href="#frutinovelas"
+      data-route="frutinovelas"
+    >
+      Frutinovelas
+    </a>
+
+    <a
+      href="#mas-vistas"
+      data-route="mas-vistas"
+    >
+      Más vistas
+    </a>
+
+    <a
+      href="#sobre-nosotros"
+      data-route="sobre-nosotros"
+    >
+      Sobre nosotros
+    </a>
+
+    <a
+      href="#contacto"
+      data-route="contacto"
+    >
+      Contacto
+    </a>
+
+  </nav>
 
 </header>
 
 
-<!-- HERO -->
+<main
+  id="app"
+  class="container page-shell"
+></main>
 
-<section class="hero">
 
-<div class="hero-box">
+<footer class="footer">
 
-<div class="hero-content">
+  <div class="container footer-grid">
 
-<div class="eyebrow">
-BIENVENIDO A ATRIUM FRUTA
-</div>
+    <div>
 
-<h1>
-Historias que se sienten hasta la última parte.
-</h1>
+      <div class="footer-brand">
+        🍓 ATRIUM FRUTA
+      </div>
 
-<p>
-Descubre nuestras Frutinovelas y disfruta historias que te harán reír,
-llorar y querer ver el siguiente capítulo
-</p>
+      <p>
+        Historias, Frutinovelas y entretenimiento en un solo lugar.
+      </p>
 
-<a class="btn light" href="#frutinovelas">
-Ver Frutinovelas
-</a>
+    </div>
 
-</div>
+    <div class="footer-links">
 
-</div>
+      <a href="#inicio">
+        Inicio
+      </a>
 
-</section>
+      <a href="#frutinovelas">
+        Frutinovelas
+      </a>
 
+      <a href="#mas-vistas">
+        Más vistas
+      </a>
 
-<div class="ad-space">
-ESPACIO PUBLICITARIO
-</div>
+      <a href="#sobre-nosotros">
+        Sobre nosotros
+      </a>
 
+      <a href="#contacto">
+        Contacto
+      </a>
 
-<!-- SOBRE ATRIUM FRUTA -->
+      <a href="#privacidad">
+        Política de privacidad
+      </a>
 
-<section class="section" id="sobre-atrium">
+      <a href="#terminos">
+        Términos y condiciones
+      </a>
 
-<div class="section-title">
+    </div>
 
-<h2>
-🍓 ¿Qué es ATRIUM FRUTA?
-</h2>
+  </div>
 
-</div>
+  <div class="container footer-bottom">
 
-<div class="featured">
+    © 2026 ATRIUM FRUTA · Todos los derechos reservados.
 
-<div>
-
-<p>
-<strong>ATRIUM FRUTA</strong> es una plataforma de entretenimiento
-dedicada a las Frutinovelas: historias cortas divididas en diferentes
-partes para que puedas seguir su desarrollo de principio a fin.
-</p>
-
-<p>
-Aquí encontrarás historias de drama, amor, fe, familia, superación
-y situaciones inesperadas que buscan mantenerte conectado con cada
-nuevo capítulo.
-</p>
-
-<p>
-Nuestro objetivo es reunir las historias de ATRIUM FRUTA en un solo
-lugar, facilitando que puedas descubrir nuevas Frutinovelas, conocer
-sus diferentes partes y continuar una historia sin perderte ningún
-capítulo.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- COMO FUNCIONA -->
-
-<section class="section" id="como-funciona">
-
-<div class="section-title">
-
-<h2>
-🎬 ¿Cómo funcionan las Frutinovelas?
-</h2>
-
-</div>
-
-<div class="featured">
-
-<div>
-
-<p>
-Cada Frutinovela está organizada en diferentes partes. Puedes entrar
-a una historia desde su tarjeta principal y encontrar sus capítulos
-disponibles en orden.
-</p>
-
-<p>
-Selecciona una historia que te interese, abre la Frutinovela y
-recorre sus diferentes partes. De esta manera puedes seguir el
-desarrollo de cada historia desde el comienzo hasta los capítulos
-más recientes disponibles.
-</p>
-
-<p>
-Las historias y sus capítulos pueden actualizarse con nuevos
-contenidos a medida que ATRIUM FRUTA publique nuevas partes.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<div class="ad-space">
-ESPACIO PUBLICITARIO
-</div>
-
-
-<!-- FRUTINOVELAS -->
-
-<section class="section" id="frutinovelas">
-
-<div class="section-title">
-
-<h2>
-🍓 Frutinovelas
-</h2>
-
-<span>
-Historias y capítulos
-</span>
-
-</div>
-
-
-<div class="filters" aria-label="Filtrar frutinovelas">
-
-<button class="filter-btn active" data-filter="all">
-Todas
-</button>
-
-<button class="filter-btn" data-filter="popular">
-🔥 Destacadas
-</button>
-
-<button class="filter-btn" data-filter="Drama">
-💔 Drama
-</button>
-
-<button class="filter-btn" data-filter="Fe">
-🙏 Fe
-</button>
-
-<button class="filter-btn" data-filter="Amor">
-❤️ Amor
-</button>
-
-</div>
-
-
-<div class="novelas-grid" id="novelas-grid">
-
-<p id="tiktok-loading" style="text-align:center; width:100%;">
-Cargando Frutinovelas...
-</p>
-
-</div>
-
-
-<p class="note">
-Las Frutinovelas disponibles se muestran en este catálogo y se
-organizan por historia para facilitar la visualización de sus
-diferentes partes.
-</p>
-
-</section>
-
-
-<div class="ad-space">
-ESPACIO PUBLICITARIO
-</div>
-
-
-<!-- DESCRIPCIONES DE LAS HISTORIAS -->
-
-<section class="section" id="historias">
-
-<div class="section-title">
-
-<h2>
-📖 Conoce nuestras historias
-</h2>
-
-</div>
-
-
-<div class="featured">
-
-<div>
-
-<h3>
-🥕 La casa que cambió la vida de Viejo Zanahoria
-</h3>
-
-<p>
-Una historia que gira alrededor de Viejo Zanahoria y de una casa
-que termina cambiando el rumbo de su vida. Descubre cómo comienza
-esta historia y qué ocurre en sus diferentes partes.
-</p>
-
-
-<h3>
-💔 El hijo que nadie apoyó
-</h3>
-
-<p>
-Una historia familiar marcada por las dificultades, las decisiones
-y la búsqueda de una oportunidad. Sigue cada parte para descubrir
-cómo evoluciona la vida de su protagonista.
-</p>
-
-
-<h3>
-🍋 La historia más triste del pequeño limón
-</h3>
-
-<p>
-Una historia protagonizada por el pequeño Limón que presenta
-momentos de tristeza, dificultades y situaciones inesperadas.
-Puedes seguir sus diferentes capítulos en orden.
-</p>
-
-
-<h3>
-🙏 Cuando ya no tienes nada, solo te queda la fe
-</h3>
-
-<p>
-Una historia sobre momentos difíciles y esperanza. Acompaña a sus
-personajes a través de sus diferentes partes y descubre cómo
-enfrentan las situaciones que aparecen en el camino.
-</p>
-
-
-<h3>
-💰 La millonaria quiso a Limón
-</h3>
-
-<p>
-Una historia de relaciones, decisiones y conflictos que comienza
-cuando una millonaria se interesa por Limón. Descubre cómo se
-desarrollan los acontecimientos en sus partes disponibles.
-</p>
-
-
-<h3>
-❤️ Hizo todo por ella
-</h3>
-
-<p>
-Una historia sobre amor, decisiones y decepciones. Su protagonista
-hace todo por la persona que ama, pero las circunstancias toman un
-rumbo inesperado.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- MAS VISTAS -->
-
-<section class="section" id="destacadas">
-
-<div class="featured">
-
-<div>
-
-<h2>
-🔥 Más vistas y destacadas
-</h2>
-
-<p>
-Encuentra historias que merecen una maratón. Las Frutinovelas
-disponibles en ATRIUM FRUTA se organizan para que puedas descubrir
-historias populares y acceder fácilmente a sus diferentes partes.
-</p>
-
-<p>
-Entre las historias disponibles encontrarás títulos como
-<strong>La historia más triste del pequeño limón</strong>,
-<strong>El hijo que nadie apoyó</strong> y
-<strong>La casa que cambió la vida de Viejo Zanahoria</strong>.
-</p>
-
-</div>
-
-<a class="btn" href="#frutinovelas">
-Explorar historias
-</a>
-
-</div>
-
-
-<!-- REDES -->
-
-<div class="social-section" id="redes">
-
-<h2>
-📲 Síguenos en nuestras redes
-</h2>
-
-<p>
-Disfruta más contenido de ATRIUM FRUTA y acompáñanos en cada nueva
-historia y publicación.
-</p>
-
-<div class="social-links">
-
-<a
-href="https://www.instagram.com/atriumfruta?igsi=Njg3bHpjOWpnbzZp&utm_source=qr"
-target="_blank"
-rel="noopener"
->
-Instagram
-</a>
-
-
-<a
-href="https://www.tiktok.com/@atriumfruta_?_r=1&_t=ZT-99GxddIfn0I"
-target="_blank"
-rel="noopener"
->
-TikTok
-</a>
-
-
-<a
-href="https://www.facebook.com/share/18GV2r7cvn/?mibextid=wwXIfr"
-target="_blank"
-rel="noopener"
->
-Facebook
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- PREGUNTAS FRECUENTES -->
-
-<section class="section" id="preguntas">
-
-<div class="section-title">
-
-<h2>
-❓ Preguntas frecuentes
-</h2>
-
-</div>
-
-
-<div class="featured">
-
-<div>
-
-<h3>
-¿Qué es una Frutinovela?
-</h3>
-
-<p>
-Una Frutinovela es una historia presentada en diferentes partes o
-capítulos. En ATRIUM FRUTA puedes encontrar varias historias y
-consultar las partes disponibles de cada una.
-</p>
-
-
-<h3>
-¿Dónde puedo ver las partes de una historia?
-</h3>
-
-<p>
-Entra en la sección de Frutinovelas, selecciona la historia que
-quieras conocer y abre su contenido para consultar las partes
-disponibles.
-</p>
-
-
-<h3>
-¿Las historias pueden tener nuevos capítulos?
-</h3>
-
-<p>
-Sí. Las historias pueden incorporar nuevas partes cuando se
-publiquen nuevos capítulos disponibles.
-</p>
-
-
-<h3>
-¿Puedo encontrar ATRIUM FRUTA en redes sociales?
-</h3>
-
-<p>
-Sí. Puedes encontrar contenido de ATRIUM FRUTA en nuestras redes
-sociales oficiales, cuyos enlaces aparecen en la sección de redes
-sociales de esta página.
-</p>
-
-
-<h3>
-¿La página tiene contenido nuevo?
-</h3>
-
-<p>
-ATRIUM FRUTA puede incorporar nuevas historias y nuevas partes a
-medida que se publique contenido adicional.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<div class="footer-container">
-
-<div>
-
-<div class="footer-brand">
-🍓 ATRIUM FRUTA
-</div>
-
-<p class="footer-text">
-Historias, Frutinovelas y entretenimiento en un solo lugar.
-</p>
-
-</div>
-
-
-<div class="footer-legal">
-
-<a href="terminos.html">
-Términos y condiciones
-</a>
-
-<a href="privacidad.html">
-Política de privacidad
-</a>
-
-</div>
-
-
-<p class="footer-text">
-© 2026 ATRIUM FRUTA
-</p>
-
-</div>
+  </div>
 
 </footer>
 
 
-<!-- VENTANA PARA VER FRUTINOVELAS -->
-
-<div id="video-modal" class="video-modal">
-
-<div class="video-modal-content">
-
-<button id="close-video" class="close-video">
-✕ Cerrar
-</button>
-
-
-<h2 id="video-modal-title">
-Frutinovela
-</h2>
-
-
-<div class="video-player-container">
-
 <div
-id="tiktok-player"
-class="frutinovela-parts"
->
-</div>
-
-</div>
-
-
-<div class="ad-space">
-ESPACIO PUBLICITARIO
-</div>
-
-</div>
-
-</div>
+  id="toast"
+  class="toast"
+  aria-live="polite"
+></div>
 
 
 <script>
 
-
-/* ---------------------------------
+/* =========================================================
    CONFIGURACIÓN
----------------------------------- */
+========================================================= */
 
-const API_URL =
-"https://atrium-fruta.onrender.com/api/tiktok/videos";
-
-
-const grid =
-document.getElementById("novelas-grid");
+const GITHUB_BASE =
+  "https://camipintovalera-code.github.io/atrium-fruta/";
 
 
-const loading =
-document.getElementById("tiktok-loading");
+/* =========================================================
+   DATOS DE LAS FRUTINOVELAS
+========================================================= */
+
+const stories = [
+
+  {
+
+    id:"hijo",
+
+    title:"El hijo que nadie apoyó",
+
+    category:"Drama",
+
+    emoji:"💔",
+
+    cover:"assets/01-el-hijo-que-nadie-apoyo.png",
+
+    excerpt:
+      "Una historia familiar sobre abandono, perseverancia, orgullo y el deseo de demostrar que sí se puede.",
+
+    synopsis:
+      "Durante años, el protagonista escucha que sus sueños no tienen futuro. En lugar de abandonar, decide seguir adelante por su cuenta. La historia explora lo que ocurre cuando una persona deja de buscar aprobación y empieza a construir su propio camino.",
+
+    context:
+      "La historia gira alrededor de un joven que debe enfrentarse a la falta de apoyo de las personas de las que esperaba comprensión. A medida que aparecen nuevos obstáculos, aprende que demostrar lo que puede hacer requiere mucho más que palabras.",
+
+    characters:[
+
+      [
+        "🍎 El protagonista",
+        "Un joven decidido que aprende a confiar en sus propias capacidades después de sentirse rechazado por su entorno."
+      ],
+
+      [
+        "🍊 La familia",
+        "Representa las expectativas y los prejuicios que el protagonista intenta superar sin perder completamente sus vínculos."
+      ],
+
+      [
+        "🍓 Una aliada",
+        "Una persona que reconoce su esfuerzo y le ofrece una perspectiva diferente cuando más necesita apoyo."
+      ]
+
+    ],
+
+    chapters:[
+
+      [
+        "El comienzo",
+        "La historia presenta al protagonista y el entorno familiar en el que comienza a desarrollarse el conflicto."
+      ],
+
+      [
+        "Sin apoyo",
+        "Las dificultades familiares aumentan y el protagonista empieza a comprender que tendrá que tomar decisiones por su cuenta."
+      ],
+
+      [
+        "El primer intento",
+        "Decide seguir adelante a pesar de las dudas y descubre que alcanzar su objetivo será más difícil de lo que imaginaba."
+      ],
+
+      [
+        "Una oportunidad",
+        "Aparece una posibilidad que puede cambiar el rumbo de la historia, pero también implica asumir nuevos riesgos."
+      ],
+
+      [
+        "La presión aumenta",
+        "Las diferencias con las personas cercanas generan nuevos conflictos y obligan al protagonista a defender sus decisiones."
+      ],
+
+      [
+        "La primera victoria",
+        "Un resultado positivo demuestra que el esfuerzo comienza a producir cambios, aunque todavía quedan obstáculos."
+      ],
+
+      [
+        "Demostrarlo con hechos",
+        "El protagonista deja de intentar convencer a los demás con palabras y comienza a permitir que sus acciones hablen por él."
+      ],
+
+      [
+        "Una nueva etapa",
+        "Las decisiones anteriores empiezan a producir consecuencias y el protagonista comprende cuánto ha cambiado."
+      ],
+
+      [
+        "Las consecuencias",
+        "Una nueva situación obliga al protagonista a pensar cuidadosamente antes de tomar otra decisión."
+      ],
+
+      [
+        "El cierre de esta etapa",
+        "La historia llega a un punto importante y deja abierta la posibilidad de continuar el camino que el protagonista decidió construir."
+      ]
+
+    ]
+
+  },
 
 
-let videos = [];
+  {
+
+    id:"zanahoria",
+
+    title:"La casa que cambió la vida de Viejo Zanahoria",
+
+    category:"Superación",
+
+    emoji:"🥕",
+
+    cover:"assets/02-viejo-zanahoria.png",
+
+    excerpt:
+      "Una casa, muchos recuerdos y un nuevo comienzo que obliga a un personaje a creer otra vez en el futuro.",
+
+    synopsis:
+      "Viejo Zanahoria lleva años intentando reconstruir su vida después de varias dificultades. Cuando aparece la posibilidad de quedarse con una casa, lo que parecía una simple oportunidad material se convierte en el comienzo de una transformación personal.",
+
+    context:
+      "Viejo Zanahoria lleva mucho tiempo pensando que su mejor etapa quedó atrás. La aparición de una casa abre una posibilidad distinta, aunque aceptar esa oportunidad significa enfrentar asuntos que no estaban completamente resueltos.",
+
+    characters:[
+
+      [
+        "🥕 Viejo Zanahoria",
+        "El protagonista. Tiene experiencia, recuerdos difíciles y una fuerte necesidad de demostrar que todavía puede construir una vida mejor."
+      ],
+
+      [
+        "🍎 Manzana",
+        "Una figura cercana que aporta una mirada diferente sobre las decisiones del protagonista y su relación con el pasado."
+      ],
+
+      [
+        "🍐 Pera",
+        "Un personaje relacionado con el entorno familiar y con algunos de los cambios que ocurren alrededor de la nueva casa."
+      ]
+
+    ],
+
+    chapters:[
+
+      [
+        "Una oportunidad diferente",
+        "Viejo Zanahoria descubre una posibilidad que podría cambiar su situación y debe decidir si está preparado para empezar de nuevo."
+      ],
+
+      [
+        "La casa",
+        "El nuevo espacio despierta recuerdos y preguntas. Lo que parecía un comienzo sencillo se transforma en una oportunidad de cambio."
+      ]
+
+    ]
+
+  },
 
 
-/* ---------------------------------
-   NOMBRES PERSONALIZADOS
----------------------------------- */
+  {
 
-const nombresPersonalizados = {
+    id:"limon",
 
-"7687118433657441550":
-"¿Traicionará a su propio primo por 100 millones? — Parte 1",
+    title:"La historia más triste del pequeño Limón",
 
-"7686161572485483789":
-"Se fue por una vida mejor… pero ahora se arrepiente — Parte 2",
+    category:"Drama",
 
-"7686616882992008462":
-"Ella lo dejó… y después se dio cuenta de lo que perdió — Parte 3",
+    emoji:"🍋",
 
-"7686536471200763149":
-"Hizo todo por ella… pero ella eligió a otro — Parte 1",
+    cover:"assets/03-la-historia-del-pequeno-limon.png",
 
-"7685624384001789198":
-"La millonaria quiso a Limón… y destruyó su matrimonio — Parte 1",
+    excerpt:
+      "Una historia marcada por decisiones difíciles, decepciones y la búsqueda de una nueva oportunidad.",
 
-"7684152799919213837":
-"Perdieron a su hija… hasta que ella regresó",
+    synopsis:
+      "El pequeño Limón atraviesa una etapa marcada por dificultades y decisiones que cambian su vida. A medida que la historia avanza, debe aprender a enfrentar la decepción, reconocer lo que realmente quiere y encontrar una nueva manera de continuar.",
 
-"7683708228512779533":
-"El secreto de Pancho — Parte 1",
+    context:
+      "Limón se encuentra en una situación en la que una decisión puede cambiar la relación entre varios personajes. La historia avanza a través de conflictos personales y nuevas oportunidades.",
 
-"7682217357120605453":
-"Buscaba tiempo para salvar a su mamá… hasta que...",
+    characters:[
 
-"7681439105544228109":
-"Cuando ya no tienes nada, solo te queda la fe — Parte 1",
+      [
+        "🍋 Pequeño Limón",
+        "El protagonista de la historia. Debe aprender de las dificultades y tomar decisiones importantes sobre su futuro."
+      ],
 
-"7681177703533382925":
-"Cuando ya no tienes nada, solo te queda la fe — Parte 2",
+      [
+        "🍓 Una persona cercana",
+        "Un personaje que influye en las decisiones de Limón y ayuda a desarrollar el conflicto principal."
+      ],
 
-"7679518897493642509":
-"La lección más valiosa vino del plátano más humilde — Parte 1",
+      [
+        "🍎 Una figura del pasado",
+        "Una presencia relacionada con acontecimientos anteriores que vuelven a aparecer durante la historia."
+      ]
 
-"7679095083471310093":
-"Mi esposo no amaba a su propio hijo",
+    ],
 
-"7678761442262174989":
-"No podía creer que su esposo le hiciera esto... — Parte 1",
+    chapters:[
 
-"7678411562339568927":
-"La historia más triste del pequeño limón — Parte 5",
+      [
+        "El comienzo",
+        "Limón enfrenta una situación que cambia la forma en que observa su entorno y comienza a preguntarse qué hacer después."
+      ],
 
-"7678366662315314462":
-"La historia más triste del pequeño limón — Parte 4",
+      [
+        "La decepción",
+        "Una situación inesperada obliga a Limón a enfrentar una realidad que no esperaba."
+      ],
 
-"7678120139761470733":
-"La historia más triste del pequeño limón — Parte 3",
+      [
+        "La decisión",
+        "Después de analizar lo ocurrido, Limón llega a un punto de quiebre y debe decidir qué camino tomar."
+      ],
 
-"7677779577325767949":
-"La historia más triste del pequeño limón — Parte 2",
+      [
+        "Un nuevo camino",
+        "Las consecuencias de la decisión empiezan a hacerse visibles y Limón comienza a construir una nueva etapa."
+      ],
 
-"7677385368311713037":
-"La historia más triste del pequeño limón — Parte 1",
+      [
+        "Una segunda oportunidad",
+        "El cierre de esta etapa deja una nueva posibilidad para el futuro y abre la puerta a nuevas decisiones."
+      ]
 
-"7676215613609479437":
-"El final de Lucas — Parte 10",
+    ]
 
-"7674830146192411917":
-"¿Quién robó a Lucas? — Parte 9"
-
-};
+  },
 
 
-/* ---------------------------------
-   CATÁLOGO DE FRUTINOVELAS
----------------------------------- */
+  {
 
-const catalogoLocal = [
+    id:"fe",
 
-{
-id: "zanahoria-1",
-title:
-"La casa que cambió la vida de Viejo Zanahoria — Parte 1",
-view_count: 1900000
-},
+    title:"Cuando ya no tienes nada, solo te queda la fe",
 
-{
-id: "zanahoria-2",
-title:
-"La casa que cambió la vida de Viejo Zanahoria — Parte 2",
-view_count: 342400
-},
+    category:"Fe",
 
-{
-id: "hijo-1",
-title:
-"El hijo que nadie apoyó 💔 — Parte 1",
-view_count: 1300000
-},
+    emoji:"🙏",
 
-{
-id: "hijo-2",
-title:
-"El hijo que nadie apoyó 💔 — Parte 2",
-view_count: 506300
-},
+    cover:"assets/04-cuando-no-tienes-nada-la-fe.png",
 
-{
-id: "hijo-3",
-title:
-"El hijo que nadie apoyó 💔 — Parte 3",
-view_count: 248000
-},
+    excerpt:
+      "Una familia atraviesa uno de sus momentos más difíciles y descubre que todavía puede existir esperanza.",
 
-{
-id: "hijo-4",
-title:
-"El hijo que nadie apoyó 💔 — Parte 4",
-view_count: 330100
-},
+    synopsis:
+      "Cuando las opciones parecen agotarse, una familia se enfrenta a una decisión difícil. La historia explora cómo el apoyo entre sus integrantes, la esperanza y la fe pueden cambiar la manera de enfrentar un problema que parece imposible.",
 
-{
-id: "hijo-5",
-title:
-"El hijo que nadie apoyó 💔 — Parte 5",
-view_count: 401300
-},
+    context:
+      "La familia llega a un momento en el que siente que las opciones se han reducido al mínimo. En ese contexto, una serie de decisiones y conversaciones abre una posibilidad que ninguno de sus integrantes había considerado.",
 
-{
-id: "hijo-6",
-title:
-"El hijo que nadie apoyó 💔 — Parte 6",
-view_count: 283300
-},
+    characters:[
 
-{
-id: "hijo-7",
-title:
-"El hijo que nadie apoyó 💔 — Parte 7",
-view_count: 182200
-},
+      [
+        "🙏 La protagonista",
+        "Mantiene la esperanza aun cuando las circunstancias parecen estar en su contra y se convierte en un punto de unión para la familia."
+      ],
 
-{
-id: "hijo-8",
-title:
-"El hijo que nadie apoyó 💔 — Parte 8",
-view_count: 173300
-},
+      [
+        "🏠 La familia",
+        "Un conjunto de personajes que enfrenta el problema desde perspectivas distintas."
+      ],
 
-{
-id: "hijo-9",
-title:
-"El hijo que nadie apoyó 💔 — Parte 9",
-view_count: 144400
-},
+      [
+        "✨ Una ayuda inesperada",
+        "Una figura que aparece cuando la familia menos lo espera y modifica el rumbo de la historia."
+      ]
 
-{
-id: "hijo-10",
-title:
-"El hijo que nadie apoyó 💔 — Parte 10",
-view_count: 125400
-},
+    ],
 
-{
-id: "limon-1",
-title:
-"La historia más triste del pequeño limón — Parte 1",
-view_count: 3900000
-},
+    chapters:[
 
-{
-id: "limon-2",
-title:
-"La historia más triste del pequeño limón — Parte 2",
-view_count: 409300
-},
+      [
+        "Cuando todo parece perdido",
+        "La familia descubre que la situación es más complicada de lo que pensaba."
+      ],
 
-{
-id: "limon-3",
-title:
-"La historia más triste del pequeño limón — Parte 3",
-view_count: 393000
-},
+      [
+        "Una decisión difícil",
+        "Llega el momento de actuar y cada alternativa tiene consecuencias."
+      ]
 
-{
-id: "limon-4",
-title:
-"La historia más triste del pequeño limón — Parte 4",
-view_count: 133100
-},
+    ]
 
-{
-id: "limon-5",
-title:
-"La historia más triste del pequeño limón — Parte 5",
-view_count: 124900
-},
+  },
 
-{
-id: "fe-1",
-title:
-"Cuando ya no tienes nada, solo te queda la fe — Parte 1",
-view_count: 800600
-},
 
-{
-id: "fe-2",
-title:
-"Cuando ya no tienes nada, solo te queda la fe — Parte 2",
-view_count: 143800
-},
+  {
 
-{
-id: "millonaria-1",
-title:
-"La millonaria quiso a Limón… y destruyó su matrimonio — Parte 1",
-view_count: 1300000
-},
+    id:"millonaria",
 
-{
-id: "millonaria-2",
-title:
-"La millonaria quiso a Limón… y destruyó su matrimonio — Parte 2",
-view_count: 137700
-},
+    title:"La millonaria quiso a Limón",
 
-{
-id: "otro-1",
-title:
-"Hizo todo por ella… pero ella eligió a otro — Parte 1",
-view_count: 16300
-}
+    category:"Amor",
+
+    emoji:"💰",
+
+    cover:"assets/05-la-millonaria-quiso-a-limon.png",
+
+    excerpt:
+      "Una relación inesperada, diferencias de poder y decisiones que ponen a prueba lo que ambos entienden por amor.",
+
+    synopsis:
+      "Limón nunca imaginó que una mujer con una vida completamente diferente pudiera interesarse en él. Lo que comienza como una coincidencia termina convirtiéndose en una relación llena de preguntas, diferencias sociales y decisiones que ponen a prueba la sinceridad de ambos.",
+
+    context:
+      "La historia comienza con un encuentro improbable que une a dos personajes de mundos económicos y sociales muy distintos. Desde ese momento, el interés mutuo debe enfrentarse a prejuicios y expectativas externas.",
+
+    characters:[
+
+      [
+        "🍋 Limón",
+        "Un protagonista sencillo que no está acostumbrado al estilo de vida de la otra parte y debe aprender a establecer límites."
+      ],
+
+      [
+        "💎 La millonaria",
+        "Una mujer acostumbrada a controlar su entorno, pero que descubre que una relación emocional no puede resolverse simplemente con dinero."
+      ],
+
+      [
+        "🍓 La amiga",
+        "Una figura que observa la relación desde fuera y cuestiona algunas de las decisiones de sus protagonistas."
+      ]
+
+    ],
+
+    chapters:[
+
+      [
+        "El primer encuentro",
+        "Una coincidencia pone a Limón frente a una persona de un mundo completamente distinto."
+      ],
+
+      [
+        "Una invitación",
+        "La relación empieza a avanzar y una invitación obliga a Limón a entrar en un entorno al que no está acostumbrado."
+      ]
+
+    ]
+
+  },
+
+
+  {
+
+    id:"hizo-todo",
+
+    title:"Hizo todo por ella",
+
+    category:"Amor",
+
+    emoji:"❤️",
+
+    cover:"assets/06-hizo-todo-por-ella.png",
+
+    excerpt:
+      "Él estaba dispuesto a hacerlo todo por la persona que amaba, pero las circunstancias llevaron la relación a un punto de quiebre.",
+
+    synopsis:
+      "Hizo todo por ella presenta una historia de amor que comienza desde el sacrificio. El protagonista cree que resolver problemas, hacer favores y renunciar a sus propias necesidades es la mejor manera de demostrar sus sentimientos.",
+
+    context:
+      "La relación comienza con una entrega total por parte del protagonista. A medida que pasa el tiempo, las diferencias en la manera de entender el amor generan señales de alerta.",
+
+    characters:[
+
+      [
+        "❤️ El protagonista",
+        "Una persona entregada que aprende que amar a alguien no significa olvidarse de sí mismo."
+      ],
+
+      [
+        "🍓 Ella",
+        "La persona que recibe la ayuda y el cariño del protagonista, pero cuyas decisiones terminan generando un conflicto inesperado."
+      ],
+
+      [
+        "🍎 El amigo",
+        "Una voz externa que intenta advertir al protagonista antes de que algunas decisiones tengan consecuencias más difíciles de revertir."
+      ]
+
+    ],
+
+    chapters:[
+
+      [
+        "Todo por amor",
+        "El protagonista demuestra cuánto está dispuesto a hacer por la persona que ama."
+      ]
+
+    ]
+
+  }
 
 ];
 
 
-/* ---------------------------------
-   CARGAR CATÁLOGO LOCAL
----------------------------------- */
+/* =========================================================
+   ARCHIVOS DE VIDEO REALES
+========================================================= */
 
-function cargarVideosTikTok() {
+const videos = {
 
-videos = catalogoLocal;
+  "zanahoria":[
 
-mostrarVideos(videos);
+    "el%20viejo%20zanahoria%20parte%201.mp4",
 
-loading.style.display = "none";
+    "el%20viejo%20zanahoria%20parte%202.mp4"
 
-}
+  ],
 
+  "hijo":[
 
-/* ---------------------------------
-   DETERMINAR CATEGORÍA
----------------------------------- */
+    "el%20hijo%20parte%201.mp4",
+    "el%20hijo%20parte%202.mp4",
+    "el%20hijo%20parte%203.mp4",
+    "el%20hijo%20parte%204.mp4",
+    "el%20hijo%20parte%205.mp4",
+    "el%20hijo%20parte%206.mp4",
+    "el%20hijo%20parte%207.mp4",
+    "el%20hijo%20parte%208.mp4",
+    "el%20hijo%20parte%209.mp4",
+    "el%20hijo%20parte%2010.mp4"
 
-function determinarCategoria(titulo) {
+  ],
 
-const texto =
-titulo.toLowerCase();
+  "limon":[
 
+    "peque%C3%B1o%20limon%20parte%201.mp4",
+    "peque%C3%B1o%20limon%20parte%202.mp4",
+    "peque%C3%B1o%20limon%20parte%203.mp4",
+    "peque%C3%B1o%20limon%20parte%204.mp4",
+    "peque%C3%B1o%20limon%20parte%205.mp4"
 
-if (
-texto.includes("fe") ||
-texto.includes("dios") ||
-texto.includes("milagro") ||
-texto.includes("esperanza") ||
-texto.includes("oración") ||
-texto.includes("oracion")
-) {
+  ],
 
-return "Fe";
+  "fe":[
 
-}
+    "la%20fe%20parte%201.mp4",
+    "la%20fe%20parte%202.mp4"
 
+  ],
 
-if (
-texto.includes("amor") ||
-texto.includes("esposa") ||
-texto.includes("esposo") ||
-texto.includes("novia") ||
-texto.includes("novio") ||
-texto.includes("matrimonio") ||
-texto.includes("ella") ||
-texto.includes("él")
-) {
+  "millonaria":[
 
-return "Amor";
+    "la%20millonaria%20parte%201.mp4",
+    "la%20millonaria%20parte%202.mp4"
 
-}
+  ],
 
+  "hizo-todo":[
 
-return "Drama";
+    "hizo%20todo%20parte%201.mp4"
 
-}
-
-
-/* ---------------------------------
-   CREAR TARJETA
----------------------------------- */
-
-function crearTarjeta(video, indice) {
-
-const titulo =
-video.title;
-
-
-const categoria =
-determinarCategoria(titulo);
-
-
-const tarjeta =
-document.createElement("article");
-
-
-tarjeta.className =
-"novela-card";
-
-
-tarjeta.dataset.category =
-categoria;
-
-
-tarjeta.dataset.popular =
-Number(video.view_count || 0) >= 100000
-? "true"
-: "false";
-
-
-tarjeta.dataset.views =
-Number(video.view_count || 0);
-
-
-const cover =
-document.createElement("div");
-
-
-cover.className =
-"cover";
-
-
-const badge =
-document.createElement("span");
-
-
-badge.className =
-"badge";
-
-
-badge.textContent =
-"FRUTINOVELA";
-
-
-const imagen =
-document.createElement("img");
-
-
-imagen.alt =
-"Miniatura: " + titulo;
-
-
-imagen.loading =
-"lazy";
-
-
-/* ---------------------------------
-   MINIATURAS
----------------------------------- */
-
-const miniaturas = {
-
-"El hijo que nadie apoyó":
-"assets/01-el-hijo-que-nadie-apoyo.png",
-
-"La casa que cambió la vida de Viejo Zanahoria":
-"assets/02-viejo-zanahoria.png",
-
-"La historia más triste del pequeño limón":
-"assets/03-la-historia-del-pequeno-limon.png",
-
-"Cuando ya no tienes nada, solo te queda la fe":
-"assets/04-cuando-no-tienes-nada-la-fe.png",
-
-"La Millonaria Quiso A Limón… Y Destruyó Su Matrimonio":
-"assets/05-la-millonaria-quiso-a-limon.png",
-
-"Hizo Todo por Ella… Pero Ella Eligió a Otro":
-"assets/06-hizo-todo-por-ella.png"
+  ]
 
 };
 
 
-let miniaturaEncontrada =
-null;
+/* =========================================================
+   VISTAS
+========================================================= */
 
+function storyCard(story){
 
-for (
-const nombre in miniaturas
-) {
+  return `
 
-if (
-titulo
-.toLowerCase()
-.includes(nombre.toLowerCase())
-) {
+    <article
+      class="card story-card"
+      onclick="go('historia/${story.id}')"
+      tabindex="0"
+      onkeydown="if(event.key==='Enter')go('historia/${story.id}')"
+    >
 
-miniaturaEncontrada =
-miniaturas[nombre];
+      <div class="story-image">
 
-break;
+        <img
+          src="${story.cover}"
+          alt="${escapeHtml(story.title)}"
+          loading="lazy"
+        >
 
-}
+      </div>
 
-}
+      <div class="story-body">
 
+        <h4 class="story-title">
+          ${story.emoji} ${escapeHtml(story.title)}
+        </h4>
 
-if (miniaturaEncontrada) {
+        <p class="story-excerpt">
+          ${escapeHtml(story.excerpt)}
+        </p>
 
-imagen.src =
-miniaturaEncontrada;
+        <div class="tags">
 
-}
+          <span class="tag">
+            ${escapeHtml(story.category)}
+          </span>
 
+          <span class="tag">
+            Frutinovela
+          </span>
 
-cover.appendChild(badge);
+        </div>
 
-cover.appendChild(imagen);
+        <span class="story-link">
+          Leer historia completa →
+        </span>
 
+      </div>
 
-const contenido =
-document.createElement("div");
+    </article>
 
-
-contenido.className =
-"card-content";
-
-
-const h3 =
-document.createElement("h3");
-
-
-h3.textContent =
-titulo;
-
-
-const partes =
-document.createElement("p");
-
-
-partes.className =
-"parts";
-
-
-partes.textContent =
-"👁️ " +
-Number(
-video.view_count || 0
-).toLocaleString("es-CO") +
-" vistas";
-
-
-const boton =
-document.createElement("button");
-
-
-boton.className =
-"view-button";
-
-
-boton.textContent =
-"▶️ Ver Frutinovela";
-
-
-boton.addEventListener(
-"click",
-() => {
-
-abrirFrutinovela(
-video.historia
-);
-
-});
-
-
-contenido.appendChild(h3);
-
-contenido.appendChild(partes);
-
-contenido.appendChild(boton);
-
-
-tarjeta.appendChild(cover);
-
-tarjeta.appendChild(contenido);
-
-
-return tarjeta;
+  `;
 
 }
 
 
-/* ---------------------------------
-   MOSTRAR VIDEOS
----------------------------------- */
+/* =========================================================
+   PORTADA
+========================================================= */
 
-function mostrarVideos(lista) {
+function home(){
 
-grid.innerHTML = "";
+  return `
+
+    <section class="hero">
+
+      <div class="card hero-copy">
+
+        <div class="eyebrow">
+          FRUTINOVELAS ORIGINALES
+        </div>
+
+        <h2>
+          Historias que se sienten hasta la última parte.
+        </h2>
+
+        <p>
+          Bienvenido a ATRIUM FRUTA, un espacio de entretenimiento
+          dedicado a historias cortas protagonizadas por personajes
+          de frutas.
+        </p>
+
+        <p>
+          Aquí puedes conocer el contexto de cada Frutinovela,
+          descubrir a sus personajes y seguir sus capítulos en orden.
+          La página está pensada para que una historia pueda disfrutarse
+          también fuera de una publicación individual en redes sociales.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            class="btn primary"
+            href="#frutinovelas"
+          >
+            Ver Frutinovelas
+          </a>
+
+          <a
+            class="btn ghost"
+            href="#sobre-nosotros"
+          >
+            Conoce ATRIUM FRUTA
+          </a>
+
+        </div>
+
+      </div>
 
 
-const historias = {};
+      <div class="card hero-art">
+
+        <img
+          src="assets/01-el-hijo-que-nadie-apoyo.png"
+          alt="Frutinovelas de ATRIUM FRUTA"
+        >
+
+      </div>
+
+    </section>
 
 
-lista.forEach(
-video => {
+    <section class="section">
 
-const historia =
-video.title
-.replace(
-/ — Parte \d+$/,
-""
-)
-.trim();
+      <div class="card info-card reading">
+
+        <div class="eyebrow">
+          BIENVENIDO A ATRIUM FRUTA
+        </div>
+
+        <h3>
+          Un lugar para descubrir cada historia.
+        </h3>
+
+        <p>
+          ATRIUM FRUTA reúne nuestras Frutinovelas en un espacio
+          organizado para que puedas descubrir una historia, conocer
+          sus personajes y continuar sus capítulos sin depender de
+          encontrar cada publicación individual en una red social.
+        </p>
+
+        <p>
+          Cada historia tiene una temática y un conflicto diferente.
+          Algunas se concentran en la familia y la superación; otras
+          exploran el amor, las decisiones, la decepción, la esperanza
+          o la fe.
+        </p>
+
+        <p>
+          La experiencia de ATRIUM FRUTA combina información escrita
+          con contenido audiovisual. De esta manera, los videos forman
+          parte de una historia más amplia y cada visitante puede
+          conocer primero el contexto antes de comenzar una nueva parte.
+        </p>
+
+      </div>
+
+    </section>
 
 
-if (!historias[historia]) {
+    <section class="section">
 
-historias[historia] = {
+      <div class="card section-directory">
 
-title: historia,
+        <div>
 
-view_count: 0,
+          <div class="eyebrow">
+            NUESTRAS HISTORIAS
+          </div>
 
-partes: []
+          <h3>
+            Encuentra tu próxima Frutinovela
+          </h3>
 
-};
+          <p>
+            Explora nuestras historias una por una.
+          </p>
+
+        </div>
+
+        <div class="directory-links">
+
+          ${stories.map((story,index)=>`
+
+            <a href="#historia/${story.id}">
+
+              <span>
+                ${String(index+1).padStart(2,"0")}
+              </span>
+
+              <div>
+                ${story.emoji}
+                ${escapeHtml(story.title)}
+              </div>
+
+            </a>
+
+          `).join("")}
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    ${stories.map((story,index)=>homepageSeries(story,index)).join("")}
+
+
+    <section class="section">
+
+      <div class="card info-card reading">
+
+        <div class="eyebrow">
+          UN UNIVERSO EN CRECIMIENTO
+        </div>
+
+        <h3>
+          ✨ Nuevas historias y nuevas partes
+        </h3>
+
+        <p>
+          ATRIUM FRUTA está pensado para crecer junto con sus historias.
+          A medida que aparezcan nuevas Frutinovelas o nuevas partes,
+          la estructura del sitio puede incorporar esos contenidos sin
+          perder el contexto de las historias anteriores.
+        </p>
+
+        <p>
+          Esto permite que una persona que descubra ATRIUM FRUTA por
+          primera vez pueda comenzar desde una historia completa,
+          mientras quienes ya conocen el proyecto pueden volver a sus
+          personajes y capítulos favoritos.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <div class="card info-card">
+
+        <div class="eyebrow">
+          PREGUNTAS FRECUENTES
+        </div>
+
+        <h3>
+          Preguntas sobre ATRIUM FRUTA
+        </h3>
+
+        <div class="faq">
+
+          <details>
+
+            <summary>
+              ¿Qué es ATRIUM FRUTA?
+            </summary>
+
+            <p>
+              ATRIUM FRUTA es un proyecto de entretenimiento digital
+              dedicado a Frutinovelas protagonizadas por personajes
+              de frutas y organizadas por capítulos.
+            </p>
+
+          </details>
+
+
+          <details>
+
+            <summary>
+              ¿Dónde puedo ver las historias?
+            </summary>
+
+            <p>
+              Cada historia cuenta con una sección propia dentro del
+              sitio donde puedes conocer su contexto y acceder a las
+              partes disponibles.
+            </p>
+
+          </details>
+
+
+          <details>
+
+            <summary>
+              ¿Las historias son originales?
+            </summary>
+
+            <p>
+              ATRIUM FRUTA desarrolla sus historias como parte del
+              proyecto, incluyendo la construcción narrativa,
+              personajes, dirección creativa y edición del contenido.
+            </p>
+
+          </details>
+
+
+          <details>
+
+            <summary>
+              ¿Las historias utilizan inteligencia artificial?
+            </summary>
+
+            <p>
+              Las herramientas digitales y de inteligencia artificial
+              pueden formar parte del proceso de producción visual.
+              Estas herramientas se utilizan dentro de un proceso
+              creativo y editorial propio.
+            </p>
+
+          </details>
+
+
+          <details>
+
+            <summary>
+              ¿Puedo contactar a ATRIUM FRUTA?
+            </summary>
+
+            <p>
+              Sí. Puedes utilizar la sección de Contacto para consultas,
+              colaboraciones, propuestas comerciales o mensajes
+              relacionados con las Frutinovelas.
+            </p>
+
+          </details>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  `;
 
 }
 
 
-historias[historia]
-.view_count +=
-Number(
-video.view_count || 0
-);
+/* =========================================================
+   SERIES EN PORTADA
+========================================================= */
+
+function homepageSeries(story,index){
+
+  const paragraphs =
+    story.synopsis
+      ? `<p>${escapeHtml(story.synopsis)}</p>`
+      : "";
+
+  const characters =
+    story.characters
+      .map(character=>`
+
+        <div class="series-character">
+
+          <span>
+            ${escapeHtml(character[0].split(" ")[0])}
+          </span>
+
+          <div>
+
+            <strong>
+              ${escapeHtml(
+                character[0]
+                  .replace(character[0].split(" ")[0],"")
+                  .trim()
+              )}
+            </strong>
+
+            <p>
+              ${escapeHtml(character[1])}
+            </p>
+
+          </div>
+
+        </div>
+
+      `)
+      .join("");
 
 
-historias[historia]
-.partes.push(video);
+  const preview =
+    story.chapters
+      .slice(0,3)
+      .map((chapter,i)=>`
 
-});
+        <div class="series-character">
 
+          <span>
+            ${i+1}
+          </span>
 
-Object.values(historias)
-.forEach(
-historia => {
+          <div>
 
+            <strong>
+              Parte ${i+1} — ${escapeHtml(chapter[0])}
+            </strong>
 
-historia.partes.sort(
-(a, b) => {
+            <p>
+              ${escapeHtml(chapter[1])}
+            </p>
 
-const parteA =
-Number(
-a.title.match(
-/Parte (\d+)$/i
-)?.[1] || 0
-);
+          </div>
 
+        </div>
 
-const parteB =
-Number(
-b.title.match(
-/Parte (\d+)$/i
-)?.[1] || 0
-);
-
-
-return parteA - parteB;
-
-});
+      `)
+      .join("");
 
 
-const tarjeta =
-crearTarjeta({
+  return `
 
-title:
-historia.title,
+    <section class="section">
 
-view_count:
-historia.view_count,
+      <div class="series-label">
 
-historia:
-historia
+        SERIE ${String(index+1).padStart(2,"0")}
+        ·
+        ${escapeHtml(story.category).toUpperCase()}
 
-}, 0);
+      </div>
 
 
-grid.appendChild(
-tarjeta
-);
+      <div class="series-home">
 
-});
+        <div class="card series-image-card">
+
+          <img
+            src="${story.cover}"
+            alt="${escapeHtml(story.title)}"
+            loading="lazy"
+          >
+
+        </div>
+
+
+        <div class="card series-copy">
+
+          <div class="eyebrow">
+            ${story.emoji} FRUTINOVELA ORIGINAL
+          </div>
+
+          <h3>
+            ${escapeHtml(story.title)}
+          </h3>
+
+          <p class="series-lead">
+            ${escapeHtml(story.synopsis)}
+          </p>
+
+          <div class="tags">
+
+            <span class="tag">
+              ${escapeHtml(story.category)}
+            </span>
+
+            <span class="tag">
+              Historia por capítulos
+            </span>
+
+          </div>
+
+          <div class="hero-actions">
+
+            <a
+              class="btn primary"
+              href="#historia/${story.id}"
+            >
+              Entrar a la historia
+            </a>
+
+            <a
+              class="btn ghost"
+              href="#historia/${story.id}"
+            >
+              Ver partes
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card series-text reading">
+
+        <h4>
+          📖 Sobre esta historia
+        </h4>
+
+        ${paragraphs}
+
+        <p>
+          ${escapeHtml(story.context)}
+        </p>
+
+      </div>
+
+
+      <div class="series-columns">
+
+        <div class="card info-card">
+
+          <h4>
+            👥 Personajes principales
+          </h4>
+
+          <div class="series-characters">
+
+            ${characters}
+
+          </div>
+
+          <a
+            class="story-link"
+            href="#historia/${story.id}"
+          >
+            Conocer la historia completa →
+          </a>
+
+        </div>
+
+
+        <div class="card info-card">
+
+          <h4>
+            🎬 Primeras partes
+          </h4>
+
+          <p>
+            Una vista previa de los capítulos disponibles.
+            En la página individual encontrarás la historia completa.
+          </p>
+
+          <div class="series-characters">
+
+            ${preview}
+
+          </div>
+
+          <a
+            class="story-link"
+            href="#historia/${story.id}"
+          >
+            Ver todos los capítulos →
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="card series-footer">
+
+        <div>
+
+          <strong>
+            ${escapeHtml(story.title)}
+          </strong>
+
+          <p>
+            Conoce la historia, sus personajes y sus capítulos.
+          </p>
+
+        </div>
+
+        <a
+          class="btn primary"
+          href="#historia/${story.id}"
+        >
+          Ver historia completa
+        </a>
+
+      </div>
+
+    </section>
+
+  `;
 
 }
 
 
-/* ---------------------------------
-   FILTROS
----------------------------------- */
+/* =========================================================
+   LISTADO
+========================================================= */
 
-const buttons =
-document.querySelectorAll(
-".filter-btn"
-);
+function listing(filter=null){
 
-
-buttons.forEach(
-btn => {
-
-btn.addEventListener(
-"click",
-() => {
+  const list =
+    filter
+      ? stories.filter(story=>story.category===filter)
+      : stories;
 
 
-buttons.forEach(
-b =>
-b.classList.remove(
-"active"
-)
-);
+  return `
+
+    <section>
+
+      <div class="section-head">
+
+        <div>
+
+          <div class="eyebrow">
+            BIBLIOTECA
+          </div>
+
+          <h3>
+            🍓 Frutinovelas
+          </h3>
+
+          <p>
+            Explora nuestras historias y descubre sus personajes,
+            conflictos y capítulos.
+          </p>
+
+        </div>
+
+      </div>
 
 
-btn.classList.add(
-"active"
-);
+      <div class="filters">
+
+        ${[
+          "Todas",
+          "Drama",
+          "Amor",
+          "Fe",
+          "Superación"
+        ].map(category=>`
+
+          <button
+            class="filter ${
+              (!filter && category==="Todas") ||
+              filter===category
+                ? "active"
+                : ""
+            }"
+            onclick="
+              go(
+                '${category==="Todas"
+                  ? "frutinovelas"
+                  : "frutinovelas/"+encodeURIComponent(category)
+                }'
+              )
+            "
+          >
+
+            ${category}
+
+          </button>
+
+        `).join("")}
+
+      </div>
 
 
-const filtro =
-btn.dataset.filter;
+      <div class="card info-card reading">
+
+        <p>
+          Esta biblioteca reúne las historias disponibles en ATRIUM
+          FRUTA. Cada Frutinovela cuenta con una página propia donde
+          puedes conocer su contexto, personajes y capítulos.
+        </p>
+
+        <p>
+          Utiliza los filtros para explorar las historias según su
+          temática.
+        </p>
+
+      </div>
 
 
-const tarjetas =
-Array.from(
-document.querySelectorAll(
-".novela-card"
-)
-);
+      <div
+        class="grid"
+        style="margin-top:20px"
+      >
 
+        ${
+          list.length
+            ? list.map(storyCard).join("")
+            : `
+              <div class="empty">
+                No hay historias disponibles en esta categoría.
+              </div>
+            `
+        }
 
-if (
-filtro === "popular"
-) {
+      </div>
 
-tarjetas.sort(
-(a, b) =>
-Number(
-b.dataset.views || 0
-) -
-Number(
-a.dataset.views || 0
-)
-);
+    </section>
 
-
-tarjetas.forEach(
-tarjeta => {
-
-grid.appendChild(
-tarjeta
-);
-
-});
+  `;
 
 }
 
 
-tarjetas.forEach(
-tarjeta => {
+/* =========================================================
+   MÁS VISTAS
+========================================================= */
+
+function mostViewed(){
+
+  const top = [
+
+    stories[2],
+    stories[1],
+    stories[0],
+    stories[3],
+    stories[4],
+    stories[5]
+
+  ];
 
 
-let mostrar =
-false;
+  return `
+
+    <section>
+
+      <div class="section-head">
+
+        <div>
+
+          <div class="eyebrow">
+            SELECCIÓN
+          </div>
+
+          <h3>
+            🔥 Más vistas
+          </h3>
+
+          <p>
+            Algunas de las historias que puedes comenzar a explorar.
+          </p>
+
+        </div>
+
+      </div>
 
 
-if (
-filtro === "all"
-) {
+      <div class="card info-card reading">
 
-mostrar =
-true;
+        <p>
+          Esta sección está pensada para destacar las historias que
+          generan mayor interés entre la comunidad de ATRIUM FRUTA.
+          La selección puede actualizarse a medida que las historias
+          acumulen nuevas reproducciones en nuestras plataformas.
+        </p>
+
+        <p>
+          Si acabas de llegar al sitio, también puede ser un buen punto
+          de partida para descubrir diferentes géneros y estilos de
+          historia.
+        </p>
+
+      </div>
+
+
+      <div
+        class="grid"
+        style="margin-top:20px"
+      >
+
+        ${top.map(storyCard).join("")}
+
+      </div>
+
+    </section>
+
+  `;
 
 }
 
 
-else if (
-filtro === "popular"
-) {
+/* =========================================================
+   PÁGINA DE HISTORIA
+========================================================= */
 
-mostrar =
-tarjeta.dataset.popular ===
-"true";
+function detail(id){
+
+  const story =
+    stories.find(item=>item.id===id) ||
+    stories[0];
+
+
+  const storyVideos =
+    videos[story.id] || [];
+
+
+  return `
+
+    <section>
+
+      <div class="detail-hero">
+
+        <div class="card detail-cover">
+
+          <img
+            src="${story.cover}"
+            alt="${escapeHtml(story.title)}"
+          >
+
+        </div>
+
+
+        <div class="card detail-copy">
+
+          <div class="eyebrow">
+
+            FRUTINOVELA ·
+            ${escapeHtml(story.category).toUpperCase()}
+
+          </div>
+
+          <h2>
+            ${story.emoji}
+            ${escapeHtml(story.title)}
+          </h2>
+
+          <p class="lead">
+            ${escapeHtml(story.synopsis)}
+          </p>
+
+          <div
+            class="tags"
+            style="margin-top:16px"
+          >
+
+            <span class="tag">
+              ${escapeHtml(story.category)}
+            </span>
+
+            <span class="tag">
+              ${storyVideos.length} partes disponibles
+            </span>
+
+          </div>
+
+          <div
+            class="hero-actions"
+            style="margin-top:20px"
+          >
+
+            <a
+              class="btn primary"
+              href="#capitulos-${story.id}"
+            >
+              ▶ Ver capítulos
+            </a>
+
+            <a
+              class="btn ghost"
+              href="#frutinovelas"
+            >
+              ← Volver a Frutinovelas
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <section class="section">
+
+        <div class="card info-card reading">
+
+          <div class="eyebrow">
+            SINOPSIS
+          </div>
+
+          <h3>
+            📖 ¿De qué trata esta historia?
+          </h3>
+
+          <p>
+            ${escapeHtml(story.synopsis)}
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="card info-card reading">
+
+          <div class="eyebrow">
+            CONTEXTO
+          </div>
+
+          <h3>
+            🧩 Contexto de la historia
+          </h3>
+
+          <p>
+            ${escapeHtml(story.context)}
+          </p>
+
+          <p>
+            Esta sección acompaña el contenido audiovisual con
+            información escrita para ayudar a comprender el conflicto,
+            las decisiones y la evolución de los personajes.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="eyebrow">
+              PERSONAJES
+            </div>
+
+            <h3>
+              👥 Personajes principales
+            </h3>
+
+            <p>
+              Conoce a las figuras que participan en la historia.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="process-grid">
+
+          ${story.characters.map(character=>`
+
+            <div class="card info-card">
+
+              <h4>
+                ${escapeHtml(character[0])}
+              </h4>
+
+              <p>
+                ${escapeHtml(character[1])}
+              </p>
+
+            </div>
+
+          `).join("")}
+
+        </div>
+
+      </section>
+
+
+      <section
+        class="section"
+        id="capitulos-${story.id}"
+      >
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="eyebrow">
+              CONTENIDO AUDIOVISUAL
+            </div>
+
+            <h3>
+              🎬 Capítulos de la historia
+            </h3>
+
+            <p>
+              Cada parte está organizada en orden para facilitar el
+              seguimiento de la trama.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline">
+
+          ${
+            storyVideos.map((videoFile,index)=>{
+
+              const chapter =
+                story.chapters[index] ||
+                [
+                  `Parte ${index+1}`,
+                  `Continúa la historia de ${story.title}.`
+                ];
+
+
+              return `
+
+                <article class="chapter">
+
+                  <div class="num">
+                    ${index+1}
+                  </div>
+
+                  <div>
+
+                    <h4>
+                      Parte ${index+1} —
+                      ${escapeHtml(chapter[0])}
+                    </h4>
+
+                    <p>
+                      ${escapeHtml(chapter[1])}
+                    </p>
+
+
+                    <div class="video-box">
+
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        width="100%"
+                      >
+
+                        <source
+                          src="${GITHUB_BASE}${videoFile}"
+                          type="video/mp4"
+                        >
+
+                        Tu navegador no puede reproducir este video.
+
+                      </video>
+
+                      <div class="video-caption">
+
+                        Parte ${index+1} de
+                        ${storyVideos.length}
+                        · ${escapeHtml(story.title)}
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </article>
+
+              `;
+
+            }).join("")
+          }
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="card info-card reading">
+
+          <div class="eyebrow">
+            SOBRE LA HISTORIA
+          </div>
+
+          <h3>
+            💬 Una historia para seguir capítulo por capítulo
+          </h3>
+
+          <p>
+            Las Frutinovelas pueden desarrollarse durante varias partes
+            y publicarse en diferentes momentos. Por eso esta página
+            reúne el contexto y los capítulos disponibles en un solo
+            lugar.
+          </p>
+
+          <p>
+            De esta manera, una persona que descubre la historia por
+            primera vez puede comenzar desde el principio y regresar a
+            partes anteriores cuando lo necesite.
+          </p>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  `;
 
 }
 
 
-else {
+/* =========================================================
+   SOBRE NOSOTROS
+========================================================= */
 
-mostrar =
-tarjeta.dataset.category ===
-filtro;
+function about(){
+
+  return `
+
+    <section>
+
+      <div class="about-hero">
+
+        <div class="card about-cover">
+
+          <img
+            src="assets/01-el-hijo-que-nadie-apoyo.png"
+            alt="ATRIUM FRUTA"
+          >
+
+        </div>
+
+
+        <div class="card about-copy">
+
+          <div class="eyebrow">
+            SOBRE ATRIUM FRUTA
+          </div>
+
+          <h2>
+            El hogar de las Frutinovelas.
+          </h2>
+
+          <p class="reading">
+            ATRIUM FRUTA es un proyecto de entretenimiento digital
+            enfocado en historias cortas protagonizadas por personajes
+            de frutas y presentadas por capítulos.
+          </p>
+
+          <p class="reading">
+            El proyecto busca construir un universo propio de historias
+            en el que diferentes personajes puedan protagonizar
+            conflictos relacionados con el amor, la familia, la
+            superación, la fe, las decisiones y las relaciones humanas.
+          </p>
+
+          <p class="reading">
+            La página web funciona como un espacio complementario a las
+            publicaciones realizadas en plataformas sociales, permitiendo
+            reunir las historias y organizar sus capítulos.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <section class="section">
+
+        <div class="card info-card reading">
+
+          <div class="eyebrow">
+            NUESTRA FORMA DE CONTAR HISTORIAS
+          </div>
+
+          <h3>
+            🍓 Historias pensadas para generar curiosidad
+          </h3>
+
+          <p>
+            Una Frutinovela parte de una situación central y desarrolla
+            personajes con objetivos, conflictos y decisiones que
+            modifican el rumbo de la historia.
+          </p>
+
+          <p>
+            Aunque los protagonistas sean frutas, las historias buscan
+            trabajar emociones y situaciones que puedan resultar
+            reconocibles para el público.
+          </p>
+
+          <p>
+            El sitio organiza cada historia alrededor de una presentación,
+            contexto, personajes y capítulos para que el visitante pueda
+            entender mejor el universo de cada Frutinovela.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="process-grid">
+
+          <div class="card info-card">
+
+            <h4>
+              ✍️ Ideas y guiones
+            </h4>
+
+            <p>
+              Las historias parten de una idea narrativa que se
+              desarrolla en situaciones, personajes, conflictos y
+              acontecimientos organizados por capítulos.
+            </p>
+
+          </div>
+
+
+          <div class="card info-card">
+
+            <h4>
+              🎭 Personajes
+            </h4>
+
+            <p>
+              Los protagonistas reciben características visuales y
+              narrativas que permiten construir una identidad para cada
+              historia.
+            </p>
+
+          </div>
+
+
+          <div class="card info-card">
+
+            <h4>
+              🧠 Herramientas digitales e IA
+            </h4>
+
+            <p>
+              Las herramientas digitales y de inteligencia artificial
+              pueden formar parte del proceso de producción visual.
+              Estas herramientas se integran dentro de una dirección
+              creativa y editorial propia.
+            </p>
+
+          </div>
+
+
+          <div class="card info-card">
+
+            <h4>
+              🎬 Edición y publicación
+            </h4>
+
+            <p>
+              Las escenas y recursos se organizan, editan y convierten
+              en capítulos que posteriormente pueden publicarse en las
+              diferentes plataformas del proyecto.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="card info-card reading">
+
+          <div class="eyebrow">
+            NUESTRO PROPÓSITO
+          </div>
+
+          <h3>
+            📚 Construir un archivo de nuestras historias
+          </h3>
+
+          <p>
+            ATRIUM FRUTA busca que las Frutinovelas no dependan de una
+            sola publicación o de una sola plataforma para ser
+            descubiertas.
+          </p>
+
+          <p>
+            La página permite reunir información de las historias,
+            conservar el contexto y organizar los capítulos para que
+            los visitantes puedan regresar a ellos.
+          </p>
+
+          <p>
+            A medida que el proyecto crece, esta estructura puede
+            incorporar nuevas historias, nuevos personajes y nuevas
+            temporadas.
+          </p>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  `;
 
 }
 
 
-tarjeta.style.display =
-mostrar
-? ""
-: "none";
+/* =========================================================
+   CONTACTO
+========================================================= */
 
+function contact(){
 
-});
+  return `
 
-});
+    <section>
 
-});
+      <div class="section-head">
 
+        <div>
 
-/* ---------------------------------
-   REPRODUCTOR DE FRUTINOVELAS
----------------------------------- */
+          <div class="eyebrow">
+            COMUNIDAD
+          </div>
 
-const videoModal =
-document.getElementById(
-"video-modal"
-);
+          <h3>
+            📩 Contacto
+          </h3>
 
+          <p>
+            Propuestas, colaboraciones, consultas o mensajes sobre
+            ATRIUM FRUTA.
+          </p>
 
-const tiktokPlayer =
-document.getElementById(
-"tiktok-player"
-);
+        </div>
 
+      </div>
 
-const videoModalTitle =
-document.getElementById(
-"video-modal-title"
-);
 
+      <div class="contact">
 
-const closeVideo =
-document.getElementById(
-"close-video"
-);
+        <div class="card contact-form">
 
+          <h4>
+            Escríbenos
+          </h4>
 
-/* ---------------------------------
-   ABRIR FRUTINOVELA
----------------------------------- */
+          <p class="muted">
+            Puedes utilizar este espacio para consultas generales,
+            colaboraciones o propuestas relacionadas con el proyecto.
+          </p>
 
-function abrirFrutinovela(
-historia
-) {
+          <form
+            onsubmit="sendContact(event)"
+          >
 
+            <div class="field">
 
-const titulo =
-historia.title;
+              <label for="contact-name">
+                Nombre
+              </label>
 
+              <input
+                id="contact-name"
+                required
+                name="name"
+                placeholder="Tu nombre"
+              >
 
-videoModalTitle.textContent =
-titulo;
+            </div>
 
 
-tiktokPlayer.innerHTML =
-"";
+            <div class="field">
 
+              <label for="contact-email">
+                Correo electrónico
+              </label>
 
-/* ---------------------------------
-   POSTERS
----------------------------------- */
+              <input
+                id="contact-email"
+                required
+                type="email"
+                name="email"
+                placeholder="tu@email.com"
+              >
 
-/*
-   IMPORTANTE:
+            </div>
 
-   Estas son las imágenes que ya
-   existen en tu carpeta assets.
 
-   No modificamos las rutas de los
-   MP4 ni el funcionamiento del
-   reproductor.
+            <div class="field">
 
-   El poster se asigna directamente
-   al video correspondiente.
-*/
+              <label for="contact-message">
+                Mensaje
+              </label>
 
-const postersVideos = {
+              <textarea
+                id="contact-message"
+                required
+                name="message"
+                placeholder="Escribe tu mensaje..."
+              ></textarea>
 
-"zanahoria-1":
-"assets/poster-zanahoria-1.png",
+            </div>
 
-"zanahoria-2":
-"assets/poster-zanahoria-2.png",
 
+            <button
+              class="btn primary"
+              type="submit"
+            >
+              Enviar consulta
+            </button>
 
-"hijo-1":
-"assets/poster-hijo-1.png",
+          </form>
 
-"hijo-2":
-"assets/poster-hijo-2.png",
+        </div>
 
-"hijo-3":
-"assets/poster-hijo-3.png",
 
-"hijo-4":
-"assets/poster-hijo-4.png",
+        <div class="card contact-info">
 
-"hijo-5":
-"assets/poster-hijo-5.png",
+          <div class="eyebrow">
+            ATRIUM FRUTA
+          </div>
 
-"hijo-6":
-"assets/poster-hijo-6.png",
+          <h4>
+            También puedes escribirnos directamente
+          </h4>
 
-"hijo-7":
-"assets/poster-hijo-7.png",
+          <p class="muted">
+            Para consultas sobre las Frutinovelas, propuestas de
+            colaboración, asuntos relacionados con el contenido o
+            mensajes de la comunidad.
+          </p>
 
-"hijo-8":
-"assets/poster-hijo-8.png",
 
-"hijo-9":
-"assets/poster-hijo-9.png",
+          <div style="margin-top:24px">
 
-"hijo-10":
-"assets/poster-hijo-10.png",
+            <strong>
+              Correo electrónico
+            </strong>
 
+            <p class="muted">
+              tiktokatrium83@gmail.com
+            </p>
 
-"limon-1":
-"assets/poster-limon-1.png",
+          </div>
 
-"limon-2":
-"assets/poster-limon-2.png",
 
-"limon-3":
-"assets/poster-limon-3.png",
+          <div style="margin-top:24px">
 
-"limon-4":
-"assets/poster-limon-4.png",
+            <strong>
+              Redes sociales
+            </strong>
 
-"limon-5":
-"assets/poster-limon-5.png",
+            <p class="muted">
+              Instagram · TikTok · Facebook
+            </p>
 
+          </div>
 
-"fe-1":
-"assets/poster-fe-1.png",
+        </div>
 
-"fe-2":
-"assets/poster-fe-2.png",
+      </div>
 
+    </section>
 
-"millonaria-1":
-"assets/poster-millonaria-1.png",
-
-"millonaria-2":
-"assets/poster-millonaria-2.png",
-
-
-"otro-1":
-"assets/poster-otro-1.png"
-
-};
-
-/* ---------------------------------
-   ARCHIVOS MP4
----------------------------------- */
-
-const archivosVideos = {
-
-
-"zanahoria-1":
-"el%20viejo%20zanahoria%20parte%201.mp4",
-
-"zanahoria-2":
-"el%20viejo%20zanahoria%20parte%202.mp4",
-
-
-"hijo-1":
-"el%20hijo%20parte%201.mp4",
-
-"hijo-2":
-"el%20hijo%20parte%202.mp4",
-
-"hijo-3":
-"el%20hijo%20parte%203.mp4",
-
-"hijo-4":
-"el%20hijo%20parte%204.mp4",
-
-"hijo-5":
-"el%20hijo%20parte%205.mp4",
-
-"hijo-6":
-"el%20hijo%20parte%206.mp4",
-
-"hijo-7":
-"el%20hijo%20parte%207.mp4",
-
-"hijo-8":
-"el%20hijo%20parte%208.mp4",
-
-"hijo-9":
-"el%20hijo%20parte%209.mp4",
-
-"hijo-10":
-"el%20hijo%20parte%2010.mp4",
-
-
-"limon-1":
-"peque%C3%B1o%20limon%20parte%201.mp4",
-
-"limon-2":
-"peque%C3%B1o%20limon%20parte%202.mp4",
-
-"limon-3":
-"peque%C3%B1o%20limon%20parte%203.mp4",
-
-"limon-4":
-"peque%C3%B1o%20limon%20parte%204.mp4",
-
-"limon-5":
-"peque%C3%B1o%20limon%20parte%205.mp4",
-
-
-"fe-1":
-"la%20fe%20parte%201.mp4",
-
-"fe-2":
-"la%20fe%20parte%202.mp4",
-
-
-"millonaria-1":
-"la%20millonaria%20parte%201.mp4",
-
-"millonaria-2":
-"la%20millonaria%20parte%202.mp4",
-
-
-"otro-1":
-"hizo%20todo%20parte%201.mp4"
-
-};
-
-
-historia.partes.forEach(
-video => {
-
-
-const tituloParte =
-document.createElement(
-"h3"
-);
-
-
-const numeroParte =
-video.title.match(
-/Parte\s+\d+/i
-);
-
-
-tituloParte.textContent =
-numeroParte
-? numeroParte[0].toUpperCase()
-: "PARTE";
-
-
-tituloParte.className =
-"parte-titulo";
-
-
-const archivo =
-archivosVideos[
-video.id
-];
-
-
-if (!archivo)
-return;
-
-
-/*
-   ESTA ES LA RUTA ORIGINAL
-   QUE YA FUNCIONABA.
-
-   NO LA CAMBIAMOS.
-*/
-
-const urlVideo =
-"https://camipintovalera-code.github.io/atrium-fruta/"
-+
-archivo;
-
-
-const reproductor =
-document.createElement(
-"video"
-);
-
-
-reproductor.controls =
-true;
-
-
-reproductor.playsInline =
-true;
-
-
-reproductor.setAttribute(
-"playsinline",
-""
-);
-
-
-reproductor.setAttribute(
-"webkit-playsinline",
-""
-);
-
-
-reproductor.preload =
-"metadata";
-
-
-reproductor.style.width =
-"100%";
-
-
-reproductor.style.maxHeight =
-"70vh";
-
-
-/* ---------------------------------
-   POSTER
----------------------------------- */
-
-/*
-   Se utiliza el poster específico
-   asociado a este ID.
-
-   Esto no modifica ni interfiere
-   con la URL del MP4.
-*/
-
-const posterVideo =
-postersVideos[
-video.id
-];
-
-
-if (posterVideo) {
-
-reproductor.poster =
-posterVideo;
-
-reproductor.setAttribute(
-"poster",
-posterVideo
-);
+  `;
 
 }
 
 
-/* ---------------------------------
-   SOURCE MP4
----------------------------------- */
+/* =========================================================
+   PRIVACIDAD
+========================================================= */
 
-const source =
-document.createElement(
-"source"
-);
+function privacy(){
 
+  return `
 
-source.src =
-urlVideo;
+    <section>
 
+      <div class="card info-card reading">
 
-source.type =
-"video/mp4";
+        <div class="eyebrow">
+          DOCUMENTO LEGAL
+        </div>
 
+        <h3>
+          Política de privacidad
+        </h3>
 
-reproductor.appendChild(
-source
-);
+        <p>
+          Última actualización: 18 de septiembre de 2026.
+        </p>
 
+        <h4>
+          1. Información general
+        </h4>
 
-tiktokPlayer.appendChild(
-tituloParte
-);
+        <p>
+          ATRIUM FRUTA es un sitio web dedicado a contenidos de
+          entretenimiento y Frutinovelas.
+        </p>
 
+        <h4>
+          2. Información de contacto
+        </h4>
 
-tiktokPlayer.appendChild(
-reproductor
-);
+        <p>
+          Para consultas relacionadas con el sitio puedes utilizar el
+          correo tiktokatrium83@gmail.com.
+        </p>
 
+        <h4>
+          3. Navegación
+        </h4>
 
-const anuncio =
-document.createElement(
-"div"
-);
+        <p>
+          Los visitantes pueden navegar por las diferentes secciones
+          del sitio, consultar información sobre las historias y
+          reproducir los contenidos audiovisuales disponibles.
+        </p>
 
+        <h4>
+          4. Publicidad
+        </h4>
 
-anuncio.className =
-"ad-space";
+        <p>
+          ATRIUM FRUTA puede utilizar servicios publicitarios de terceros,
+          incluyendo Google AdSense. Estos servicios pueden utilizar
+          tecnologías destinadas a mostrar publicidad relevante y medir
+          el rendimiento de los anuncios de acuerdo con sus propias
+          políticas y condiciones.
+        </p>
 
+        <h4>
+          5. Actualizaciones
+        </h4>
 
-anuncio.textContent =
-"ESPACIO PUBLICITARIO";
+        <p>
+          Esta política puede actualizarse cuando cambien las
+          funcionalidades del sitio, los servicios utilizados o las
+          prácticas relacionadas con la información.
+        </p>
 
+      </div>
 
-tiktokPlayer.appendChild(
-anuncio
-);
+    </section>
 
-});
-
-
-videoModal.classList.add(
-"active"
-);
-
-
-document.body.style.overflow =
-"hidden";
-
-}
-
-
-/* ---------------------------------
-   CERRAR FRUTINOVELA
----------------------------------- */
-
-function cerrarVideo() {
-
-
-videoModal.classList.remove(
-"active"
-);
-
-
-/*
-   Detener cualquier video
-   que esté reproduciéndose.
-*/
-
-const reproductores =
-tiktokPlayer.querySelectorAll(
-"video"
-);
-
-
-reproductores.forEach(
-video => {
-
-video.pause();
-
-video.currentTime = 0;
-
-});
-
-
-tiktokPlayer.innerHTML =
-"";
-
-
-document.body.style.overflow =
-"";
+  `;
 
 }
 
 
-/* ---------------------------------
-   BOTÓN CERRAR
----------------------------------- */
+/* =========================================================
+   TÉRMINOS
+========================================================= */
 
-closeVideo.addEventListener(
-"click",
-cerrarVideo
-);
+function terms(){
 
+  return `
 
-/* ---------------------------------
-   CERRAR AL TOCAR FUERA
----------------------------------- */
+    <section>
 
-videoModal.addEventListener(
-"click",
-event => {
+      <div class="card info-card reading">
 
+        <div class="eyebrow">
+          DOCUMENTO LEGAL
+        </div>
 
-if (
-event.target ===
-videoModal
-) {
+        <h3>
+          Términos y condiciones
+        </h3>
 
-cerrarVideo();
+        <h4>
+          1. Uso del sitio
+        </h4>
+
+        <p>
+          ATRIUM FRUTA es un espacio de entretenimiento dedicado a
+          Frutinovelas y contenido relacionado.
+        </p>
+
+        <h4>
+          2. Contenido
+        </h4>
+
+        <p>
+          El sitio puede contener textos, imágenes, videos y otros
+          materiales relacionados con el proyecto.
+        </p>
+
+        <h4>
+          3. Propiedad del contenido
+        </h4>
+
+        <p>
+          Los materiales originales publicados por ATRIUM FRUTA deben
+          utilizarse de acuerdo con las condiciones y derechos que
+          correspondan a cada contenido.
+        </p>
+
+        <h4>
+          4. Enlaces externos
+        </h4>
+
+        <p>
+          El sitio puede contener enlaces hacia plataformas externas.
+          Dichas plataformas cuentan con sus propias condiciones de
+          servicio y políticas.
+        </p>
+
+        <h4>
+          5. Actualizaciones
+        </h4>
+
+        <p>
+          Estos términos pueden modificarse cuando cambien las
+          funcionalidades o servicios disponibles.
+        </p>
+
+        <h4>
+          6. Contacto
+        </h4>
+
+        <p>
+          tiktokatrium83@gmail.com
+        </p>
+
+      </div>
+
+    </section>
+
+  `;
 
 }
 
-});
+
+/* =========================================================
+   ROUTER
+========================================================= */
+
+function render(){
+
+  const hash =
+    location.hash.slice(1) || "inicio";
+
+  const parts =
+    hash.split("/");
+
+  const route =
+    parts[0];
+
+  const param =
+    parts.slice(1).join("/");
 
 
-/* ---------------------------------
-   INICIAR
----------------------------------- */
-
-document.body.style.overflow =
-"auto";
+  let html = "";
 
 
-cargarVideosTikTok();
+  if(route==="inicio"){
 
+    html = home();
+
+  }
+
+  else if(route==="frutinovelas"){
+
+    html =
+      listing(
+        param
+          ? decodeURIComponent(param)
+          : null
+      );
+
+  }
+
+  else if(route==="mas-vistas"){
+
+    html = mostViewed();
+
+  }
+
+  else if(route==="sobre-nosotros"){
+
+    html = about();
+
+  }
+
+  else if(route==="contacto"){
+
+    html = contact();
+
+  }
+
+  else if(route==="privacidad"){
+
+    html = privacy();
+
+  }
+
+  else if(route==="terminos"){
+
+    html = terms();
+
+  }
+
+  else if(route==="historia"){
+
+    html = detail(param);
+
+  }
+
+  else{
+
+    html = home();
+
+  }
+
+
+  document.getElementById("app").innerHTML = html;
+
+
+  document
+    .querySelectorAll(".top-nav a")
+    .forEach(link=>{
+
+      link.classList.toggle(
+        "active",
+        link.dataset.route===route
+      );
+
+    });
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"instant"
+  });
+
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+function go(path){
+
+  location.hash = path;
+
+}
+
+
+/* =========================================================
+   CONTACTO DEMO
+========================================================= */
+
+function sendContact(event){
+
+  event.preventDefault();
+
+  showToast(
+    "Para recibir mensajes reales, conecta este formulario con tu correo o servicio de formularios."
+  );
+
+  event.target.reset();
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  clearTimeout(
+    window.__toastTimer
+  );
+
+  window.__toastTimer =
+    setTimeout(()=>{
+
+      toast.classList.remove("show");
+
+    },4000);
+
+}
+
+
+/* =========================================================
+   SEGURIDAD HTML
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(value).replace(
+    /[&<>'"]/g,
+    character=>({
+
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      "'":"&#39;",
+      '"':"&quot;"
+
+    }[character])
+  );
+
+}
+
+
+/* =========================================================
+   EVENTOS
+========================================================= */
+
+window.addEventListener(
+  "hashchange",
+  render
+);
+
+window.addEventListener(
+  "load",
+  render
+);
 
 </script>
 
-
 </body>
-
 </html>
-
