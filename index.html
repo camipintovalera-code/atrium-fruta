@@ -3102,6 +3102,10 @@ function about(){
    CONTACTO
 ========================================================= */
 
+/* =========================================================
+   CONTACTO
+========================================================= */
+
 function contact(){
 
   return `
@@ -3143,8 +3147,10 @@ function contact(){
             colaboraciones o propuestas relacionadas con el proyecto.
           </p>
 
+
           <form
-            onsubmit="sendContact(event)"
+            action="https://formspree.io/f/mdeaagwb"
+            method="POST"
           >
 
             <div class="field">
@@ -3240,47 +3246,47 @@ function contact(){
 
           <div style="margin-top:24px">
 
-  <strong>
-    Redes sociales
-  </strong>
+            <strong>
+              Redes sociales
+            </strong>
 
-  <div style="
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:12px;
-  ">
+            <div style="
+              display:flex;
+              flex-wrap:wrap;
+              gap:10px;
+              margin-top:12px;
+            ">
 
-    <a
-      class="btn ghost"
-      href="https://www.instagram.com/atriumfruta/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      📸 Instagram
-    </a>
+              <a
+                class="btn ghost"
+                href="https://www.instagram.com/atriumfruta/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                📸 Instagram
+              </a>
 
-    <a
-      class="btn ghost"
-      href="https://www.tiktok.com/@atriumfruta_"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      🎵 TikTok
-    </a>
+              <a
+                class="btn ghost"
+                href="https://www.tiktok.com/@atriumfruta_"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                🎵 TikTok
+              </a>
 
-    <a
-      class="btn ghost"
-      href="https://www.facebook.com/sharer/sharer.php?u=https://atriumfruta.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      📘 Facebook
-    </a>
+              <a
+                class="btn ghost"
+                href="https://www.facebook.com/sharer/sharer.php?u=https://atriumfruta.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                📘 Facebook
+              </a>
 
-  </div>
+            </div>
 
-</div>
+          </div>
 
         </div>
 
@@ -3291,7 +3297,6 @@ function contact(){
   `;
 
 }
-
 
 /* =========================================================
    PRIVACIDAD
