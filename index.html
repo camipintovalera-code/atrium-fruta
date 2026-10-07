@@ -3535,18 +3535,44 @@ function render(){
 
   }
 
-  else if(route==="historia"){
+ else if(route==="historia"){
 
-    html = detail(param);
+  html = detail(param);
 
-  }
+}
 
-  else{
+else if(route.startsWith("capitulos-")){
 
-    html = home();
+  const storyId =
+    route.replace("capitulos-","");
 
-  }
+  html = detail(storyId);
 
+  setTimeout(() => {
+
+    const chapters =
+      document.getElementById(
+        `capitulos-${storyId}`
+      );
+
+    if(chapters){
+
+      chapters.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+    }
+
+  }, 50);
+
+}
+
+else{
+
+  html = home();
+
+}
 
   document.getElementById("app").innerHTML = html;
 
