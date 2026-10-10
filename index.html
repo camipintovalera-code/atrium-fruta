@@ -3654,21 +3654,30 @@ function detail(id){
                     </p>
 
     
-                    <div class="video-box" style="position:relative;width:100%;">
+                    <div
+                      class="video-box"
+                      style="position:relative;width:100%;"
+                    >
 
-                      <!-- PORTADA VISIBLE ANTES DE REPRODUCIR -->
                       <div
                         class="video-preview"
                         style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;border-radius:12px;"
                       >
 
+                        <canvas
+                          class="chapter-poster"
+                          width="576"
+                          height="1024"
+                          aria-label="Vista previa de la parte ${index+1}"
+                          style="display:none;width:100%;height:100%;object-fit:contain;"
+                        ></canvas>
+
                         <img
-                          class="video-poster"
+                          class="poster-fallback"
                           src="${story.cover}"
-                          alt="Portada de ${escapeHtml(story.title)}, parte ${index+1}"
+                          alt="Portada de ${escapeHtml(story.title)}"
                           loading="lazy"
-                          decoding="async"
-                          style="display:block;width:100%;height:100%;object-fit:contain;"
+                          style="width:100%;height:100%;object-fit:contain;"
                         >
 
                         <button
@@ -3677,30 +3686,49 @@ function detail(id){
                           onclick="
                             const box=this.closest('.video-box');
                             const video=box.querySelector('video');
-                            const poster=box.querySelector('.video-preview');
-
-                            poster.style.display='none';
+                            box.querySelector('.video-preview').style.display='none';
                             video.style.display='block';
-                            video.play().catch(()=>{
-                              video.style.display='block';
-                            });
+                            video.currentTime=0;
+                            video.play().catch(()=>{});
                           "
-                          style="position:absolute;inset:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.12);border:0;cursor:pointer;color:white;font-size:54px;"
-                        >
-                          ▶
-                        </button>
+                          style="position:absolute;inset:0;width:100%;height:100%;border:0;background:rgba(0,0,0,.12);color:white;font-size:54px;cursor:pointer;"
+                        >▶</button>
 
                       </div>
 
-                      <!-- REPRODUCTOR -->
                       <video
                         controls
                         playsinline
                         webkit-playsinline
                         preload="metadata"
-                        poster="${story.cover}"
                         width="100%"
                         style="display:none;width:100%;height:auto;background:#000;border-radius:12px;"
+                        onloadedmetadata="
+                          if(this.dataset.posterDone) return;
+                          this.dataset.posterDone='1';
+                          const v=this;
+                          const box=v.closest('.video-box');
+                          const canvas=box.querySelector('.chapter-poster');
+                          const img=box.querySelector('.poster-fallback');
+                          const ctx=canvas.getContext('2d');
+
+                          const capture=()=>{
+                            try{
+                              if(v.videoWidth && v.videoHeight){
+                                canvas.width=v.videoWidth;
+                                canvas.height=v.videoHeight;
+                                ctx.drawImage(v,0,0,canvas.width,canvas.height);
+                                canvas.style.display='block';
+                                img.style.display='none';
+                              }
+                            }catch(e){
+                              console.warn('No se pudo generar la vista previa',e);
+                            }
+                          };
+
+                          v.addEventListener('seeked',capture,{once:true});
+                          try{v.currentTime=0.1;}catch(e){}
+                        "
                       >
 
                         <source
@@ -3713,14 +3741,12 @@ function detail(id){
                       </video>
 
                       <div class="video-caption">
-
-                        Parte ${index+1} de
-                        ${storyVideos.length}
+                        Parte ${index+1} de ${storyVideos.length}
                         · ${escapeHtml(story.title)}
-
                       </div>
 
                     </div>
+        
 
                   </div>
 
