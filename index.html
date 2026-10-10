@@ -99,17 +99,20 @@
       background:#0b0c0d;
     }
 
-    .cover-wrap{
+        .cover-wrap{
       background:#100708;
       overflow:hidden;
       border-bottom:1px solid #1f2022;
+      position:relative;
+      width:100%;
     }
 
     .cover{
+      display:block;
       width:100%;
-      height:clamp(220px,31vw,370px);
+      height:clamp(180px,31vw,370px);
       object-fit:cover;
-      object-position:center;
+      object-position:center center;
     }
 
     .profile-row{
@@ -122,23 +125,108 @@
     }
 
     .avatar-wrap{
-      margin-top:-86px;
+      margin-top:-70px;
+      position:relative;
       z-index:2;
+      min-width:0;
     }
 
     .avatar{
-  width:168px;
-  height:168px;
-  border-radius:50%;
-  border:8px solid #191a1c;
-  box-shadow:0 7px 24px rgba(0,0,0,.42);
-  background:#2b0f14;
-  object-fit:contain;
-  object-position:center;
-  padding:14px;
-  box-sizing:border-box;
-  display:block;
-}
+      width:168px;
+      height:168px;
+      border-radius:50%;
+      border:8px solid #191a1c;
+      box-shadow:0 7px 24px rgba(0,0,0,.42);
+      background:#2b0f14;
+      object-fit:contain;
+      object-position:center;
+      padding:14px;
+      box-sizing:border-box;
+      display:block;
+      position:relative;
+    }
+
+    /* =========================================
+       AJUSTES PARA IPHONE Y ANDROID
+    ========================================= */
+
+    @media (max-width:768px){
+
+      .cover{
+        height:180px;
+        object-position:center center;
+      }
+
+      .profile-row{
+        grid-template-columns:minmax(0,1fr);
+        gap:12px;
+        align-items:start;
+        padding:0 20px 24px;
+      }
+
+      .avatar-wrap{
+        margin-top:-58px;
+        margin-bottom:4px;
+      }
+
+      .avatar{
+        width:140px;
+        height:140px;
+        border-width:7px;
+        padding:11px;
+      }
+
+      .name-row{
+        display:flex;
+        align-items:center;
+        flex-wrap:wrap;
+        gap:8px;
+        margin-top:8px;
+      }
+
+      h1{
+        font-size:clamp(27px,7vw,34px);
+        line-height:1.15;
+        letter-spacing:-.7px;
+        overflow-wrap:break-word;
+      }
+
+      .profile-actions{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+        justify-content:stretch;
+        padding:10px 0 0;
+      }
+
+      .profile-actions .btn{
+        width:100%;
+        min-width:0;
+        padding:12px 10px;
+        text-align:center;
+      }
+    }
+
+    @media (max-width:380px){
+
+      .profile-row{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .avatar{
+        width:124px;
+        height:124px;
+      }
+
+      .avatar-wrap{
+        margin-top:-50px;
+      }
+
+      h1{
+        font-size:27px;
+      }
+    }
 
     .name-row{
       display:flex;
