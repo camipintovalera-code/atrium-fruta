@@ -1213,6 +1213,256 @@
 
     }
 
+      }
+
+    /* =========================================
+       ENCABEZADO Y PERFIL ATRIUM FRUTA
+    ========================================= */
+
+    .site-header {
+      width: 100%;
+      background: #111214;
+      border-bottom: 1px solid #303338;
+      margin-bottom: 32px;
+    }
+
+    .cover-wrap {
+      width: 100%;
+      height: clamp(150px, 28vw, 300px);
+      overflow: hidden;
+      background: linear-gradient(135deg, #351d12, #17181a, #493018);
+    }
+
+    .cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .profile-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-top: 22px;
+      padding-bottom: 24px;
+    }
+
+    .avatar-wrap {
+      flex: 0 0 auto;
+      width: 112px;
+      height: 112px;
+      margin-top: -55px;
+      position: relative;
+      z-index: 2;
+      padding: 5px;
+      border-radius: 50%;
+      background: #111214;
+      border: 1px solid #3a3b3f;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #222;
+    }
+
+    .profile-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .name-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .name-row h1 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(23px, 3vw, 34px);
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .verified {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      background: #2f67f6;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .stats {
+      margin-top: 8px;
+      color: #b9bbc0;
+      font-size: 14px;
+    }
+
+    .stats strong {
+      color: #fff;
+    }
+
+    .bio {
+      margin-top: 10px;
+      color: #ededed;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .bio span {
+      color: #b9bbc0;
+    }
+
+    .creator {
+      margin-top: 8px;
+      color: #aeb2b8;
+      font-size: 12px;
+    }
+
+    .profile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .profile-actions .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 42px;
+      padding: 10px 17px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 13px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .profile-actions .btn.primary {
+      background: #f0b84e;
+      color: #17130b;
+      border: 1px solid #f0b84e;
+    }
+
+    .profile-actions .btn.ghost {
+      background: #222428;
+      color: #fff;
+      border: 1px solid #414349;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      border-top: 1px solid #303338;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .top-nav a {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 17px;
+      color: #c6c7ca;
+      font-size: 14px;
+      font-weight: 650;
+      border-bottom: 3px solid transparent;
+      transition: color .2s ease, border-color .2s ease;
+    }
+
+    .top-nav a:hover,
+    .top-nav a.active {
+      color: #f0b84e;
+      border-bottom-color: #f0b84e;
+    }
+
+    .page-shell {
+      min-height: 50vh;
+    }
+
+    .footer {
+      margin-top: 50px;
+    }
+
+    /* =========================================
+       AJUSTES PARA CELULARES
+    ========================================= */
+
+    @media (max-width: 760px) {
+      .cover-wrap {
+        height: 155px;
+      }
+
+      .profile-row {
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 12px;
+        padding-top: 16px;
+        padding-bottom: 18px;
+      }
+
+      .avatar-wrap {
+        width: 76px;
+        height: 76px;
+        margin-top: -40px;
+        padding: 4px;
+      }
+
+      .profile-main {
+        min-width: 0;
+      }
+
+      .name-row h1 {
+        font-size: 22px;
+      }
+
+      .stats,
+      .bio {
+        font-size: 12px;
+      }
+
+      .creator {
+        font-size: 11px;
+      }
+
+      .profile-actions {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        margin-top: 4px;
+      }
+
+      .profile-actions .btn {
+        white-space: normal;
+        padding: 10px 8px;
+      }
+
+      .top-nav {
+        gap: 0;
+      }
+
+      .top-nav a {
+        padding: 13px 14px;
+        font-size: 13px;
+      }
+    }
+
   </style>
 
 </head>
