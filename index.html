@@ -3653,16 +3653,54 @@ function detail(id){
                       ${escapeHtml(chapter[1])}
                     </p>
 
+    
+                    <div class="video-box" style="position:relative;width:100%;">
 
-                                        <div class="video-box">
+                      <!-- PORTADA VISIBLE ANTES DE REPRODUCIR -->
+                      <div
+                        class="video-preview"
+                        style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;border-radius:12px;"
+                      >
 
+                        <img
+                          class="video-poster"
+                          src="${story.cover}"
+                          alt="Portada de ${escapeHtml(story.title)}, parte ${index+1}"
+                          loading="lazy"
+                          decoding="async"
+                          style="display:block;width:100%;height:100%;object-fit:contain;"
+                        >
+
+                        <button
+                          type="button"
+                          aria-label="Reproducir parte ${index+1}"
+                          onclick="
+                            const box=this.closest('.video-box');
+                            const video=box.querySelector('video');
+                            const poster=box.querySelector('.video-preview');
+
+                            poster.style.display='none';
+                            video.style.display='block';
+                            video.play().catch(()=>{
+                              video.style.display='block';
+                            });
+                          "
+                          style="position:absolute;inset:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.12);border:0;cursor:pointer;color:white;font-size:54px;"
+                        >
+                          ▶
+                        </button>
+
+                      </div>
+
+                      <!-- REPRODUCTOR -->
                       <video
                         controls
                         playsinline
                         webkit-playsinline
                         preload="metadata"
+                        poster="${story.cover}"
                         width="100%"
-                        style="display:block;width:100%;height:auto;background:#000;"
+                        style="display:none;width:100%;height:auto;background:#000;border-radius:12px;"
                       >
 
                         <source
