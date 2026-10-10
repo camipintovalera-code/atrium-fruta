@@ -1835,6 +1835,28 @@
   }
 
   }
+    /* ELIMINAR COMPLETAMENTE EL BANNER SUPERIOR */
+.site-header .cover-wrap {
+  display: none !important;
+}
+
+.site-header .profile-row.container {
+  padding-top: 30px !important;
+}
+
+.site-header .avatar-wrap {
+  margin-top: 0 !important;
+}
+
+@media screen and (max-width: 760px) {
+  .site-header .profile-row.container {
+    padding-top: 22px !important;
+  }
+
+  .site-header .avatar-wrap {
+    margin-top: 0 !important;
+  }
+}
   </style>
 
 </head>
@@ -1843,16 +1865,6 @@
 
 <header class="site-header">
 
-  <div class="cover-wrap">
-
-    <img
-      class="cover"
-      src="assets/cover.png"
-      alt="ATRIUM FRUTA - Frutinovelas"
-      onerror="this.style.display='none';"
-    >
-
-  </div>
 
   <div class="profile-row container">
 
