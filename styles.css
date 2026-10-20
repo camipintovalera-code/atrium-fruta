@@ -103,3 +103,57 @@
   display: inline-block;
   margin-top: 10px;
 }
+
+/* ===== CORRECCIÓN: TEXTO DE LAS TARJETAS ===== */
+
+#grid .card {
+  color: #f5f5f5;
+}
+
+#grid .bodycard {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  color: #f5f5f5;
+  padding: 18px;
+}
+
+#grid .bodycard h3,
+#grid .bodycard h3 a {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#grid .bodycard p {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  color: #d0d0d0;
+  line-height: 1.7;
+}
+
+#grid .bodycard .meta,
+#grid .bodycard .pill,
+#grid .bodycard .read {
+  visibility: visible;
+  opacity: 1;
+}
+
+#grid .bodycard .read {
+  display: inline-block;
+  color: #b9f36b;
+  margin-top: 10px;
+}
+
+#grid .bodycard a {
+  overflow-wrap: anywhere;
+}
+
+#grid .art img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
