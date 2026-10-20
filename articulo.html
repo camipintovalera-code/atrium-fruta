@@ -373,6 +373,7 @@
       });
 
       
+
 document.getElementById("comment-form").addEventListener("submit", async event => {
   event.preventDefault();
 
@@ -406,20 +407,25 @@ document.getElementById("comment-form").addEventListener("submit", async event =
     );
 
     const result = await response.json();
+    console.log("Respuesta de FormSubmit:", result);
 
-    if (response.ok && (result.success === "true" || result.success === true)) {
-      status.textContent = "¡Comentario enviado! Gracias por participar.";
+    if (String(result.success) === "true") {
+      status.textContent = "¡Comentario enviado correctamente!";
       form.reset();
     } else {
-      status.textContent = "No se pudo enviar. Inténtalo nuevamente.";
+      status.textContent =
+        "FormSubmit: " + (result.message || "No se pudo confirmar el envío.");
     }
   } catch (error) {
-    status.textContent = "Error de conexión. Revisa tu internet e inténtalo otra vez.";
+    console.error("Error del formulario:", error);
+    status.textContent =
+      "Error de conexión. Abre la página publicada e inténtalo nuevamente.";
   } finally {
     button.disabled = false;
     button.textContent = "Enviar comentario";
   }
 });
+
 
       let calendarDate = new Date();
 
