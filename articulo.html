@@ -284,18 +284,42 @@
                 Completa los campos para preparar tu comentario y enviarlo por correo.
                 No se publicará automáticamente en la página.
               </p>
-              <form id="comment-form">
-                <label for="comment-text">Comentario *</label>
-                <textarea id="comment-text" rows="5" required placeholder="Escribe tu comentario..."></textarea>
+              
+<form id="comment-form">
+  <label for="comment-text">Comentario *</label>
+  <textarea
+    id="comment-text"
+    name="comment"
+    rows="5"
+    required
+    placeholder="Escribe tu comentario..."
+  ></textarea>
 
-                <label for="comment-name">Nombre *</label>
-                <input id="comment-name" required placeholder="Tu nombre">
+  <label for="comment-name">Nombre *</label>
+  <input
+    id="comment-name"
+    name="name"
+    type="text"
+    required
+    placeholder="Tu nombre"
+  >
 
-                <label for="comment-email">Correo electrónico *</label>
-                <input id="comment-email" type="email" required placeholder="tu@correo.com">
+  <label for="comment-email">Correo electrónico *</label>
+  <input
+    id="comment-email"
+    name="email"
+    type="email"
+    required
+    placeholder="tu@correo.com"
+  >
 
-                <button type="submit">Enviar comentario por correo</button>
-              </form>
+  <button type="submit" id="comment-submit">
+    Enviar comentario
+  </button>
+
+  <p id="comment-status" role="status" aria-live="polite"></p>
+</form>
+
             </section>
           </div>
 
