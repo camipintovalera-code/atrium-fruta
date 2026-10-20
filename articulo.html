@@ -247,25 +247,168 @@
         <p>El artículo solicitado no existe o el enlace está incompleto.</p>
         <p><a href="index.html#articulos">Explorar todos los artículos</a></p>
       `;
+   
     } else {
       document.title = article.title + " | Atrium Juegos";
 
+      const recent = articles.filter(item => item.id !== article.id);
+      const recentList = recent.slice(0, 8);
+
+      container.className = "reading";
       container.innerHTML = `
-        <a class="back-link" href="index.html#articulos">← Volver a los artículos</a>
-        <header class="articlehero">
-          <label>${article.category.toUpperCase()} · GUÍA</label>
-          <h1>${article.title}</h1>
-          <p>${article.excerpt}</p>
-          <div class="article-meta">${article.date} · ${article.read} de lectura</div>
-        </header>
-        <img class="cover-image" src="${article.image}" alt="${article.title}">
-        <div class="article-content">${article.body}</div>
-        <div class="more-articles">
-          <h2>Continúa leyendo</h2>
-          <p>Encuentra más guías, consejos y novedades en Atrium Juegos.</p>
-          <a class="read" href="index.html#articulos">Ver todos los artículos →</a>
+        <div class="article-columns">
+          <div class="article-main">
+            <a class="back-link" href="index.html#articulos">← Volver a los artículos</a>
+
+            <header class="articlehero">
+              <label>${article.category.toUpperCase()} · GUÍA</label>
+              <h1>${article.title}</h1>
+              <p>${article.excerpt}</p>
+              <div class="article-meta">${article.date} · ${article.read} de lectura</div>
+            </header>
+
+            <img class="cover-image" src="${article.image}" alt="${article.title}">
+            <div class="article-content">${article.body}</div>
+
+            <div class="more-articles">
+              <h2>Continúa leyendo</h2>
+              <p>Encuentra más guías, consejos y novedades en Atrium Juegos.</p>
+              <a class="read" href="index.html#articulos">Ver todos los artículos →</a>
+            </div>
+
+            <section class="article-widget" id="comments">
+              <h2>Deja un comentario</h2>
+              <p class="comment-note">
+                Completa los campos para preparar tu comentario y enviarlo por correo.
+                No se publicará automáticamente en la página.
+              </p>
+              <form id="comment-form">
+                <label for="comment-text">Comentario *</label>
+                <textarea id="comment-text" rows="5" required placeholder="Escribe tu comentario..."></textarea>
+
+                <label for="comment-name">Nombre *</label>
+                <input id="comment-name" required placeholder="Tu nombre">
+
+                <label for="comment-email">Correo electrónico *</label>
+                <input id="comment-email" type="email" required placeholder="tu@correo.com">
+
+                <button type="submit">Enviar comentario por correo</button>
+              </form>
+            </section>
+          </div>
+
+          <aside class="article-sidebar">
+            <section class="article-widget">
+              <h2>Buscar</h2>
+              <input id="recent-search" type="search" placeholder="Buscar artículos..." aria-label="Buscar artículos">
+              <ul class="recent-list" id="recent-list">
+                ${recentList.map(item => `
+                  <li data-title="${item.title.toLowerCase()}">
+                    <a href="articulo.html?id=${encodeURIComponent(item.id)}">${item.title}</a>
+                  </li>
+                `).join("")}
+              </ul>
+              <p id="recent-empty" hidden>No se encontraron artículos.</p>
+            </section>
+
+            <section class="article-widget">
+              <h2>Recent Posts</h2>
+              <ul class="recent-list">
+                ${recent.slice(0, 5).map(item => `
+                  <li><a href="articulo.html?id=${encodeURIComponent(item.id)}">${item.title}</a></li>
+                `).join("")}
+              </ul>
+            </section>
+
+            <section class="article-widget">
+              <h2>Calendario</h2>
+              <div class="calendar-head">
+                <button type="button" id="cal-prev" aria-label="Mes anterior">‹</button>
+                <strong id="cal-month"></strong>
+                <button type="button" id="cal-next" aria-label="Mes siguiente">›</button>
+              </div>
+              <div class="calendar-grid" id="cal-grid"></div>
+            </section>
+          </aside>
         </div>
       `;
+
+      document.getElementById("recent-search").addEventListener("input", event => {
+        const query = event.target.value.toLowerCase().trim();
+        let visible = 0;
+
+        document.querySelectorAll("#recent-list li").forEach(item => {
+          const match = item.dataset.title.includes(query);
+          item.hidden = !match;
+          if (match) visible++;
+        });
+
+        document.getElementById("recent-empty").hidden = visible > 0;
+      });
+
+      document.getElementById("comment-form").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const name = document.getElementById("comment-name").value.trim();
+        const email = document.getElementById("comment-email").value.trim();
+        const comment = document.getElementById("comment-text").value.trim();
+
+        const subject = encodeURIComponent("Comentario sobre: " + article.title);
+        const body = encodeURIComponent(
+          "Artículo: " + article.title +
+          "\nNombre: " + name +
+          "\nCorreo: " + email +
+          "\n\nComentario:\n" + comment
+        );
+
+        window.location.href =
+          "mailto:tiktokatrium83@gmail.com?subject=" + subject + "&body=" + body;
+      });
+
+      let calendarDate = new Date();
+
+      function drawCalendar() {
+        const year = calendarDate.getFullYear();
+        const month = calendarDate.getMonth();
+
+        document.getElementById("cal-month").textContent =
+          new Intl.DateTimeFormat("es-CO", {
+            month: "long",
+            year: "numeric"
+          }).format(calendarDate);
+
+        const offset = (new Date(year, month, 1).getDay() + 6) % 7;
+        const days = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+
+        let html = ["L", "M", "X", "J", "V", "S", "D"]
+          .map(day => `<span class="weekday">${day}</span>`).join("");
+
+        for (let i = 0; i < offset; i++) html += "<span></span>";
+
+        for (let day = 1; day <= days; day++) {
+          const isToday = day === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear();
+
+          html += `<span class="${isToday ? "today" : ""}">${day}</span>`;
+        }
+
+        document.getElementById("cal-grid").innerHTML = html;
+      }
+
+      document.getElementById("cal-prev").addEventListener("click", () => {
+        calendarDate.setMonth(calendarDate.getMonth() - 1);
+        drawCalendar();
+      });
+
+      document.getElementById("cal-next").addEventListener("click", () => {
+        calendarDate.setMonth(calendarDate.getMonth() + 1);
+        drawCalendar();
+      });
+
+      drawCalendar();
+    
     }
   </script>
 </body>
