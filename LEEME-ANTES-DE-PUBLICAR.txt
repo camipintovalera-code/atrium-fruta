@@ -1,0 +1,21 @@
+ATRIUM JUEGOS — PAQUETE INICIAL
+
+Archivos incluidos: index.html, styles.css, script.js, favicon, cuatro páginas informativas y seis artículos individuales.
+
+ANTES DE PUBLICAR:
+1. Es una nueva propuesta y no incluye los recursos originales de ATRIUM FRUTA.
+2. No borres la rama de respaldo ni el ZIP original.
+3. Reemplaza el texto provisional de contacto.html por una dirección que controles.
+4. Completa y revisa privacidad.html y terminos.html con los datos y servicios reales.
+5. No copies artículos, imágenes, identidad ni código de otras webs.
+6. La aprobación de AdSense no está garantizada por cambiar de temática. Publica contenido original, útil y revisa sus políticas.
+7. No he incluido el código de AdSense ni un ads.txt nuevo porque primero debe verificarse qué configuración corresponde a tu cuenta y dominio.
+
+CÓMO SUBIR:
+1. Abre https://github.com/camipintovalera-code/atrium-fruta
+2. Selecciona main.
+3. Add file > Upload files.
+4. Descomprime el ZIP y arrastra el CONTENIDO de la carpeta atrium-juegos (no la carpeta contenedora) a GitHub.
+5. Asegúrate de que index.html, styles.css y script.js queden en la raíz y que articulos/ contenga las seis páginas.
+6. Escribe un mensaje de commit y confirma. Esto reemplazará archivos con el mismo nombre en main; el ZIP y la rama de respaldo son para volver atrás.
+7. Prueba enlaces, búsqueda, filtros y páginas legales en móvil antes de solicitar otra revisión.
