@@ -1,48 +1,5 @@
 
-const articles = [
-  {
-    category: "Free Fire",
-    title: "Cómo aprovechar los eventos de Free Fire",
-    excerpt: "Descubre cómo consultar eventos y recompensas de forma segura.",
-    image: "https://ginica.streamfocus.lat/wp-content/uploads/2025/11/IMG_7787-300x200.png",
-    url: "eventos-oficiales.html"
-  },
-  {
-    category: "Free Fire",
-    title: "Diamantes en Free Fire",
-    excerpt: "Qué debes saber antes de comprar diamantes y usar servicios externos.",
-    image: "https://ginica.streamfocus.lat/wp-content/uploads/2025/12/recargar-diamantes-free-fire-300x176.jpg",
-    url: "diamantes-seguros.html"
-  },
-  {
-    category: "Guías",
-    title: "Mejora tu precisión en Free Fire",
-    excerpt: "Conoce los ajustes que puedes practicar para mejorar tu puntería.",
-    image: "https://ginica.streamfocus.lat/wp-content/uploads/2025/12/maxresdefault-31-300x169.jpg",
-    url: "consejos-principiantes.html"
-  },
-  {
-    category: "Guías",
-    title: "Cómo subir a Heroico",
-    excerpt: "Consejos para practicar y avanzar de rango.",
-    image: "https://ginica.streamfocus.lat/wp-content/uploads/2025/12/maxresdefault-30-300x169.jpg",
-    url: "rendimiento-movil.html"
-  },
-  {
-    category: "Novedades",
-    title: "Códigos de Free Fire",
-    excerpt: "Aprende a consultar códigos y recompensas en fuentes oficiales.",
-    image: "https://ginica.streamfocus.lat/wp-content/uploads/2025/12/20224281553848_1-300x157.jpg",
-    url: "eventos-oficiales.html"
-  },
-  {
-    category: "Seguridad",
-    title: "Cuida tu cuenta de juego",
-    excerpt: "Consejos para proteger tus datos y evitar páginas sospechosas.",
-    image: "https://ginica.streamfocus.lat/wp-content/uploads/2025/12/maxresdefault-29-300x169.jpg",
-    url: "proteger-cuenta.html"
-  }
-];
+const articles = window.ARTICLES || [];
 
 const grid = document.getElementById("grid");
 const search = document.getElementById("search");
@@ -51,25 +8,22 @@ const empty = document.getElementById("empty");
 let active = "Todos";
 
 function render() {
-  const q = (search.value || "").toLowerCase().trim();
+  if (!grid || !search || !empty) return;
+
+  const q = search.value.toLowerCase().trim();
 
   const list = articles.filter(a =>
     (active === "Todos" || a.category === active) &&
     (a.title + " " + a.excerpt + " " + a.category)
-      .toLowerCase()
-      .includes(q)
+      .toLowerCase().includes(q)
   );
 
   grid.innerHTML = list.map(a => `
     <article class="card">
-      <a href="${a.url}" class="article-image">
+      <a href="articulo.html?id=${encodeURIComponent(a.id)}"
+         class="article-image">
         <div class="art">
-          <img
-            src="${a.image}"
-            alt="${a.title}"
-            loading="lazy"
-            onerror="this.style.display='none'"
-          >
+          <img src="${a.image}" alt="${a.title}" loading="lazy">
           <small>${a.category.toUpperCase()}</small>
         </div>
       </a>
@@ -77,12 +31,18 @@ function render() {
       <div class="bodycard">
         <div class="meta">
           <span class="pill">${a.category}</span>
-          Guía práctica
+          ${a.read} de lectura
         </div>
-
-        <h3><a href="${a.url}">${a.title}</a></h3>
+        <h3>
+          <a href="articulo.html?id=${encodeURIComponent(a.id)}">
+            ${a.title}
+          </a>
+        </h3>
         <p>${a.excerpt}</p>
-        <a class="read" href="${a.url}">Leer artículo →</a>
+        <a class="read"
+           href="articulo.html?id=${encodeURIComponent(a.id)}">
+          Leer artículo completo →
+        </a>
       </div>
     </article>
   `).join("");
@@ -93,48 +53,38 @@ function render() {
 document.querySelectorAll("[data-filter]").forEach(button => {
   button.addEventListener("click", () => {
     active = button.dataset.filter;
+    render();
 
-    document.querySelectorAll(".filters button").forEach(item => {
+    document.querySelectorAll("[data-filter]").forEach(item => {
       item.classList.toggle(
         "active",
         item.dataset.filter === active
       );
-    });
-
-    render();
-    document.getElementById("articulos").scrollIntoView({
-      behavior: "smooth"
     });
   });
 });
 
 document.querySelectorAll("[data-side]").forEach(button => {
-  button.addEventListener("click", event => {
-    event.preventDefault();
+  button.addEventListener("click", () => {
     active = button.dataset.side;
-
-    document.querySelectorAll(".filters button").forEach(item => {
-      item.classList.toggle(
-        "active",
-        item.dataset.filter === active
-      );
-    });
-
     render();
-    document.getElementById("articulos").scrollIntoView({
-      behavior: "smooth"
-    });
   });
 });
 
-search.addEventListener("input", render);
+if (search) search.addEventListener("input", render);
 
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+const year = document.getElementById("year");
+if (year) year.textContent = new Date().getFullYear();
 
-document.getElementById("menubtn").addEventListener("click", () => {
-  document.getElementById("nav").classList.toggle("open");
-});
+const menuButton = document.getElementById("menubtn");
+const nav = document.getElementById("nav");
+
+if (menuButton && nav) {
+  menuButton.addEventListener("click", () => {
+    nav.classList.toggle("open");
+  });
+}
 
 render();
+
 
