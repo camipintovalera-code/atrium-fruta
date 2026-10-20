@@ -7,6 +7,7 @@
   <title>Contacto | Atrium Juegos</title>
   <meta name="description" content="Contacta con el equipo editorial de Atrium Juegos.">
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/favicon.svg">
 </head>
 <body>
   <div class="topline">GUÍAS · NOVEDADES · CONSEJOS PARA JUGADORES</div>
@@ -16,8 +17,11 @@
       <span class="logo">AJ</span>
       <span><b>ATRIUM</b><small>JUEGOS</small></span>
     </a>
-    <nav>
+    <button id="menubtn" aria-label="Abrir menú">☰</button>
+    <nav id="nav">
       <a href="index.html">Inicio</a>
+      <a href="index.html#articulos">Artículos</a>
+      <a href="index.html#categorias">Categorías</a>
       <a href="sobre-nosotros.html">Sobre nosotros</a>
       <a href="contacto.html">Contacto</a>
     </nav>
@@ -40,8 +44,8 @@
     </p>
 
     <p>
-      No envíes contraseñas, códigos de verificación ni datos de pago
-      por correo electrónico.
+      No envíes contraseñas, códigos de verificación ni datos
+      de pago por correo electrónico.
     </p>
 
     <p><a href="index.html">← Volver al inicio</a></p>
@@ -54,8 +58,15 @@
       <a href="privacidad.html">Privacidad</a>
       <a href="terminos.html">Términos</a>
     </div>
-    <small>Proyecto editorial independiente.</small>
+    <small>© Atrium Juegos. Sitio editorial independiente.</small>
   </footer>
+
+  <script>
+    document.getElementById("menubtn").addEventListener("click", () => {
+      document.getElementById("nav").classList.toggle("open");
+    });
+  </script>
 </body>
 </html>
+
 
