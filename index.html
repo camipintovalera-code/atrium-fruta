@@ -7,75 +7,59 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <!-- Encabezado Principal -->
     <header class="main-header">
         <div class="header-container">
             <a href="index.html" class="logo">AJ <span>ATRIUMJUEGOS</span></a>
             <nav class="main-nav">
                 <a href="index.html" class="active">Inicio</a>
-                <a href="sobre-nosotros.html">Sobre nosotros</a>
+                <a href="sobre-nosotros.html">Sobre Nosotros</a>
                 <a href="contacto.html">Contacto</a>
             </nav>
         </div>
     </header>
 
-    <!-- Héroe / Presentación (Legible para SEO) -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <span class="hero-subtitle">Tu punto de encuentro gamer</span>
-            <h1>Juega mejor. <strong>Infórmate primero.</strong></h1>
-            <p>Guías claras, análisis técnicos de rendimiento y consejos de ciberseguridad para disfrutar los videojuegos móviles con más conocimiento y seguridad.</p>
-        </div>
-    </section>
-
-    <!-- Contenedor del Blog -->
-    <main class="blog-container">
-        <div class="blog-header">
-            <h2>Últimos artículos publicados</h2>
-            
-            <!-- Pestañas de Filtro Dinámico -->
-            <div class="categories-tabs">
-                <button class="tab-categoria active" data-categoria="Todos">Todos</button>
-                <button class="tab-categoria" data-categoria="Guías">Guías Técnicas</button>
-                <button class="tab-categoria" data-categoria="Seguridad">Seguridad Digital</button>
+    <div class="layout-principal">
+        <main class="zona-contenido">
+            <div class="blog-header">
+                <h2>Artículos de Blog</h2>
+                <div class="categories-tabs">
+                    <button class="tab-categoria active" data-categoria="Todos">Todos</button>
+                    <button class="tab-categoria" data-categoria="Guías">Guías Técnicas</button>
+                    <button class="tab-categoria" data-categoria="Seguridad">Seguridad Digital</button>
+                </div>
             </div>
-        </div>
+            <div id="contenedor-articulos" class="articles-grid"></div>
+        </main>
 
-        <!-- AQUÍ SE INYECTAN LAS TARJETAS DESDE SCRIPT.JS -->
-        <div id="contenedor-articulos" class="articles-grid">
-            <p class="loading-text">Cargando biblioteca de artículos...</p>
-        </div>
-    </main>
+        <aside class="barras-laterales">
+            <div class="widget-lateral">
+                <h3>Buscar artículo</h3>
+                <input type="text" placeholder="Buscar..." class="search-input">
+            </div>
+            <div class="widget-lateral">
+                <h3>Recent Posts</h3>
+                <ul id="lista-recientes"></ul>
+            </div>
+            <div class="widget-lateral">
+                <h3>Calendario del mes</h3>
+                <table class="calendario-tabla">
+                    <thead>
+                        <tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th><th>D</th></tr>
+                    </thead>
+                    <tbody id="calendar-body"></tbody>
+                </table>
+            </div>
+        </aside>
+    </div>
 
-    <!-- Sección de Concientización Exigida por Google -->
-    <section class="safety-banner">
-        <div class="safety-content">
-            <h3>¡Juega seguro en entornos virtuales!</h3>
-            <p>Desconfía de páginas web externas que soliciten contraseñas privadas o prometan recompensas monetarias imposibles fuera de las plataformas oficiales.</p>
-        </div>
-    </section>
-
-    <!-- Pie de Página con Enlaces Legales Críticos -->
     <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-info">
-                <h4>ATRIUM JUEGOS</h4>
-                <p>Información técnica y guías detalladas para una experiencia de juego más segura, fluida y responsable.</p>
-            </div>
-            <div class="footer-nav">
-                <h5>Legales</h5>
-                <a href="privacidad.html">Política de Privacidad</a>
-                <a href="terminos.html">Términos y condiciones</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Atrium Juegos. Todos los derechos reservados.</p>
-            <p class="disclaimer">Sitio editorial independiente. Las marcas comerciales pertenecen a sus respectivos propietarios.</p>
+        <p>&copy; 2026 Atrium Juegos. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="privacidad.html">Política de Privacidad</a>
+            <a href="terminos.html">Términos y condiciones</a>
         </div>
     </footer>
 
-    <!-- Scripts en el Orden Correcto de Carga -->
     <script src="articulos.js"></script>
     <script src="script.js"></script>
 </body>
