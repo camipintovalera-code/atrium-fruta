@@ -1,62 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const contenedor = document.getElementById("contenedor-articulos");
-    const listaRecientes = document.getElementById("lista-recientes");
-    const pestañas = document.querySelectorAll(".tab-categoria");
-
-    function mostrarArticulos(categoriaFiltrada = "Todos") {
-        if (!contenedor) return;
-        contenedor.innerHTML = "";
-        const filtrados = articulos.filter(art => categoriaFiltrada === "Todos" || art.categoria === categoriaFiltrada);
-        
-        filtrados.forEach(art => {
-            const tarjeta = document.createElement("div");
-            tarjeta.className = "tarjeta-articulo";
-            tarjeta.innerHTML = `
-                <div class="tarjeta-tag">${art.categoria}</div>
-                <h3>${art.titulo}</h3>
-                <p class="tarjeta-fecha">📅 ${art.fecha}</p>
-                <p class="tarjeta-resumen">${art.resumen}</p>
-                <a href="articulo.html?id=${art.id}" class="btn-leer">Leer artículo →</a>
-            `;
-            contenedor.appendChild(tarjeta);
-        });
+    const c = document.getElementById("calendar-body");
+    if (c) {
+        const h = new Date(), p = new Date(h.getFullYear(), h.getMonth(), 1).getDay(), t = new Date(h.getFullYear(), h.getMonth() + 1, 0).getDate(); let s = "<tr>", d = p === 0 ? 6 : p - 1; for (let i = 0; i < d; i++)s += "<td></td>"; for (let n = 1; n <= t; n++) { if (d === 7) { s += "</tr><tr>"; d = 0 } s += "<td" + (n === h.getDate() ? " class='hoy'" : "") + ">" + n + "</td>"; d++ } c.innerHTML = s + "</tr>";
+        const m = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]; document.getElementById("mes-cal").textContent = m[h.getMonth()] + " " + h.getFullYear()
     }
-
-    function cargarRecientes() {
-        if (!listaRecientes) return;
-        listaRecientes.innerHTML = "";
-        articulos.slice(-5).reverse().forEach(art => {
-            const item = document.createElement("li");
-            item.innerHTML = `<a href="articulo.html?id=${art.id}">🔹 ${art.titulo}</a>`;
-            listaRecientes.appendChild(item);
-        });
-    }
-
-    function generarCalendario() {
-        const cuerpoCal = document.getElementById("calendar-body");
-        if (!cuerpoCal) return;
-        const fechaActual = new Date();
-        const primerDia = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), 1).getDay();
-        const totalDias = new Date(fechaActual.getFullYear(), fechaActual.getMonth() + 1, 0).getDate();
-        let html = "<tr>";
-        let diaSemana = (primerDia === 0) ? 6 : primerDia - 1;
-        for (let i = 0; i < diaSemana; i++) html += "<td></td>";
-        for (let dia = 1; dia <= totalDias; dia++) {
-            if (diaSemana === 7) { html += "</tr><tr>"; diaSemana = 0; }
-            const esHoy = dia === fechaActual.getDate() ? "class='hoy'" : "";
-            html += `<td ${esHoy}>${dia}</td>`;
-            diaSemana++;
-        }
-        html += "</tr>"; cuerpoCal.innerHTML = html;
-    }
-
-    pestañas.forEach(tab => {
-        tab.addEventListener("click", (e) => {
-            pestañas.forEach(t => t.classList.remove("active"));
-            e.target.classList.add("active");
-            mostrarArticulos(e.target.dataset.categoria);
-        });
-    });
-
-    mostrarArticulos(); cargarRecientes(); generarCalendario();
+    const f = document.getElementById("form-buscar"); if (f) f.addEventListener("submit", e => { e.preventDefault(); location.href = "index.html?q=" + encodeURIComponent(f.q.value) });
+    const q = (new URLSearchParams(location.search).get("q") || "").toLowerCase();
+    if (q) { document.querySelectorAll(".tarjeta-articulo").forEach(a => { a.style.display = a.textContent.toLowerCase().includes(q) ? "" : "none" }); const i = document.querySelector("input[name=q]"); if (i) i.value = q }
 });
