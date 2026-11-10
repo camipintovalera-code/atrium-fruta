@@ -1,90 +1,41 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const contenedor = document.getElementById("contenedor-articulos");
+    const pestañas = document.querySelectorAll(".tab-categoria");
 
-const articles = window.ARTICLES || [];
+    function mostrarArticulos(categoriaFiltrada = "Todos") {
+        if (!contenedor) return;
+        contenedor.innerHTML = "";
 
-const grid = document.getElementById("grid");
-const search = document.getElementById("search");
-const empty = document.getElementById("empty");
+        const articulosFiltrados = articulos.filter(art => 
+            categoriaFiltrada === "Todos" || art.categoria === categoriaFiltrada
+        );
 
-let active = "Todos";
+        if (articulosFiltrados.length === 0) {
+            contenedor.innerHTML = `<p class="no-articles">No se encontraron artículos en esta categoría.</p>`;
+            return;
+        }
 
-function render() {
-  if (!grid || !search || !empty) return;
+        articulosFiltrados.forEach(art => {
+            const tarjeta = document.createElement("div");
+            tarjeta.className = "tarjeta-articulo";
+            tarjeta.innerHTML = `
+                <div class="tarjeta-tag">${art.categoria}</div>
+                <h3>${art.titulo}</h3>
+                <p class="tarjeta-fecha">${art.fecha}</p>
+                <p class="tarjeta-resumen">${art.resumen}</p>
+                <a href="articulo.html?id=${art.id}" class="btn-leer">Leer artículo →</a>
+            `;
+            contenedor.appendChild(tarjeta);
+        });
+    }
 
-  const q = search.value.toLowerCase().trim();
-
-  const list = articles.filter(a =>
-    (active === "Todos" || a.category === active) &&
-    (a.title + " " + a.excerpt + " " + a.category)
-      .toLowerCase().includes(q)
-  );
-
-  grid.innerHTML = list.map(a => `
-    <article class="card">
-      <a href="articulo.html?id=${encodeURIComponent(a.id)}"
-         class="article-image">
-        <div class="art">
-          <img src="${a.image}" alt="${a.title}" loading="lazy">
-          <small>${a.category.toUpperCase()}</small>
-        </div>
-      </a>
-
-      <div class="bodycard">
-        <div class="meta">
-          <span class="pill">${a.category}</span>
-          ${a.read} de lectura
-        </div>
-        <h3>
-          <a href="articulo.html?id=${encodeURIComponent(a.id)}">
-            ${a.title}
-          </a>
-        </h3>
-        <p>${a.excerpt}</p>
-        <a class="read"
-           href="articulo.html?id=${encodeURIComponent(a.id)}">
-          Leer artículo completo →
-        </a>
-      </div>
-    </article>
-  `).join("");
-
-  empty.hidden = list.length > 0;
-}
-
-document.querySelectorAll("[data-filter]").forEach(button => {
-  button.addEventListener("click", () => {
-    active = button.dataset.filter;
-    render();
-
-    document.querySelectorAll("[data-filter]").forEach(item => {
-      item.classList.toggle(
-        "active",
-        item.dataset.filter === active
-      );
+    pestañas.forEach(tab => {
+        tab.addEventListener("click", (e) => {
+            pestañas.forEach(t => t.classList.remove("active"));
+            e.target.classList.add("active");
+            mostrarArticulos(e.target.dataset.categoria);
+        });
     });
-  });
+
+    mostrarArticulos();
 });
-
-document.querySelectorAll("[data-side]").forEach(button => {
-  button.addEventListener("click", () => {
-    active = button.dataset.side;
-    render();
-  });
-});
-
-if (search) search.addEventListener("input", render);
-
-const year = document.getElementById("year");
-if (year) year.textContent = new Date().getFullYear();
-
-const menuButton = document.getElementById("menubtn");
-const nav = document.getElementById("nav");
-
-if (menuButton && nav) {
-  menuButton.addEventListener("click", () => {
-    nav.classList.toggle("open");
-  });
-}
-
-render();
-
-
