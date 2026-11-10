@@ -1,477 +1,62 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Artículo | Atrium Juegos</title>
-  <meta name="description" content="Guías, consejos y novedades de videojuegos en Atrium Juegos.">
-  <meta name="robots" content="index,follow">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    
-.reading {
-  width: 100%;
-  max-width: none;
-  box-sizing: border-box;
-  margin: 40px auto 70px;
-  padding: 0 22px;
-  color: #17182b;
-  line-height: 1.85;
-}
-
-.reading .article-content {
-  display: block;
-  visibility: visible;
-  opacity: 1;
-  color: #343747;
-  margin-top: 25px;
-}
-
-.reading .article-content p,
-.reading .article-content li {
-  color: #343747;
-  font-size: 17px;
-  line-height: 1.85;
-}
-
-.reading .article-content h2 {
-  display: block;
-  color: #17182b;
-  margin-top: 38px;
-  line-height: 1.3;
-}
-
-.reading .article-content ul,
-.reading .article-content ol {
-  padding-left: 26px;
-}
-
-.reading .article-content .callout {
-  color: #343747;
-}
-
-/* ===== BARRA LATERAL Y COMENTARIOS ===== */
-.article-columns {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: 28px;
-  max-width: 1160px;
-  margin: 35px auto 60px;
-  padding: 0 22px;
-  align-items: start;
-}
-
-.article-main {
-  min-width: 0;
-  background: #fff;
-  border: 1px solid #e7e8f0;
-  border-radius: 16px;
-  padding: 28px;
-  color: #343747;
-}
-
-.article-main .article-content,
-.article-main .article-content p,
-.article-main .article-content li {
-  color: #343747 !important;
-  line-height: 1.85;
-}
-
-.article-main .article-content h2,
-.article-main .article-content h3 {
-  color: #17182b !important;
-}
-
-.article-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  min-width: 0;
-}
-
-.article-widget {
-  background: #fff;
-  border: 1px solid #e7e8f0;
-  border-radius: 14px;
-  padding: 20px;
-  color: #17182b;
-  min-width: 0;
-}
-
-.article-widget h2 {
-  font-size: 1.15rem;
-  margin: 0 0 15px;
-  color: #17182b;
-}
-
-.article-widget input,
-.article-widget textarea {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #dfe1eb;
-  border-radius: 8px;
-  font: inherit;
-}
-
-.article-widget button {
-  border: 0;
-  border-radius: 8px;
-  background: #7255ec;
-  color: #fff;
-  padding: 10px 14px;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.recent-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.recent-list li {
-  border-bottom: 1px solid #eeeef4;
-  padding: 10px 0;
-  font-size: .88rem;
-}
-
-.recent-list a {
-  color: #343747;
-  font-weight: 600;
-}
-
-.calendar-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.calendar-head button {
-  padding: 5px 9px;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 4px;
-  text-align: center;
-  font-size: .78rem;
-}
-
-.calendar-grid span {
-  padding: 5px 0;
-}
-
-.calendar-grid .weekday {
-  font-weight: 700;
-  color: #7255ec;
-}
-
-.calendar-grid .today {
-  background: #7255ec;
-  color: #fff;
-  border-radius: 6px;
-}
-
-.comment-note {
-  font-size: .8rem;
-  color: #6c7284;
-  line-height: 1.6;
-}
-
-@media (max-width: 850px) {
-  .article-columns {
-    grid-template-columns: 1fr;
-    margin-top: 20px;
-    padding: 0 14px;
-  }
-
-  .article-main {
-    padding: 20px;
-  }
-}
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículo Informativo | Atrium Juegos</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="topline">GUÍAS · NOVEDADES · CONSEJOS PARA JUGADORES</div>
-
-  <header class="header">
-    <a class="brand" href="index.html">
-      <span class="logo">AJ</span>
-      <span><b>ATRIUM</b><small>JUEGOS</small></span>
-    </a>
-    <button id="menubtn" aria-label="Abrir menú">☰</button>
-    <nav id="nav">
-      <a href="index.html">Inicio</a>
-      <a href="index.html#articulos">Artículos</a>
-      <a href="index.html#categorias">Categorías</a>
-      <a href="sobre-nosotros.html">Sobre nosotros</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
-  </header>
-
-  <main class="reading" id="article">
-    <p>Estamos cargando el artículo...</p>
-  </main>
-
-  <footer>
-    <div class="footlinks">
-      <a href="sobre-nosotros.html">Sobre nosotros</a>
-      <a href="contacto.html">Contacto</a>
-      <a href="privacidad.html">Privacidad</a>
-      <a href="terminos.html">Términos</a>
-    </div>
-    <small>© Atrium Juegos. Sitio editorial independiente.</small>
-  </footer>
-
-  <script src="articulos.js?v=4"></script>
-  <script>
-    const container = document.getElementById("article");
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-    const articles = window.ARTICLES || [];
-    const article = articles.find(item => item.id === id);
-
-    document.getElementById("menubtn").addEventListener("click", () => {
-      document.getElementById("nav").classList.toggle("open");
-    });
-
-    if (!article) {
-      container.innerHTML = `
-        <a class="back-link" href="index.html#articulos">← Volver a los artículos</a>
-        <h1>Artículo no encontrado</h1>
-        <p>El artículo solicitado no existe o el enlace está incompleto.</p>
-        <p><a href="index.html#articulos">Explorar todos los artículos</a></p>
-      `;
-   
-    } else {
-      document.title = article.title + " | Atrium Juegos";
-
-      const recent = articles.filter(item => item.id !== article.id);
-      const recentList = recent.slice(0, 8);
-
-      container.className = "reading";
-      container.innerHTML = `
-        <div class="article-columns">
-          <div class="article-main">
-            <a class="back-link" href="index.html#articulos">← Volver a los artículos</a>
-
-            <header class="articlehero">
-              <label>${article.category.toUpperCase()} · GUÍA</label>
-              <h1>${article.title}</h1>
-              <p>${article.excerpt}</p>
-              <div class="article-meta">${article.date} · ${article.read} de lectura</div>
-            </header>
-
-            <img class="cover-image" src="${article.image}" alt="${article.title}">
-            <div class="article-content">${article.body}</div>
-
-            <div class="more-articles">
-              <h2>Continúa leyendo</h2>
-              <p>Encuentra más guías, consejos y novedades en Atrium Juegos.</p>
-              <a class="read" href="index.html#articulos">Ver todos los artículos →</a>
-            </div>
-
-            <section class="article-widget" id="comments">
-              <h2>Deja un comentario</h2>
-              <p class="comment-note">
-                Completa los campos para preparar tu comentario y enviarlo por correo.
-                No se publicará automáticamente en la página.
-              </p>
-              
-<form id="comment-form">
-  <label for="comment-text">Comentario *</label>
-  <textarea
-    id="comment-text"
-    name="comment"
-    rows="5"
-    required
-    placeholder="Escribe tu comentario..."
-  ></textarea>
-
-  <label for="comment-name">Nombre *</label>
-  <input
-    id="comment-name"
-    name="name"
-    type="text"
-    required
-    placeholder="Tu nombre"
-  >
-
-  <label for="comment-email">Correo electrónico *</label>
-  <input
-    id="comment-email"
-    name="email"
-    type="email"
-    required
-    placeholder="tu@correo.com"
-  >
-
-  <button type="submit" id="comment-submit">
-    Enviar comentario
-  </button>
-
-  <p id="comment-status" role="status" aria-live="polite"></p>
-</form>
-
-            </section>
-          </div>
-
-          <aside class="article-sidebar">
-            <section class="article-widget">
-              <h2>Buscar</h2>
-              <input id="recent-search" type="search" placeholder="Buscar artículos..." aria-label="Buscar artículos">
-              <ul class="recent-list" id="recent-list">
-                ${recentList.map(item => `
-                  <li data-title="${item.title.toLowerCase()}">
-                    <a href="articulo.html?id=${encodeURIComponent(item.id)}">${item.title}</a>
-                  </li>
-                `).join("")}
-              </ul>
-              <p id="recent-empty" hidden>No se encontraron artículos.</p>
-            </section>
-
-            <section class="article-widget">
-              <h2>Recent Posts</h2>
-              <ul class="recent-list">
-                ${recent.slice(0, 5).map(item => `
-                  <li><a href="articulo.html?id=${encodeURIComponent(item.id)}">${item.title}</a></li>
-                `).join("")}
-              </ul>
-            </section>
-
-            <section class="article-widget">
-              <h2>Calendario</h2>
-              <div class="calendar-head">
-                <button type="button" id="cal-prev" aria-label="Mes anterior">‹</button>
-                <strong id="cal-month"></strong>
-                <button type="button" id="cal-next" aria-label="Mes siguiente">›</button>
-              </div>
-              <div class="calendar-grid" id="cal-grid"></div>
-            </section>
-          </aside>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">AJ <span>ATRIUMJUEGOS</span></a>
+            <nav class="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="sobre-nosotros.html">Sobre nosotros</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
         </div>
-      `;
+    </header>
 
-      document.getElementById("recent-search").addEventListener("input", event => {
-        const query = event.target.value.toLowerCase().trim();
-        let visible = 0;
+    <main class="article-main">
+        <article class="full-article">
+            <div id="categoria-render" class="article-tag">Cargando...</div>
+            <h1 id="titulo-render">Cargando título...</h1>
+            <p id="fecha-render" class="article-date"></p>
+            <hr class="article-divider">
+            <div id="contenido-render" class="article-body">
+                <!-- El contenido de AdSense se inyectará aquí -->
+            </div>
+        </article>
+    </main>
 
-        document.querySelectorAll("#recent-list li").forEach(item => {
-          const match = item.dataset.title.includes(query);
-          item.hidden = !match;
-          if (match) visible++;
+    <footer class="main-footer">
+        <p>&copy; 2026 Atrium Juegos. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="privacidad.html">Política de Privacidad</a>
+            <a href="terminos.html">Términos y condiciones</a>
+        </div>
+    </footer>
+
+    <script src="articulos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const idArticulo = params.get("id");
+
+            const articuloData = articulos.find(a => a.id === idArticulo);
+
+            if (articuloData) {
+                document.getElementById("categoria-render").innerText = articuloData.categoria;
+                document.getElementById("titulo-render").innerText = articuloData.titulo;
+                document.getElementById("fecha-render").innerText = "Publicado el: " + articuloData.fecha;
+                document.getElementById("contenido-render").innerHTML = articuloData.contenido;
+                document.title = `${articuloData.titulo} | Atrium Juegos`;
+            } else {
+                document.getElementById("titulo-render").innerText = "Artículo no encontrado";
+                document.getElementById("contenido-render").innerHTML = "<p>El artículo solicitado no existe o ha sido movido.</p><a href='index.html'>Volver al inicio</a>";
+            }
         });
-
-        document.getElementById("recent-empty").hidden = visible > 0;
-      });
-
-      
-
-document.getElementById("comment-form").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const form = event.currentTarget;
-  const button = document.getElementById("comment-submit");
-  const status = document.getElementById("comment-status");
-
-  button.disabled = true;
-  button.textContent = "Enviando...";
-  status.textContent = "";
-
-  const data = {
-    name: document.getElementById("comment-name").value.trim(),
-    email: document.getElementById("comment-email").value.trim(),
-    comment: document.getElementById("comment-text").value.trim(),
-    _subject: "Comentario sobre: " + article.title,
-    _template: "table"
-  };
-
-  try {
-    const response = await fetch(
-      "https://formsubmit.co/ajax/tiktokatrium83@gmail.com",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(data)
-      }
-    );
-
-    const result = await response.json();
-    console.log("Respuesta de FormSubmit:", result);
-
-    if (String(result.success) === "true") {
-      status.textContent = "¡Comentario enviado correctamente!";
-      form.reset();
-    } else {
-      status.textContent =
-        "FormSubmit: " + (result.message || "No se pudo confirmar el envío.");
-    }
-  } catch (error) {
-    console.error("Error del formulario:", error);
-    status.textContent =
-      "Error de conexión. Abre la página publicada e inténtalo nuevamente.";
-  } finally {
-    button.disabled = false;
-    button.textContent = "Enviar comentario";
-  }
-});
-
-
-      let calendarDate = new Date();
-
-      function drawCalendar() {
-        const year = calendarDate.getFullYear();
-        const month = calendarDate.getMonth();
-
-        document.getElementById("cal-month").textContent =
-          new Intl.DateTimeFormat("es-CO", {
-            month: "long",
-            year: "numeric"
-          }).format(calendarDate);
-
-        const offset = (new Date(year, month, 1).getDay() + 6) % 7;
-        const days = new Date(year, month + 1, 0).getDate();
-        const today = new Date();
-
-        let html = ["L", "M", "X", "J", "V", "S", "D"]
-          .map(day => `<span class="weekday">${day}</span>`).join("");
-
-        for (let i = 0; i < offset; i++) html += "<span></span>";
-
-        for (let day = 1; day <= days; day++) {
-          const isToday = day === today.getDate() &&
-            month === today.getMonth() &&
-            year === today.getFullYear();
-
-          html += `<span class="${isToday ? "today" : ""}">${day}</span>`;
-        }
-
-        document.getElementById("cal-grid").innerHTML = html;
-      }
-
-      document.getElementById("cal-prev").addEventListener("click", () => {
-        calendarDate.setMonth(calendarDate.getMonth() - 1);
-        drawCalendar();
-      });
-
-      document.getElementById("cal-next").addEventListener("click", () => {
-        calendarDate.setMonth(calendarDate.getMonth() + 1);
-        drawCalendar();
-      });
-
-      drawCalendar();
-    
-    }
-  </script>
+    </script>
 </body>
 </html>
